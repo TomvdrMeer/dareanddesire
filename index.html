@@ -17,6 +17,7 @@
   --gold:#c9a84c; --gold-l:#e2c16a; --gold-d:#7a6220;
   --cream:#f0e6d3; --cream-d:#8a7a6a; --white:#fff8f2;
   --blue:#7eb4e0; --pink:#e07eb4; --purple-d:#5a3a90;
+  --femme:#d4a0c0; --speeltje:#a0c4d4;
   --r:14px; --r-lg:22px; --footer-h:68px; --footer-open:220px;
   --touch:52px;
 }
@@ -45,7 +46,27 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
 .player-names{display:flex;align-items:center;gap:1rem;font-family:'Cinzel',serif}
 .pname{font-size:clamp(1.1rem,4.5vw,1.6rem);font-weight:600;letter-spacing:.1em}
 .pname.daddy{color:var(--blue)}.pname.meisje{color:var(--pink)}
+.pname.femme{color:var(--femme)}.pname.speeltje{color:var(--speeltje)}
 .pdivider{color:var(--gold);opacity:.45}
+
+/* ── ROL KEUZE KNOPPEN ── */
+.rol-keuze{display:flex;flex-direction:column;gap:1rem;width:100%;max-width:360px}
+.rol-btn{
+  width:100%;min-height:80px;padding:1.1rem 1.6rem;
+  border:1.5px solid rgba(201,168,76,.2);border-radius:var(--r-lg);
+  background:var(--surface);
+  cursor:pointer;user-select:none;-webkit-user-select:none;
+  transition:all .2s;text-align:center;
+}
+.rol-btn:active{transform:scale(.97)}
+.rol-btn-title{font-family:'Cinzel',serif;font-size:clamp(.8rem,3vw,1rem);font-weight:600;letter-spacing:.1em;margin-bottom:.35rem}
+.rol-btn-sub{font-style:italic;font-size:clamp(.78rem,3vw,.9rem);color:var(--cream-d);line-height:1.4}
+.rol-btn.dm{border-color:rgba(126,180,224,.3);background:rgba(126,180,224,.05)}
+.rol-btn.dm:active,.rol-btn.dm:hover{border-color:rgba(126,180,224,.6);background:rgba(126,180,224,.1)}
+.rol-btn.dm .rol-btn-title{background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.rol-btn.fs{border-color:rgba(212,160,192,.3);background:rgba(212,160,192,.05)}
+.rol-btn.fs:active,.rol-btn.fs:hover{border-color:rgba(212,160,192,.6);background:rgba(212,160,192,.1)}
+.rol-btn.fs .rol-btn-title{background:linear-gradient(90deg,var(--femme),var(--speeltje));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 .btn{display:block;width:100%;max-width:360px;min-height:var(--touch);padding:.9rem 1.8rem;border:none;border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.72rem,2.8vw,.82rem);font-weight:600;letter-spacing:.12em;text-align:center;cursor:pointer;user-select:none;transition:transform .15s,opacity .15s;-webkit-user-select:none}
 .btn:active{transform:scale(.96)}.btn+.btn{margin-top:.7rem}.btn:disabled{opacity:.28;pointer-events:none}
@@ -74,7 +95,7 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
 .score-item{text-align:center}
 .score-num{font-family:'Cinzel',serif;font-size:clamp(1.6rem,7vw,2.1rem);font-weight:900;line-height:1}
 .score-num.daddy{color:var(--blue)}.score-num.meisje{color:var(--pink)}
-.score-vs{font-family:'Cinzel',serif;font-size:.85rem;color:var(--cream-d)}
+.score-num.femme{color:var(--femme)}.score-num.speeltje{color:var(--speeltje)}
 .score-label{font-family:'Cinzel',serif;font-size:clamp(.5rem,1.8vw,.58rem);letter-spacing:.12em;color:var(--cream-d);margin-top:.2rem}
 
 .q-card{width:100%;max-width:380px;background:var(--surface);border:1px solid rgba(201,168,76,.2);border-radius:var(--r-lg);padding:clamp(1.4rem,5vw,2rem) clamp(1.2rem,4vw,1.6rem);text-align:center;box-shadow:0 8px 48px rgba(0,0,0,.65);animation:cardIn .42s cubic-bezier(.34,1.56,.64,1) forwards,cardPulse 3.5s .5s ease-in-out infinite}
@@ -94,6 +115,8 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
 .turn-name{font-family:'Cinzel',serif;font-size:clamp(2.6rem,14vw,5rem);font-weight:900;text-align:center;line-height:1}
 .turn-name.daddy{color:var(--blue);text-shadow:0 0 60px rgba(126,180,224,.35)}
 .turn-name.meisje{color:var(--pink);text-shadow:0 0 60px rgba(224,126,180,.35)}
+.turn-name.femme{color:var(--femme);text-shadow:0 0 60px rgba(212,160,192,.35)}
+.turn-name.speeltje{color:var(--speeltje);text-shadow:0 0 60px rgba(160,196,212,.35)}
 
 #score-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);font-family:'Cinzel',serif;font-size:5rem;font-weight:900;pointer-events:none;z-index:200;opacity:0;transition:transform .18s cubic-bezier(.34,1.56,.64,1),opacity .35s ease}
 #score-flash.pos{color:#80e080;text-shadow:0 0 50px rgba(80,220,80,.7)}
@@ -134,13 +157,18 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
 .lock-badge-change{color:rgba(201,168,76,.45);cursor:pointer;white-space:nowrap;font-size:clamp(.46rem,1.6vw,.52rem)}
 .lock-badge-change:active{color:var(--gold)}
 
-/* ── RULES ── */
+/* ── AVONDREGELS ── */
 .rules-card{width:100%;max-width:360px;background:var(--surface);border:1px solid rgba(201,168,76,.12);border-radius:var(--r-lg);padding:1.3rem;margin-bottom:.8rem}
-.rules-card-header{font-family:'Cinzel',serif;font-size:clamp(.6rem,2.2vw,.68rem);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+.rules-card-header{font-family:'Cinzel',serif;font-size:clamp(.6rem,2.2vw,.68rem);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;justify-content:space-between}
 .rules-card-header.daddy{color:var(--blue)}.rules-card-header.meisje{color:var(--pink)}
+.rules-card-header.femme{color:var(--femme)}.rules-card-header.speeltje{color:var(--speeltje)}
 .rule-item{font-style:italic;font-size:clamp(.85rem,3.2vw,.95rem);color:var(--cream);line-height:1.55;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .rule-item:last-child{border-bottom:none;padding-bottom:0}
+.rule-item.rule-vast{color:var(--gold-l)}
 .rule-num{font-family:'Cinzel',serif;font-size:clamp(.48rem,1.8vw,.55rem);color:var(--gold-d);letter-spacing:.1em;margin-bottom:.16rem}
+.rule-vast-badge{font-family:'Cinzel',serif;font-size:clamp(.4rem,1.5vw,.48rem);letter-spacing:.12em;color:var(--gold-d);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:.1rem .4rem}
+.btn-reroll-rules{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);color:rgba(201,168,76,.45);font-family:'Cinzel',serif;font-size:clamp(.44rem,1.6vw,.52rem);letter-spacing:.1em;padding:.28rem .7rem;border-radius:10px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-reroll-rules:active{background:rgba(201,168,76,.12);color:var(--gold)}
 
 #rules-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(9,4,18,.97);border-top:1px solid rgba(201,168,76,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:40;height:var(--footer-h);transition:height .32s cubic-bezier(.4,0,.2,1);display:none;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
 #rules-footer.visible{display:block}
@@ -148,6 +176,7 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
 .footer-toggle{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1.2rem .35rem;cursor:pointer;min-height:44px}
 .footer-player-label{font-family:'Cinzel',serif;font-size:clamp(.54rem,2vw,.62rem);letter-spacing:.2em;text-transform:uppercase}
 .footer-player-label.daddy{color:var(--blue)}.footer-player-label.meisje{color:var(--pink)}
+.footer-player-label.femme{color:var(--femme)}.footer-player-label.speeltje{color:var(--speeltje)}
 .footer-chevron{font-size:.65rem;color:var(--gold-d);transition:transform .3s ease}
 #rules-footer.open .footer-chevron{transform:rotate(180deg)}
 .footer-compact-rules{padding:0 1.2rem .4rem;display:flex;flex-direction:column;gap:.1rem}
@@ -161,6 +190,7 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
 .climax-winner-lbl{font-family:'Cinzel',serif;font-size:clamp(.54rem,2vw,.64rem);letter-spacing:.28em;text-transform:uppercase;color:var(--cream-d);text-align:center}
 .climax-winner-name{font-family:'Cinzel',serif;font-size:clamp(2rem,10vw,3.4rem);font-weight:900;line-height:1.05;text-align:center;animation:wGlow 2.5s ease-in-out infinite alternate}
 .climax-winner-name.daddy{color:var(--blue)}.climax-winner-name.meisje{color:var(--pink)}.climax-winner-name.draw{color:var(--gold)}
+.climax-winner-name.femme{color:var(--femme)}.climax-winner-name.speeltje{color:var(--speeltje)}
 .climax-sub{font-style:italic;font-size:clamp(.82rem,3.2vw,.96rem);color:var(--cream-d);text-align:center;line-height:1.55;max-width:310px;margin:.3rem auto .6rem}
 .climax-cards{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.65rem}
 .climax-option{
@@ -178,6 +208,7 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
 .climax-reveal-wlbl{font-family:'Cinzel',serif;font-size:clamp(.5rem,1.8vw,.6rem);letter-spacing:.28em;text-transform:uppercase;color:var(--cream-d);text-align:center}
 .climax-reveal-wname{font-family:'Cinzel',serif;font-size:clamp(1.6rem,8vw,2.4rem);font-weight:900;text-align:center;line-height:1;animation:wGlow 2.5s ease-in-out infinite alternate}
 .climax-reveal-wname.daddy{color:var(--blue)}.climax-reveal-wname.meisje{color:var(--pink)}.climax-reveal-wname.draw{color:var(--gold)}
+.climax-reveal-wname.femme{color:var(--femme)}.climax-reveal-wname.speeltje{color:var(--speeltje)}
 .climax-big-card{
   width:100%;max-width:380px;
   background:linear-gradient(155deg,rgba(139,26,43,.2),rgba(19,9,32,.98));
@@ -222,46 +253,54 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
     <div class="sx"></div>
     <h1>DARE &amp; DESIRE</h1>
     <div class="sx"></div>
-    <div class="player-names fu">
-      <span class="pname daddy">Daddy</span>
-      <span class="pdivider">♦</span>
-      <span class="pname meisje">Meisje</span>
-    </div>
+    <p class="italic fu">Kies jullie rolverdeling voor vanavond</p>
     <div class="div"></div>
-    <p class="italic fu-1">Speel eerlijk. Verlies mooi.</p>
     <div class="smd"></div>
-    <button class="btn btn-primary fu-2" onclick="startGame(false)">BEGIN HET SPEL →</button>
+    <div class="rol-keuze fu-1">
+      <button class="rol-btn dm" onclick="kiesRol('dm')">
+        <div class="rol-btn-title">Daddy &nbsp;♦&nbsp; Meisje</div>
+        <div class="rol-btn-sub">Hij leidt, zij gehoorzaamt</div>
+      </button>
+      <button class="rol-btn fs" onclick="kiesRol('fs')">
+        <div class="rol-btn-title">Femme &nbsp;♦&nbsp; Speeltje</div>
+        <div class="rol-btn-sub">Zij controleert, hij dient</div>
+      </button>
+    </div>
     <div class="sm"></div>
-    <button class="btn btn-outline fu-3" onclick="initRules()">♦ Stel spelregels in</button>
-    <div class="sm"></div>
-    <button class="btn btn-ghost fu-4" id="btn-load-json" onclick="triggerJsonLoad()" style="display:none">↑ Opdrachten inladen</button>
+    <button class="btn btn-ghost fu-2" id="btn-load-json" onclick="triggerJsonLoad()" style="display:none">↑ Opdrachten inladen</button>
     <input type="file" id="json-file-input" accept=".json" style="display:none" onchange="handleJsonFile(event)">
     <div class="json-notice" id="json-notice"></div>
   </div>
 </div>
 
-<!-- RULES -->
+<!-- AVONDREGELS -->
 <div class="screen" id="screen-rules">
   <button class="btn-back" onclick="showScreen('screen-setup')">← Terug</button>
   <div class="screen-inner no-footer top">
     <div class="slg"></div>
-    <h2 class="fu" style="text-align:left;width:100%;max-width:360px">De spelregels van vanavond</h2>
-    <p class="italic fu-1" style="margin:.4rem 0 1.1rem;font-size:.88rem;text-align:left;width:100%;max-width:360px">Onthoud jouw regels goed — ze gelden de hele avond.</p>
-    <div class="rules-card fu-2">
-      <div class="rules-card-header daddy">♂ &nbsp;Daddy's Regels</div>
-      <div id="rules-M-list"></div>
+    <h2 class="fu" style="text-align:left;width:100%;max-width:360px">Avondregels</h2>
+    <p class="italic fu-1" style="margin:.4rem 0 1.1rem;font-size:.88rem;text-align:left;width:100%;max-width:360px">Deze regels gelden de hele avond. Onthoud ze goed.</p>
+    <div class="rules-card fu-2" id="rules-card-p1">
+      <div class="rules-card-header" id="rules-header-p1">
+        <span id="rules-label-p1">—</span>
+        <button class="btn-reroll-rules" onclick="rerollRules('p1')">↺ Nieuwe regels</button>
+      </div>
+      <div id="rules-list-p1"></div>
     </div>
-    <div class="rules-card fu-3">
-      <div class="rules-card-header meisje">♀ &nbsp;Meisje's Regels</div>
-      <div id="rules-F-list"></div>
+    <div class="rules-card fu-3" id="rules-card-p2">
+      <div class="rules-card-header" id="rules-header-p2">
+        <span id="rules-label-p2">—</span>
+        <button class="btn-reroll-rules" onclick="rerollRules('p2')">↺ Nieuwe regels</button>
+      </div>
+      <div id="rules-list-p2"></div>
     </div>
     <div class="sm"></div>
-    <button class="btn btn-primary fu-4" onclick="startGame(true)">BEGIN HET SPEL →</button>
+    <button class="btn btn-primary fu-4" onclick="startGame()">BEGIN HET SPEL →</button>
     <div class="slg"></div>
   </div>
 </div>
 
-<!-- TURN + SELECT (combined) -->
+<!-- TURN + SELECT -->
 <div class="screen" id="screen-turn">
   <div class="btn-climax-hold" id="climax-btn-turn">
     <div class="climax-ring-wrap">
@@ -277,9 +316,9 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
     <div class="turn-name fu-1" id="turn-name-big">—</div>
     <div class="div"></div>
     <div class="score-row fu-1" style="margin-bottom:1.1rem">
-      <div class="score-item"><div class="score-num daddy" id="turn-s-daddy">0</div><div class="score-label">Daddy</div></div>
+      <div class="score-item"><div class="score-num" id="turn-s-p1" style="color:var(--blue)">0</div><div class="score-label" id="turn-lbl-p1">—</div></div>
       <div class="score-vs">vs</div>
-      <div class="score-item"><div class="score-num meisje" id="turn-s-meisje">0</div><div class="score-label">Meisje</div></div>
+      <div class="score-item"><div class="score-num" id="turn-s-p2" style="color:var(--pink)">0</div><div class="score-label" id="turn-lbl-p2">—</div></div>
     </div>
 
     <div class="lock-badge" id="lock-badge">
@@ -374,157 +413,160 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.2rem);font-weight:6
 </div>
 
 <script>
+/* ══ ROL CONFIG ══ */
+const ROL = {
+  dm: {
+    p1: { key:'M',  name:'Daddy',   cls:'daddy',   label:"♂ Daddy's Avondregels" },
+    p2: { key:'F',  name:'Meisje',  cls:'meisje',  label:"♀ Meisje's Avondregels" },
+    hasVraag: true,
+    dataKey: 'daddy_meisje'
+  },
+  fs: {
+    p1: { key:'Femme',   name:'Femme',   cls:'femme',   label:"♀ Femme's Avondregels" },
+    p2: { key:'Speeltje',name:'Speeltje',cls:'speeltje',label:"♂ Speeltje's Avondregels" },
+    hasVraag: false,
+    dataKey: 'femme_speeltje'
+  }
+};
+
 /* ══ FALLBACK DATA ══ */
 const FALLBACK = {
-  rules:{
-    M:[
-      "Elke keer dat er van fase gewisseld wordt, geef je Meisje een kus. Je mag zelf bepalen waar.",
-      "Elke keer dat Meisje iets goed doet of gehoorzaamt, beloon je haar met een specifieke aanraking die zij lekker vindt. Jij weet welke.",
-    ],
-    F:[
-      "Al het voorvocht moet elke keer van Daddy's pik worden opgelikt of gezogen. Vertel hem dat je dit lekker vindt om voor hem te doen.",
-      "Wanneer Daddy je spankt, tel je hardop mee en bedank je hem na elke tik.",
-    ]
-  },
-  voorspel:{
-    M:{
-      mild:[
-        "Kus Meisje hartstochtelijk op haar mond en in haar nek.",
-        "Streel en kus Meisje over haar hele lichaam.",
-        "Vraag Meisje wat ze graag zou willen tijdens dit spel.",
-      ],
-      spicy:[
-        "Maak je vingers nat en wrijf over Meisje's clitje.",
-        "Trek jezelf af en laat Meisje dit goed zien.",
-        "Zuig aan de tepels van Meisje en maak ze hard.",
-      ]
+  daddy_meisje: {
+    avondregels: {
+      M: {
+        random: [
+          "Elke keer dat we van fase wisselen, kus je Meisje langzaam op de mond.",
+          "Raak de hele avond regelmatig Meisje op een onverwacht moment aan. Niet per se seksueel, maar wel bezitterig.",
+          "Vertel Meisje precies wat je met haar gaat doen, voordat je het doet. In detail, rustig, terwijl je haar aankijkt."
+        ]
+      },
+      F: {
+        vast: "Al het voorvocht moet van Daddy's pik worden opgelikt en gezogen. Bedank hem elke keer.",
+        random: [
+          "Je mag je genot niet verbergen; elk gevoel benoem je hardop of laat je duidelijk horen.",
+          "Als je iets wil, vraag je het netjes aan Daddy.",
+          "Als Daddy je spankt, tel je hardop mee en bedank je hem na elke tik."
+        ]
+      }
     },
-    F:{
-      mild:[
-        "Kijk Daddy in zijn ogen en zeg hem 2 dingen die je vanavond voor hem wil doen.",
-        "Streel en kus Daddy over zijn hele lichaam.",
-        "Ga met je borsten boven Daddy's gezicht hangen en bied hem je tepels aan.",
-      ],
-      spicy:[
-        "Neem Daddy's pik in je mond en zorg ervoor dat je zijn voorvocht proeft.",
-        "Vinger jezelf en laat Daddy goed kijken. \"Vind je het lekker, Daddy?\"",
-        "Ga op je knieën met je billen naar Daddy toe zitten. Vinger je kontgaatje en laat hem dit goed zien.",
-      ]
+    voorspel: {
+      M: { mild: ["Kus Meisje hartstochtelijk op haar mond en in haar nek.","Streel en kus Meisje over haar hele lichaam."], spicy: ["Zuig aan de tepels van Meisje en maak ze hard.","Maak je vinger nat en speel met Meisje's clitje."] },
+      F: { mild: ["Kus Daddy hartstochtelijk op zijn mond.","Streel en kus Daddy over zijn hele lichaam."], spicy: ["Neem Daddy's pik in je mond en maak 'm hard. Kijk hem zoveel mogelijk aan.","Vinger jezelf en laat Daddy goed kijken."] },
+      vraag: ["Wat vind je het lekkerste wat de ander bij je doet?","Beschrijf waar je vanavond het meeste zin in hebt.","Vertel de fantasie waarop je de laatste keer bent klaargekomen."]
     },
-    vraag:[
-      "Vertel de fantasie waarop je de laatste keer bent klaargekomen.",
-      "Beschrijf je meest geile seksuele scenario: casting, locatie, wat er precies gebeurt.",
-      "Wat is iets wat je graag nog eens verder zou willen verkennen?",
-    ]
-  },
-  hoofdspel:{
-    M:{
-      mild:[
-        "Vinger Meisje met 1 of meerdere vingers, zoals zij lekker vindt.",
-        "Lik Meisje's hele kut.",
-        "Pak een speeltje en speel hiermee met Meisje.",
-      ],
-      spicy:[
-        "Zeg Meisje op haar knieën te gaan zitten en vinger haar beide gaatjes.",
-        "Ga in standje 69 liggen en lik Meisje van haar clitje tot haar kontgaatje.",
-        "Geef Meisje een opdracht die ze zonder vragen uitvoert. Als ze gehoorzaamt, beloon je haar royaal.",
-      ]
+    hoofdspel: {
+      M: { mild: ["Breng je vinger(s) bij Meisje naar binnen en speel met haar kutje.","Lik Meisje's hele kutje."], spicy: ["Zeg Meisje op haar knieën te gaan zitten en vinger beide gaatjes.","Doe Meisje een blinddoek om en speel met haar."] },
+      F: { mild: ["Pijp Daddy en lik zijn ballen.","Ga voor Daddy zitten en beweeg je borsten om zijn pik heen."], spicy: ["Ga op Daddy's gezicht zitten en beweeg je heupen.","Gebruik Daddy voor jouw genot. Hij is er volledig voor jou."] }
     },
-    F:{
-      mild:[
-        "Pijp Daddy en lik zijn ballen. Kijk hem hierbij zoveel mogelijk aan.",
-        "Ga voor Daddy zitten en houd je borsten tegen elkaar aan met zijn pik ertussen. Beweeg je borsten.",
-      ],
-      spicy:[
-        "Ga op Daddy's gezicht zitten met gespreide billen. Berijd hem en laat hem goed je beide gaatjes likken.",
-        "Ga met je hoofd over de rand van het bed liggen en laat Daddy je in je mondje neuken.",
-        "Vraag Daddy op zijn rug te gaan liggen met opgetrokken benen. Lik zijn kontgaatje terwijl je hem aftrekt.",
-      ]
+    climax: {
+      M: ["Vraag aan Meisje hoe ze graag wil klaarkomen en voer dit uit.","Vertel Meisje op welke plek je wil klaarkomen en doe dit.","Laat Meisje voor je zitten en neuk haar mondje."],
+      F: ["Kijk Daddy aan en vraag hem smachtend over je heen te spuiten.","Vraag Daddy toestemming om klaar te komen. Gebruik de woorden die je normaal nooit hardop zegt.","Laat Daddy op je klaarkomen en smeer het langzaam over je lichaam."]
     }
   },
-  climax:{
-    M:[
-      "Zeg Meisje met haar hoofd over de rand van het bed te gaan liggen. Neuk haar mondje totdat je bijna klaarkomt. Haal je pik eruit, trek jezelf af en zodra je de eerste lading over haar heen gespoten hebt, neemt zij jouw pik diep in haar keeltje voor de rest van de cum.",
-      "Neuk Meisje achterlangs in haar kontje, terwijl je aan haar haren trekt. Je mag haar tussendoor ook spanken. Zij mag de roze vibrator gebruiken om klaar te komen.",
-      "Vraag Meisje hoe ze graag wil klaarkomen en voer dit uit.",
-    ],
-    F:[
-      "Ga voor Daddy zitten met je mondje open. Laat Daddy in je mondje spuiten, laat het eruit lopen en verwen jezelf met zijn cum, terwijl je zijn pik weer hard maakt met je mondje.",
-      "Ga samen in standje 69 liggen en pijp Daddy terwijl je zijn kontgaatje vingert. Slik zijn cum door en laat hem dit trots zien. Of gebruik zijn cum om jezelf ermee te bevredigen.",
-      "Ga met je rug naar Daddy toe op hem zitten en laat zijn pik in je kontgaatje glijden. Laat hem hard klaarkomen.",
-    ]
+  femme_speeltje: {
+    avondregels: {
+      Femme: {
+        vast: "Wanneer Speeltje gehoorzaamt en je tevreden bent, beloon je hem door hem te pijpen en zeg je hem dat hij dit verdiend heeft.",
+        random: ["Raak Speeltje op onverwachte momenten aan. Niet als beloning — gewoon omdat hij van jou is.","Jij bepaalt het tempo van de avond. Speeltje volgt, jij leidt.","Als Speeltje iets fout doet, corrigeer je hem direct en concreet."]
+      },
+      Speeltje: {
+        vast: "Je mag niet klaarkomen zonder expliciete toestemming van Femme. Vraag het. Gebruik de woorden die je normaal niet hardop zegt.",
+        random: ["Speeltje mag Femme niet aanraken zonder toestemming.","Elke keer dat Femme je gebruikt voor haar genot, bedank je haar daarna.","Je mag je eigen genot niet verbergen — elk gevoel benoem je hardop."]
+      }
+    },
+    voorspel: {
+      Femme: { mild: ["Laat Speeltje op zijn knieën voor je zitten en kijk hem aan.","Zeg Speeltje precies hoe hij je moet kussen."], spicy: ["Ga op Speeltje's gezicht zitten en beweeg je heupen.","Laat Speeltje zichzelf aftrekken terwijl jij toekijkt."] },
+      Speeltje: { mild: ["Streel en kus Femme over haar hele lichaam.","Ga voor Femme staan en wacht op haar opdracht."], spicy: ["Vinger Femme terwijl je haar aankijkt.","Lik Femme's kutje totdat zij zegt dat je mag stoppen."] }
+    },
+    hoofdspel: {
+      Femme: { mild: ["Zeg Speeltje hoe je wil liggen en laat hem jou verwennen.","Pak Speeltje's hoofd vast en leid hem naar waar jij wil."], spicy: ["Bind Speeltje vast en gebruik hem zoals jij wil.","Ga bovenop Speeltje zitten en bepaal het tempo volledig."] },
+      Speeltje: { mild: ["Lig stil en laat Femme met je doen wat zij wil.","Vraag Femme halverwege of ze tevreden over je bent."], spicy: ["Lik Femme's kutje totdat zij zegt dat je mag stoppen.","Lik Femme's kontgaatje uitgebreid. Stop pas wanneer zij dat zegt."] }
+    },
+    climax: {
+      Femme: ["Zeg Speeltje hoe je wil klaarkomen. Hij voert het uit.","Ga bovenop Speeltje zitten en rijd hem totdat jij klaarkomt.","Laat Speeltje je likken totdat je klaarkomt."],
+      Speeltje: ["Vraag Femme toestemming om klaar te komen.","Vraag Femme waar zij wil dat je klaarkomt. Wacht op haar antwoord."]
+    }
   }
 };
 
 let DATA = JSON.parse(JSON.stringify(FALLBACK));
+let G = {
+  rol: null,         // 'dm' of 'fs'
+  scores: [0,0],
+  current: 0,        // 0 = p1, 1 = p2
+  sel: {phase:null, intensity:null},
+  locked: {phase:null, intensity:null},
+  assignedRules: {p1:[], p2:[]},
+  recentShown: []
+};
+const MAX_RECENT = 4;
 
 /* ══ JSON LOAD ══ */
 async function tryAutoLoad(){
   try{
-    const r=await fetch('./dare-and-desire-data.json',{cache:'no-cache'});
-    if(!r.ok)throw new Error();
-    const json=await r.json();
-    if(validateData(json)){DATA=json;setNotice('✦ Opdrachten geladen','loaded');}
-    else{setNotice('JSON ongeldig — standaard actief','error');showLoadBtn();}
-  }catch{showLoadBtn();}
+    const r = await fetch('./dare-and-desire-data.json',{cache:'no-cache'});
+    if(!r.ok) throw new Error();
+    const json = await r.json();
+    if(validateData(json)){ DATA=json; setNotice('✦ Opdrachten geladen','loaded'); }
+    else{ setNotice('JSON ongeldig — standaard actief','error'); showLoadBtn(); }
+  }catch{ showLoadBtn(); }
 }
 function validateData(d){
   try{
-    return d.voorspel&&d.voorspel.M&&d.voorspel.F&&d.voorspel.vraag&&
-           d.hoofdspel&&d.hoofdspel.M&&d.hoofdspel.F&&
-           d.climax&&Array.isArray(d.climax.M)&&Array.isArray(d.climax.F)&&
-           Array.isArray(d.voorspel.vraag);
-  }catch{return false;}
+    return d.daddy_meisje && d.daddy_meisje.voorspel && d.daddy_meisje.voorspel.M &&
+           d.daddy_meisje.voorspel.vraag && d.femme_speeltje && d.femme_speeltje.voorspel;
+  }catch{ return false; }
 }
-function showLoadBtn(){document.getElementById('btn-load-json').style.display='block';}
-function setNotice(t,c){const el=document.getElementById('json-notice');el.textContent=t;el.className='json-notice '+c;}
-function triggerJsonLoad(){document.getElementById('json-file-input').click();}
+function showLoadBtn(){ document.getElementById('btn-load-json').style.display='block'; }
+function setNotice(t,c){ const el=document.getElementById('json-notice'); el.textContent=t; el.className='json-notice '+c; }
+function triggerJsonLoad(){ document.getElementById('json-file-input').click(); }
 function handleJsonFile(e){
-  const f=e.target.files[0];if(!f)return;
+  const f=e.target.files[0]; if(!f) return;
   const r=new FileReader();
   r.onload=ev=>{
     try{
       const json=JSON.parse(ev.target.result);
-      if(validateData(json)){DATA=json;setNotice('✦ Opdrachten geladen','loaded');document.getElementById('btn-load-json').style.display='none';}
+      if(validateData(json)){ DATA=json; setNotice('✦ Opdrachten geladen','loaded'); document.getElementById('btn-load-json').style.display='none'; }
       else setNotice('Ongeldige structuur — standaard actief','error');
-    }catch{setNotice('Bestand kon niet worden gelezen','error');}
+    }catch{ setNotice('Bestand kon niet worden gelezen','error'); }
   };
-  r.readAsText(f);e.target.value='';
+  r.readAsText(f); e.target.value='';
 }
 
-/* ══ STATE ══ */
-const G={scores:[0,0],current:0,sel:{phase:null,intensity:null},locked:{phase:null,intensity:null},assignedRules:{M:[],F:[]},useRules:false,recentShown:[]};
-const MAX_RECENT=4;
+/* ══ ROL KEUZE ══ */
+function kiesRol(rol){
+  G.rol = rol;
+  initRules();
+}
 
 /* ══ WAKE LOCK ══ */
 let wl=null;
-async function reqWL(){try{if('wakeLock'in navigator)wl=await navigator.wakeLock.request('screen')}catch{}}
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')reqWL();});
+async function reqWL(){ try{ if('wakeLock' in navigator) wl=await navigator.wakeLock.request('screen'); }catch{} }
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') reqWL(); });
 reqWL();
 
 /* ══ CLIMAX HOLD ══ */
 const HOLD_MS=800;
 const CIRC=2*Math.PI*29;
 
-function setupClimaxBtn(btnId,ringId){
+function setupClimaxBtn(btnId, ringId){
   const btn=document.getElementById(btnId);
   const ring=document.getElementById(ringId);
-  let timer=null,start=null,raf=null;
-
+  let timer=null, start=null, raf=null;
   function begin(e){
     e.preventDefault();
     start=Date.now();
-    timer=setTimeout(()=>{cancel();showClimaxChoice();},HOLD_MS);
+    timer=setTimeout(()=>{ cancel(); showClimaxChoice(); }, HOLD_MS);
     raf=requestAnimationFrame(function tick(){
-      if(!start)return;
+      if(!start) return;
       const p=Math.min((Date.now()-start)/HOLD_MS,1);
       ring.setAttribute('stroke-dasharray',`${p*CIRC} ${CIRC}`);
-      if(p<1)raf=requestAnimationFrame(tick);
+      if(p<1) raf=requestAnimationFrame(tick);
     });
   }
   function cancel(){
-    clearTimeout(timer);timer=null;
-    cancelAnimationFrame(raf);raf=null;start=null;
+    clearTimeout(timer); timer=null;
+    cancelAnimationFrame(raf); raf=null; start=null;
     ring.setAttribute('stroke-dasharray',`0 ${CIRC}`);
   }
   btn.addEventListener('mousedown',begin);
@@ -536,107 +578,176 @@ function setupClimaxBtn(btnId,ringId){
 }
 
 /* ══ SCREENS ══ */
-const FOOTER_SCREENS=new Set(['screen-turn','screen-card']);
+const FOOTER_SCREENS = new Set(['screen-turn','screen-card']);
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
   const f=document.getElementById('rules-footer');
-  if(G.useRules&&FOOTER_SCREENS.has(id)){f.classList.add('visible');updateFooter();}
-  else{f.classList.remove('visible','open');}
+  if(G.useRules && FOOTER_SCREENS.has(id)){ f.classList.add('visible'); updateFooter(); }
+  else{ f.classList.remove('visible','open'); }
 }
 
-/* ══ RULES ══ */
+/* ══ AVONDREGELS ══ */
+function getRulesData(){
+  const rc = ROL[G.rol];
+  const d = DATA[rc.dataKey].avondregels;
+  return { p1: d[rc.p1.key], p2: d[rc.p2.key] };
+}
+
+function pickRules(playerData, hasVast){
+  const rules = [];
+  if(hasVast && playerData.vast){
+    rules.push({ text: playerData.vast, vast: true });
+  }
+  const pool = [...(playerData.random || [])].sort(()=>Math.random()-.5);
+  const needed = 3 - rules.length;
+  pool.slice(0, needed).forEach(t => rules.push({ text: t, vast: false }));
+  return rules;
+}
+
 function initRules(){
-  G.assignedRules.M=[...DATA.rules.M].sort(()=>Math.random()-.5).slice(0,Math.min(3,DATA.rules.M.length));
-  G.assignedRules.F=[...DATA.rules.F].sort(()=>Math.random()-.5).slice(0,Math.min(3,DATA.rules.F.length));
-  renderRulesBlock('rules-M-list',G.assignedRules.M);
-  renderRulesBlock('rules-F-list',G.assignedRules.F);
+  const rc = ROL[G.rol];
+  const rd = getRulesData();
+
+  // p1 (Daddy / Femme) — geen vaste regel
+  G.assignedRules.p1 = pickRules(rd.p1, false);
+  // p2 (Meisje / Speeltje) — heeft vaste regel
+  G.assignedRules.p2 = pickRules(rd.p2, true);
+
+  renderRulesScreen();
   showScreen('screen-rules');
 }
-function renderRulesBlock(id,rules){
-  document.getElementById(id).innerHTML=rules.map((r,i)=>`<div class="rule-item"><div class="rule-num">REGEL ${i+1}</div>${r}</div>`).join('');
+
+function renderRulesScreen(){
+  const rc = ROL[G.rol];
+
+  // Headers
+  const h1 = document.getElementById('rules-header-p1');
+  const h2 = document.getElementById('rules-header-p2');
+  const lbl1 = document.getElementById('rules-label-p1');
+  const lbl2 = document.getElementById('rules-label-p2');
+
+  lbl1.textContent = rc.p1.label;
+  h1.className = `rules-card-header ${rc.p1.cls}`;
+  lbl2.textContent = rc.p2.label;
+  h2.className = `rules-card-header ${rc.p2.cls}`;
+
+  renderRulesBlock('rules-list-p1', G.assignedRules.p1);
+  renderRulesBlock('rules-list-p2', G.assignedRules.p2);
 }
-function updateFooter(){
-  const g=G.current===0?'M':'F',name=G.current===0?'Daddy':'Meisje',cls=G.current===0?'daddy':'meisje';
-  const rules=G.assignedRules[g];
-  const lbl=document.getElementById('footer-label');lbl.textContent=`♦ ${name}'s regels`;lbl.className=`footer-player-label ${cls}`;
-  document.getElementById('footer-compact').innerHTML=rules.map(r=>`<div class="footer-compact-rule">${r.length>60?r.slice(0,57)+'…':r}</div>`).join('');
-  document.getElementById('footer-full').innerHTML=rules.map(r=>`<div class="footer-full-rule">${r}</div>`).join('');
+
+function renderRulesBlock(id, rules){
+  document.getElementById(id).innerHTML = rules.map((r,i) => `
+    <div class="rule-item${r.vast?' rule-vast':''}">
+      <div class="rule-num">REGEL ${i+1}${r.vast?' &nbsp;<span class="rule-vast-badge">VAST</span>':''}</div>
+      ${r.text}
+    </div>`).join('');
 }
-function toggleFooter(){
-  const f=document.getElementById('rules-footer'),c=document.getElementById('footer-compact'),fl=document.getElementById('footer-full');
-  if(f.classList.contains('open')){f.classList.remove('open');setTimeout(()=>{fl.style.display='none';c.style.display=''},150);}
-  else{c.style.display='none';fl.style.display='';requestAnimationFrame(()=>f.classList.add('open'));}
+
+function rerollRules(player){
+  const rc = ROL[G.rol];
+  const rd = getRulesData();
+  const isP2 = player === 'p2';
+
+  if(isP2){
+    // p2 heeft vaste regel — herrol alleen de random
+    const newRules = pickRules(rd.p2, true);
+    G.assignedRules.p2 = newRules;
+    renderRulesBlock('rules-list-p2', G.assignedRules.p2);
+  } else {
+    const newRules = pickRules(rd.p1, false);
+    G.assignedRules.p1 = newRules;
+    renderRulesBlock('rules-list-p1', G.assignedRules.p1);
+  }
 }
 
 /* ══ GAME ══ */
-function startGame(withRules){
-  G.useRules=withRules;G.scores=[0,0];G.recentShown=[];
-  G.locked={phase:null,intensity:null};
-  G.current=Math.random()<.5?0:1;
+function startGame(){
+  G.useRules = true;
+  G.scores = [0,0];
+  G.recentShown = [];
+  G.locked = {phase:null, intensity:null};
+  G.current = Math.random() < .5 ? 0 : 1;
+
+  // Score labels instellen
+  const rc = ROL[G.rol];
+  document.getElementById('turn-lbl-p1').textContent = rc.p1.name;
+  document.getElementById('turn-lbl-p2').textContent = rc.p2.name;
+  document.getElementById('turn-s-p1').style.color = `var(--${rc.p1.cls})`;
+  document.getElementById('turn-s-p2').style.color = `var(--${rc.p2.cls})`;
+
   showTurnScreen();
 }
 
+function currentPlayerConfig(){
+  const rc = ROL[G.rol];
+  return G.current === 0 ? rc.p1 : rc.p2;
+}
+
 function showTurnScreen(){
-  const name=G.current===0?'Daddy':'Meisje';
-  const cls=G.current===0?'daddy':'meisje';
+  const pc = currentPlayerConfig();
+  document.getElementById('turn-lbl-top').textContent = 'Geef het scherm aan';
+  const tn = document.getElementById('turn-name-big');
+  tn.textContent = pc.name;
+  tn.className = `turn-name fu-1 ${pc.cls}`;
 
-  document.getElementById('turn-lbl-top').textContent='Geef het scherm aan';
-  const tn=document.getElementById('turn-name-big');tn.textContent=name;tn.className=`turn-name fu-1 ${cls}`;
-  document.getElementById('turn-s-daddy').textContent=G.scores[0];
-  document.getElementById('turn-s-meisje').textContent=G.scores[1];
+  document.getElementById('turn-s-p1').textContent = G.scores[0];
+  document.getElementById('turn-s-p2').textContent = G.scores[1];
 
-  const badge=document.getElementById('lock-badge');
-  const chooser=document.getElementById('phase-chooser');
-  const revBtn=document.getElementById('btn-reveal');
+  const badge = document.getElementById('lock-badge');
+  const chooser = document.getElementById('phase-chooser');
+  const revBtn = document.getElementById('btn-reveal');
 
   if(G.locked.phase){
-    const pLabel=G.locked.phase==='voorspel'?'Voorspel':'Hoofdspel';
-    const iLabel=G.locked.intensity==='mild'?'Mild':G.locked.intensity==='spicy'?'Spicy 🌶':'Vraag';
-    document.getElementById('lock-badge-text').textContent=`🔒 ${pLabel} · ${iLabel}`;
+    const pLabel = G.locked.phase==='voorspel' ? 'Voorspel' : 'Hoofdspel';
+    const iLabel = G.locked.intensity==='mild' ? 'Mild' : G.locked.intensity==='spicy' ? 'Spicy 🌶' : 'Vraag';
+    document.getElementById('lock-badge-text').textContent = `🔒 ${pLabel} · ${iLabel}`;
     badge.classList.add('visible');
-    chooser.style.display='none';
-    revBtn.disabled=false;
-    G.sel.phase=G.locked.phase;G.sel.intensity=G.locked.intensity;
-  }else{
+    chooser.style.display = 'none';
+    revBtn.disabled = false;
+    G.sel.phase = G.locked.phase;
+    G.sel.intensity = G.locked.intensity;
+  } else {
     badge.classList.remove('visible');
-    chooser.style.display='block';
+    chooser.style.display = 'block';
     resetChooser();
-    revBtn.disabled=true;
+    revBtn.disabled = true;
   }
   showScreen('screen-turn');
 }
 
 function resetChooser(){
-  G.sel.phase=null;G.sel.intensity=null;
-  ['btn-voorspel','btn-hoofdspel'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='cbtn';});
-  document.getElementById('intensity-group').style.display='none';
+  G.sel.phase = null; G.sel.intensity = null;
+  ['btn-voorspel','btn-hoofdspel'].forEach(id=>{ const el=document.getElementById(id); if(el) el.className='cbtn'; });
+  document.getElementById('intensity-group').style.display = 'none';
 }
 
 function unlockCategory(){
-  G.locked={phase:null,intensity:null};
+  G.locked = {phase:null, intensity:null};
   document.getElementById('lock-badge').classList.remove('visible');
-  document.getElementById('phase-chooser').style.display='block';
+  document.getElementById('phase-chooser').style.display = 'block';
   resetChooser();
-  document.getElementById('btn-reveal').disabled=true;
+  document.getElementById('btn-reveal').disabled = true;
 }
 
 function selectPhase(v){
-  G.sel.phase=v;G.sel.intensity=null;
-  ['voorspel','hoofdspel'].forEach(p=>{const el=document.getElementById(`btn-${p}`);if(el)el.className='cbtn'+(v===p?` s-${p}`:'');});
-  const ig=document.getElementById('intensity-group'),row=document.getElementById('intensity-row'),lbl=document.getElementById('intensity-lbl');
-  ig.style.display='';
-  if(v==='voorspel'){
-    lbl.textContent='Keuze';
-    // Volgorde: Vraag → Mild → Spicy
-    row.innerHTML=`
+  G.sel.phase = v; G.sel.intensity = null;
+  ['voorspel','hoofdspel'].forEach(p=>{ const el=document.getElementById(`btn-${p}`); if(el) el.className='cbtn'+(v===p?` s-${p}`:''); });
+  const ig = document.getElementById('intensity-group');
+  const row = document.getElementById('intensity-row');
+  const lbl = document.getElementById('intensity-lbl');
+  ig.style.display = '';
+  const rc = ROL[G.rol];
+  if(v === 'voorspel' && rc.hasVraag){
+    lbl.textContent = 'Keuze';
+    row.innerHTML = `
       <button class="cbtn" id="btn-vraag"  onclick="selectIntensity('vraag')">VRAAG</button>
       <button class="cbtn" id="btn-mild"   onclick="selectIntensity('mild')">MILD</button>
       <button class="cbtn" id="btn-spicy"  onclick="selectIntensity('spicy')">SPICY 🌶</button>`;
-  }else{
-    lbl.textContent='Intensiteit';
-    row.innerHTML=`
+  } else {
+    lbl.textContent = 'Intensiteit';
+    row.innerHTML = `
       <button class="cbtn" id="btn-mild"  onclick="selectIntensity('mild')">MILD</button>
       <button class="cbtn" id="btn-spicy" onclick="selectIntensity('spicy')">SPICY 🌶</button>`;
   }
@@ -644,163 +755,187 @@ function selectPhase(v){
 }
 
 function selectIntensity(v){
-  G.sel.intensity=v;
-  document.querySelectorAll('#intensity-row .cbtn').forEach(b=>{const k=b.id.replace('btn-','');b.className='cbtn'+(k===v?` s-${k}`:'');});
+  G.sel.intensity = v;
+  document.querySelectorAll('#intensity-row .cbtn').forEach(b=>{ const k=b.id.replace('btn-',''); b.className='cbtn'+(k===v?` s-${k}`:''); });
   checkReveal();
 }
-function checkReveal(){document.getElementById('btn-reveal').disabled=!(G.sel.phase&&G.sel.intensity);}
+function checkReveal(){ document.getElementById('btn-reveal').disabled = !(G.sel.phase && G.sel.intensity); }
 
 /* ══ POOL & CARD ══ */
-const MAX_RECENT_C=4;
-function pickFrom(pool,extra=[]){
-  const excl=[...G.recentShown,...extra];
-  let c=pool.filter(t=>!excl.includes(t));
-  if(!c.length)c=pool;
+function pickFrom(pool, extra=[]){
+  const excl = [...G.recentShown, ...extra];
+  let c = pool.filter(t=>!excl.includes(t));
+  if(!c.length) c = pool;
   return c[Math.floor(Math.random()*c.length)];
 }
 function addToRecent(t){
-  G.recentShown=G.recentShown.filter(x=>x!==t);
+  G.recentShown = G.recentShown.filter(x=>x!==t);
   G.recentShown.push(t);
-  if(G.recentShown.length>MAX_RECENT)G.recentShown.shift();
+  if(G.recentShown.length > MAX_RECENT) G.recentShown.shift();
 }
 
-let currentCardText='';
+let currentCardText = '';
 
 function getPool(){
-  const g=G.current===0?'M':'F';
-  if(G.sel.phase==='voorspel'&&G.sel.intensity==='vraag')return DATA.voorspel.vraag;
-  return DATA[G.sel.phase][g][G.sel.intensity];
+  const rc = ROL[G.rol];
+  const dk = rc.dataKey;
+  const pk = G.current === 0 ? rc.p1.key : rc.p2.key;
+
+  if(G.sel.phase === 'voorspel' && G.sel.intensity === 'vraag'){
+    return DATA[dk].voorspel.vraag;
+  }
+  return DATA[dk][G.sel.phase][pk][G.sel.intensity];
 }
 
 function buildTags(){
-  const isVraag=G.sel.phase==='voorspel'&&G.sel.intensity==='vraag';
-  if(isVraag)return`<span class="q-tag qt-vraag">VRAAG</span><span class="q-tag qt-fase">voor beide</span>`;
-  const it=G.sel.intensity==='mild'?'<span class="q-tag qt-mild">MILD</span>':'<span class="q-tag qt-spicy">SPICY 🌶</span>';
-  return`<span class="q-tag qt-opdracht">OPDRACHT</span>${it}<span class="q-tag qt-fase">${G.sel.phase}</span>`;
+  const rc = ROL[G.rol];
+  const isVraag = G.sel.phase === 'voorspel' && G.sel.intensity === 'vraag';
+  if(isVraag) return `<span class="q-tag qt-vraag">VRAAG</span><span class="q-tag qt-fase">voor beide</span>`;
+  const it = G.sel.intensity === 'mild'
+    ? '<span class="q-tag qt-mild">MILD</span>'
+    : '<span class="q-tag qt-spicy">SPICY 🌶</span>';
+  return `<span class="q-tag qt-opdracht">OPDRACHT</span>${it}<span class="q-tag qt-fase">${G.sel.phase}</span>`;
 }
 
 function renderCard(isReroll){
-  const pool=getPool();
-  const text=pickFrom(pool,isReroll?[currentCardText]:[]);
-  currentCardText=text;addToRecent(text);
-  document.getElementById('q-tags').innerHTML=buildTags();
-  document.getElementById('q-text').textContent=text;
-  const c=document.getElementById('q-card');c.style.animation='none';c.offsetHeight;c.style.animation='';
+  const pool = getPool();
+  const text = pickFrom(pool, isReroll ? [currentCardText] : []);
+  currentCardText = text; addToRecent(text);
+  document.getElementById('q-tags').innerHTML = buildTags();
+  document.getElementById('q-text').textContent = text;
+  const c = document.getElementById('q-card'); c.style.animation='none'; c.offsetHeight; c.style.animation='';
 }
 
 function revealCard(){
-  G.locked.phase=G.sel.phase;G.locked.intensity=G.sel.intensity;
-  const isVraag=G.sel.phase==='voorspel'&&G.sel.intensity==='vraag';
-  const pName=G.current===0?'Meisje':'Daddy';
-  document.getElementById('judge-lbl').textContent=isVraag?'Allebei beantwoorden:':'Laat '+pName+' beoordelen:';
-  document.getElementById('judge-sec').style.display='block';
-  document.getElementById('reroll-sec').style.display='block';
+  G.locked.phase = G.sel.phase; G.locked.intensity = G.sel.intensity;
+  const isVraag = G.sel.phase === 'voorspel' && G.sel.intensity === 'vraag';
+  const rc = ROL[G.rol];
+  const otherName = G.current === 0 ? rc.p2.name : rc.p1.name;
+  document.getElementById('judge-lbl').textContent = isVraag ? 'Allebei beantwoorden:' : `Laat ${otherName} beoordelen:`;
+  document.getElementById('judge-sec').style.display = 'block';
+  document.getElementById('reroll-sec').style.display = 'block';
   renderCard(false);
   showScreen('screen-card');
 }
-function rerollCard(){renderCard(true);}
+function rerollCard(){ renderCard(true); }
 
 /* ══ JUDGE ══ */
 function judge(ok){
-  G.scores[G.current]+=ok?1:-1;
+  G.scores[G.current] += ok ? 1 : -1;
   burstParticles(ok);
-  const fl=document.getElementById('score-flash');
-  fl.textContent=ok?'+1':'−1';fl.className=ok?'pos show':'neg show';
-  // Disable buttons
+  const fl = document.getElementById('score-flash');
+  fl.textContent = ok ? '+1' : '−1';
+  fl.className = ok ? 'pos show' : 'neg show';
   document.querySelectorAll('#judge-sec .btn').forEach(b=>b.disabled=true);
-  document.getElementById('reroll-sec').style.display='none';
-  setTimeout(()=>{fl.className=fl.className.replace('show','hide');},700);
+  document.getElementById('reroll-sec').style.display = 'none';
+  setTimeout(()=>{ fl.className = fl.className.replace('show','hide'); }, 700);
   setTimeout(()=>{
-    fl.className='';
+    fl.className = '';
     document.querySelectorAll('#judge-sec .btn').forEach(b=>b.disabled=false);
-    G.current=1-G.current;
+    G.current = 1 - G.current;
     showTurnScreen();
-  },1300);
+  }, 1300);
+}
+
+/* ══ FOOTER ══ */
+function updateFooter(){
+  const rc = ROL[G.rol];
+  const pc = currentPlayerConfig();
+  const rules = G.current === 0 ? G.assignedRules.p1 : G.assignedRules.p2;
+  const lbl = document.getElementById('footer-label');
+  lbl.textContent = `♦ ${pc.name}'s regels`;
+  lbl.className = `footer-player-label ${pc.cls}`;
+  document.getElementById('footer-compact').innerHTML = rules.map(r=>`<div class="footer-compact-rule">${r.text.length>60?r.text.slice(0,57)+'…':r.text}</div>`).join('');
+  document.getElementById('footer-full').innerHTML = rules.map(r=>`<div class="footer-full-rule">${r.text}</div>`).join('');
+}
+function toggleFooter(){
+  const f=document.getElementById('rules-footer');
+  const c=document.getElementById('footer-compact');
+  const fl=document.getElementById('footer-full');
+  if(f.classList.contains('open')){ f.classList.remove('open'); setTimeout(()=>{ fl.style.display='none'; c.style.display=''; },150); }
+  else{ c.style.display='none'; fl.style.display=''; requestAnimationFrame(()=>f.classList.add('open')); }
 }
 
 /* ══ CLIMAX FLOW ══ */
 function showClimaxChoice(){
-  const[s0,s1]=G.scores;
-  const isDraw=s0===s1;
-  const wi=s0>s1?0:1;
-  const wName=wi===0?'Daddy':'Meisje';
-  const wCls=wi===0?'daddy':'meisje';
+  const [s0,s1] = G.scores;
+  const isDraw = s0 === s1;
+  const wi = s0 > s1 ? 0 : 1;
+  const rc = ROL[G.rol];
+  const wpc = wi === 0 ? rc.p1 : rc.p2;
+  const dk = rc.dataKey;
 
-  const wLbl=document.getElementById('cc-winner-lbl');
-  const wNameEl=document.getElementById('cc-winner-name');
-  const sub=document.getElementById('cc-sub');
+  const wLbl = document.getElementById('cc-winner-lbl');
+  const wNameEl = document.getElementById('cc-winner-name');
+  const sub = document.getElementById('cc-sub');
 
   if(isDraw){
-    wLbl.textContent='GELIJKSPEL';
-    wNameEl.textContent='Daddy ♦ Meisje';
-    wNameEl.className='climax-winner-name fu-1 draw';
-    sub.textContent='Jullie staan quitte — overleg samen welke heerlijke optie jullie kiezen om vanavond mee te eindigen. De keuze is aan jullie beiden…';
-  }else{
-    wLbl.textContent='WINNAAR';
-    wNameEl.textContent=wName;
-    wNameEl.className=`climax-winner-name fu-1 ${wCls}`;
-    sub.textContent=`Kies jouw beloning, ${wName}. Dit heb je verdiend.`;
+    wLbl.textContent = 'GELIJKSPEL';
+    wNameEl.textContent = `${rc.p1.name} ♦ ${rc.p2.name}`;
+    wNameEl.className = 'climax-winner-name fu-1 draw';
+    sub.textContent = 'Jullie staan quitte — overleg samen welke heerlijke optie jullie kiezen om vanavond mee te eindigen.';
+  } else {
+    wLbl.textContent = 'WINNAAR';
+    wNameEl.textContent = wpc.name;
+    wNameEl.className = `climax-winner-name fu-1 ${wpc.cls}`;
+    sub.textContent = `Kies jouw beloning, ${wpc.name}. Dit heb je verdiend.`;
   }
 
-  // Pick 3 options
   let opts;
   if(isDraw){
-    const pm=[...DATA.climax.M].sort(()=>Math.random()-.5);
-    const pf=[...DATA.climax.F].sort(()=>Math.random()-.5);
-    opts=[pm[0],pf[0],pm[1]||pf[1]||pm[0]];
-  }else{
-    const g=wi===0?'M':'F';
-    opts=[...DATA.climax[g]].sort(()=>Math.random()-.5).slice(0,3);
+    const pm = [...DATA[dk].climax[rc.p1.key]].sort(()=>Math.random()-.5);
+    const pf = [...DATA[dk].climax[rc.p2.key]].sort(()=>Math.random()-.5);
+    opts = [pm[0], pf[0], pm[1]||pf[1]||pm[0]];
+  } else {
+    const g = wi === 0 ? rc.p1.key : rc.p2.key;
+    opts = [...DATA[dk].climax[g]].sort(()=>Math.random()-.5).slice(0,3);
   }
-  while(opts.length<3)opts.push(opts[0]);
+  while(opts.length < 3) opts.push(opts[0]);
 
-  // Store state globally — avoids all inline-onclick escaping issues
-  window._cx={opts,isDraw,wName,wCls};
+  window._cx = {opts, isDraw, wName: isDraw ? `${rc.p1.name} ♦ ${rc.p2.name}` : wpc.name, wCls: isDraw ? 'draw' : wpc.cls};
 
-  const container=document.getElementById('cc-cards');
-  container.innerHTML=opts.map((txt,i)=>`
+  const container = document.getElementById('cc-cards');
+  container.innerHTML = opts.map((_,i) => `
     <div class="climax-option" onclick="chooseClimaxByIdx(${i})">
       <div class="climax-option-num">Optie ${i+1}</div>
       <div class="climax-option-body"></div>
     </div>`).join('');
-  // Set text safely via DOM (no escaping risk)
-  container.querySelectorAll('.climax-option-body').forEach((el,i)=>{el.textContent=opts[i];});
+  container.querySelectorAll('.climax-option-body').forEach((el,i)=>{ el.textContent=opts[i]; });
 
   launchConfetti();
   showScreen('screen-climax-choice');
 }
 
 function chooseClimaxByIdx(idx){
-  const{opts,isDraw,wName,wCls}=window._cx;
-  const text=opts[idx];
-
-  document.getElementById('cr-winner-lbl').textContent=isDraw?'GELIJKSPEL':'WINNAAR';
-  const crName=document.getElementById('cr-winner-name');
-  crName.textContent=isDraw?'Daddy ♦ Meisje':wName;
-  crName.className=`climax-reveal-wname fu-1 ${isDraw?'draw':wCls}`;
-  document.getElementById('cr-text').textContent=text;
+  const {opts, isDraw, wName, wCls} = window._cx;
+  const text = opts[idx];
+  document.getElementById('cr-winner-lbl').textContent = isDraw ? 'GELIJKSPEL' : 'WINNAAR';
+  const crName = document.getElementById('cr-winner-name');
+  crName.textContent = wName;
+  crName.className = `climax-reveal-wname fu-1 ${wCls}`;
+  document.getElementById('cr-text').textContent = text;
   launchConfetti();
   showScreen('screen-climax-reveal');
 }
 
 /* ══ PARTICLES ══ */
 function launchConfetti(){
-  const cols=['#c9a84c','#e2c16a','#8b1a2b','#c41e3a','#f0e6d3','#9b6fd6','#7eb4e0','#e07eb4'];
-  for(let i=0;i<52;i++)setTimeout(()=>{
-    const el=document.createElement('div');el.className='conf';
+  const cols = ['#c9a84c','#e2c16a','#8b1a2b','#c41e3a','#f0e6d3','#9b6fd6','#7eb4e0','#e07eb4'];
+  for(let i=0;i<52;i++) setTimeout(()=>{
+    const el=document.createElement('div'); el.className='conf';
     const sz=5+Math.random()*9;
     el.style.cssText=`left:${Math.random()*100}vw;top:-14px;width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.45?'50%':'2px'};animation-duration:${1.4+Math.random()*2.8}s;`;
-    document.body.appendChild(el);setTimeout(()=>el.remove(),4600);
-  },i*48);
+    document.body.appendChild(el); setTimeout(()=>el.remove(),4600);
+  }, i*48);
 }
 function burstParticles(ok){
-  const cols=ok?['#80e080','#50d050','#c0ffc0','#fff','#aaffaa']:['#e08080','#d05050','#ffc0c0','#fff','#ffaaaa'];
+  const cols = ok ? ['#80e080','#50d050','#c0ffc0','#fff','#aaffaa'] : ['#e08080','#d05050','#ffc0c0','#fff','#ffaaaa'];
   for(let i=0;i<24;i++){
     const el=document.createElement('div');
-    const a=(i/24)*Math.PI*2+Math.random()*.4,d=55+Math.random()*115,s=4+Math.random()*7;
+    const a=(i/24)*Math.PI*2+Math.random()*.4, d=55+Math.random()*115, s=4+Math.random()*7;
     el.style.cssText=`position:fixed;left:50vw;top:50vh;width:${s}px;height:${s}px;border-radius:50%;background:${cols[Math.floor(Math.random()*cols.length)]};pointer-events:none;z-index:200;transform:translate(-50%,-50%);transition:transform .55s cubic-bezier(.2,1,.3,1),opacity .55s ease-out;opacity:1;`;
     document.body.appendChild(el);
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{el.style.transform=`translate(calc(-50% + ${Math.cos(a)*d}px),calc(-50% + ${Math.sin(a)*d}px)) scale(0)`;el.style.opacity='0';}));
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ el.style.transform=`translate(calc(-50% + ${Math.cos(a)*d}px),calc(-50% + ${Math.sin(a)*d}px)) scale(0)`; el.style.opacity='0'; }));
     setTimeout(()=>el.remove(),660);
   }
 }
@@ -809,7 +944,7 @@ function burstParticles(ok){
 (function(){
   const pal=['rgba(201,168,76,','rgba(196,30,58,','rgba(155,111,214,','rgba(201,168,76,','rgba(240,230,211,'];
   for(let i=0;i<22;i++){
-    const el=document.createElement('div'),sz=2+Math.random()*5.5,col=pal[Math.floor(Math.random()*pal.length)],op=.09+Math.random()*.22,dur=10+Math.random()*15;
+    const el=document.createElement('div'), sz=2+Math.random()*5.5, col=pal[Math.floor(Math.random()*pal.length)], op=.09+Math.random()*.22, dur=10+Math.random()*15;
     el.className='amb';
     el.style.cssText=`width:${sz}px;height:${sz}px;background:${col}${op});left:${Math.random()*100}vw;bottom:-20px;--drift:${(Math.random()-.5)*85}px;animation-duration:${dur}s;animation-delay:${-(Math.random()*dur)}s;`;
     document.body.appendChild(el);

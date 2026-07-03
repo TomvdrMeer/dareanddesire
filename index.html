@@ -274,6 +274,41 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
 @keyframes wPulse{0%,100%{opacity:.7}50%{opacity:1}}
 .btn-back{position:fixed;top:max(.9rem,env(safe-area-inset-top));left:1rem;padding:.3rem .65rem;min-height:36px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;font-family:'Cinzel',serif;font-size:clamp(.5rem,1.9vw,.58rem);letter-spacing:.12em;color:var(--cream-d);cursor:pointer;z-index:60;transition:all .2s}
 .btn-back:active{background:rgba(255,255,255,.09);color:var(--cream)}
+
+/* ── ZINNEN ── */
+.zinnen-wrap{margin-top:.9rem;border-top:1px solid rgba(255,255,255,.07);padding-top:.75rem}
+.zinnen-lbl{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin-bottom:.5rem;text-align:center}
+.zinnen-list{display:flex;flex-direction:column;gap:.35rem}
+.zin{font-style:italic;font-size:clamp(.78rem,3vw,.88rem);color:rgba(240,230,211,.75);line-height:1.5;padding:.25rem .5rem;border-left:2px solid rgba(201,168,76,.25);text-align:left}
+.btn-meer-zinnen{background:transparent;border:1px solid rgba(201,168,76,.2);color:rgba(201,168,76,.5);font-family:'Cinzel',serif;font-size:clamp(.42rem,1.5vw,.5rem);letter-spacing:.12em;padding:.3rem .8rem;border-radius:10px;cursor:pointer;margin-top:.4rem;display:block;margin-left:auto;margin-right:auto;transition:all .2s}
+.btn-meer-zinnen:active{background:rgba(201,168,76,.08);color:var(--gold)}
+
+/* ── MODUS BADGE ── */
+.modus-badge{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.15em;text-transform:uppercase;padding:.18rem .55rem;border-radius:10px;border:1px solid rgba(155,111,214,.35);background:rgba(155,111,214,.08);color:rgba(155,111,214,.8);margin-bottom:.4rem;display:inline-block}
+
+/* ── VETO BTN ── */
+.veto-row{display:flex;gap:.5rem;justify-content:center;margin-top:.5rem}
+.btn-veto{background:rgba(212,26,60,.05);border:1px solid rgba(212,26,60,.25);color:rgba(212,26,60,.6);font-family:'Cinzel',serif;font-size:clamp(.46rem,1.7vw,.54rem);letter-spacing:.12em;padding:.35rem .9rem;border-radius:10px;cursor:pointer;transition:all .2s}
+.btn-veto:active{background:rgba(212,26,60,.12);color:var(--crimson3)}
+.btn-veto:disabled{opacity:.25;pointer-events:none}
+.btn-veto.used{opacity:.2;pointer-events:none;text-decoration:line-through}
+
+/* ── BONUS ── */
+.btn-bonus{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.06));border:1px solid rgba(201,168,76,.4);color:var(--gold-l);font-family:'Cinzel',serif;font-size:clamp(.6rem,2.2vw,.7rem);letter-spacing:.12em;padding:.6rem 1.4rem;border-radius:var(--r);cursor:pointer;animation:hbGold 2s ease-in-out infinite;margin-top:.5rem;display:block;margin-left:auto;margin-right:auto;transition:all .2s}
+.btn-bonus:active{transform:scale(.96)}
+
+/* ── SIDEBAR EXTRA ── */
+.sidebar-regels{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;width:100%;padding:.85rem .5rem;transition:all .2s;border-top:1px solid rgba(255,255,255,.06)}
+.sidebar-regels:active{background:rgba(255,255,255,.04)}
+.sidebar-regels-icon{font-size:1.3rem;line-height:1}
+.sidebar-regels-lbl{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d)}
+
+/* ── MODUS SELECTIE ── */
+.modus-keuze{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:.8rem 0}
+.modus-btn{flex:1;min-width:80px;padding:.7rem .5rem;background:var(--surface);border:1.5px solid rgba(201,168,76,.12);border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.54rem,2vw,.62rem);letter-spacing:.08em;color:var(--cream-d);cursor:pointer;transition:all .2s;text-align:center}
+.modus-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.08);box-shadow:0 0 12px rgba(201,168,76,.15)}
+.modus-btn:active{transform:scale(.97)}
+
 </style>
 </head>
 <body>
@@ -312,6 +347,12 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
     <div class="rules-card fu-2" id="rules-card-p1"></div>
     <div class="rules-card fu-3" id="rules-card-p2"></div>
     <div class="sm"></div>
+    <p style="font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);text-align:center;width:100%;max-width:420px">Spelmodus</p>
+    <div class="modus-keuze fu-4" style="width:100%;max-width:420px">
+      <div class="modus-btn active" id="modus-normaal" onclick="setModus('normaal',this)">Normaal</div>
+      <div class="modus-btn" id="modus-verrassing" onclick="setModus('verrassing',this)">Verrassing</div>
+      <div class="modus-btn" id="modus-random" onclick="setModus('random',this)">Volledig Random</div>
+    </div>
     <button class="btn btn-primary fu-4" onclick="startGame()">BEGIN HET SPEL →</button>
     <div class="slg"></div>
   </div>
@@ -351,6 +392,12 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
         <div class="cat-tab-dot"></div>
         <span class="cat-tab-icon">🌙</span>
         <span class="cat-tab-lbl">Buiten</span>
+      </div>
+    </div>
+    <div class="topbar-side" id="sidebar-regels-btn" style="display:none">
+      <div class="sidebar-regels" onclick="toggleFooter()" title="Avondregels">
+        <span class="sidebar-regels-icon">📋</span>
+        <span class="sidebar-regels-lbl">Regels</span>
       </div>
     </div>
     <div class="topbar-side">
@@ -456,324 +503,16 @@ const ROL = {
 // ══════════════════════════════════════════
 // DATA
 // ══════════════════════════════════════════
-const DATA = {
-  "dm": {
-    "avondregels": {
-      "Daddy": {
-        "vast": null,
-        "random": [
-          "Elke keer als Meisje een opdracht goed heeft uitgevoerd zonder aarzelen, zeg je dat ze een goed meisje is en geef je haar een zoen.",
-          "Als Meisje niet luistert, wordt ze gespankt.",
-          "Zeg Meisje hardop wat ze vanavond is. Laat het haar herhalen totdat je tevreden bent.",
-          "Als Meisje gehoorzaamt zonder aarzelen, mag zij haar beloning kiezen. Jij voert uit wat ze netjes vraagt aan Daddy.",
-          "Als Meisje uit haar rol valt zonder enige reden, verdient ze een spanking."
-        ]
-      },
-      "Meisje": {
-        "vast": "Al het voorvocht van Daddy's pik moet worden opgelikt en opgezogen. Zeg daarna: 'Dank je, Daddy.'",
-        "random": [
-          "Als je iets wilt, vraag je dit aan Daddy.",
-          "Bij de climax blijf je Daddy vragen om zijn warme zaad, terwijl je 'Oh Daddy' blijft kreunen.",
-          "Elke keer dat je je onzeker voelt, zeg je: 'Daddy, zeg me wat ik moet doen.'",
-          "Vanavond rem je jezelf niet af. Daddy bepaalt, jij ondergaat en laat jezelf helemaal gaan. Dit geldt ook voor wanneer Daddy je wil laten klaarkomen: hij bepaalt.",
-          "Elke keer als Daddy zijn pik in je doet, kreun je: 'Oh Daddy...' Dit herhaal je vaak, terwijl hij je neukt."
-        ]
-      }
-    },
-    "vragen": {
-      "Daddy": [
-        "Beschrijf wat je vanavond met Meisje wil doen — geen details weglaten.",
-        "Welk lichaamsdeel van Meisje maakt je het meest geil, en wat wil je er precies mee doen?",
-        "Beschrijf hoe je wil dat Meisje je aankijkt op het moment dat je klaarkomt.",
-        "Als je de komende week één moment mocht kiezen waarop je Meisje volledig vrij mag gebruiken — wanneer en wat?",
-        "Wat zou je doen als je wist dat Meisje de komende 24 uur altijd beschikbaar is voor jou, zonder vragen?",
-        "Beschrijf een situatie tussendoor waarbij je Meisje op dat moment zou willen hebben.",
-        "Wat wil je dat Meisje doet zonder dat je het hoeft te vragen?",
-        "Beschrijf precies hoe je Meisje wil vasthouden vanavond — waar, hoe, hoe stevig.",
-        "Wat doet het met je als Meisje gehoorzaamt zonder aarzelen?",
-        "Beschrijf wat je met Meisje wil doen op het moment dat ze bijna klaarkomt.",
-        "Welke scène uit een pornofilm zou jij met Meisje willen naspelen — beschrijf hem in detail.",
-        "Wat betekent het voor jou om vanavond volledig de controle te hebben?",
-        "Wat wil je dat Meisje zegt op het moment dat ze bijna klaarkomt?",
-        "Beschrijf wat je wil zien als je naar Meisje kijkt terwijl je haar neemt.",
-        "Wat doet het met je als Meisje jouw naam schreeuwt?"
-      ],
-      "Meisje": [
-        "Wat vind je het lekkerste wat Daddy bij je doet — wees expliciet.",
-        "Beschrijf waar je vanavond het meeste zin in hebt.",
-        "Vertel de fantasie waarop je de laatste keer bent klaargekomen.",
-        "Wat is iets wat je graag nog eens verder zou willen verkennen?",
-        "Wat vind jij enorm stout en opwindend?",
-        "Als Daddy vanavond één ding met je mag doen wat je nog nooit hebt toegestaan of gevraagd — wat is dat?",
-        "Beschrijf je meest geile seksuele scenario: wie, waar, wat er precies gebeurt.",
-        "Wat is je meest stoute stiekeme fantasie waar je geil van wordt maar nooit hardop hebt uitgesproken?",
-        "Wat vind je lekker aan spanking — beschrijf wat het met je doet.",
-        "Wat doet de rolverdeling Daddy/Meisje met je — fysiek en in je hoofd?",
-        "Wat zou je doen als je wist dat Daddy nooit zou oordelen?",
-        "Beschrijf wat er in je hoofd omgaat op het moment dat Daddy je vasthoudt en je nergens heen kunt.",
-        "Wat doet het met je als Daddy je precies vertelt wat je moet doen — ook als je het zelf al wil?",
-        "Vertel wat je voelt op het moment dat je Daddy's pik in je mond neemt.",
-        "Wat wil je dat Daddy met je doet op het moment dat je bijna klaarkomt?",
-        "Wat vind je het lekkerste aan pijpen — eerlijk en expliciet.",
-        "Beschrijf hoe je wil dat Daddy je aankijkt op het moment dat je klaarkomt.",
-        "Als je vanavond één ding mag vragen dat normaal te stout voelt — wat is het?",
-        "Wat doet het met je als Daddy je vasthoudt terwijl hij je neemt?",
-        "Wat is de meest geile positie voor jou en waarom?",
-        "Wat vind je leuk, lekker en geil aan cumplay?"
-      ]
-    },
-    "voorspel": {
-      "Daddy": {
-        "mild": [
-          "Kus Meisje hartstochtelijk op haar mond en in haar nek.",
-          "Zuig aan Meisje's tepels.",
-          "Draai Meisje op haar buik en kus over haar hele lichaam — eindig met een stout likje over haar kontgaatje."
-        ],
-        "spicy": [
-          "Laat Meisje je vingers nat likken en vinger haar kutje. Laat haar daarna haar eigen vingers weer aflikken.",
-          "Trek jezelf af en laat Meisje goed kijken.",
-          "Ga bij Meisje's hoofd zitten en duw je pik in haar mondje. Beweeg je heupen en neuk haar mondje.",
-          "Pak Meisje bij haar hoofd en duw haar naar beneden. Beweeg haar hoofd terwijl ze je pijpt.",
-          "Ga tegenover Meisje zitten. Trek jezelf af en zeg haar zichzelf te vingeren terwijl jullie elkaar aankijken en van het uitzicht genieten."
-        ],
-        "cnc": [
-          "Pak Meisje vast als ze probeert weg te schuiven. Houd haar stevig in bedwang. Meisje stribbelt fysiek licht tegen en verbaal waar mogelijk.",
-          "Grijp Meisje's polsen en houd ze boven haar hoofd. Kijk haar aan en voel haar borsten en kutje terwijl zij blijft tegenwerken.",
-          "Ga bij Meisje's hoofd zitten en houd haar polsen vast. Duw je pik naar binnen en neuk haar mondje terwijl ze tegenstribbelt.",
-          "Trek Meisje met haar hoofd over de rand van het bed. Ga voor haar staan, houd haar in bedwang en neuk haar mondje.",
-          "Houd Meisje's polsen boven haar hoofd en vinger haar natte kutje. Doe daarna je natte vingers in haar mondje en laat haar zichzelf proeven."
-        ]
-      },
-      "Meisje": {
-        "mild": [
-          "Kus en streel Daddy over zijn hele lichaam.",
-          "Kruip tegen Daddy aan en zeg dat je zijn lieve, gehoorzame, vieze Meisje bent vanavond.",
-          "Kom boven Daddy's gezicht hangen met blote borsten en bied hem je tepels aan.",
-          "Kruip langzaam naar Daddy toe en doe zijn pik in je mondje zonder iets te zeggen. Kijk hem aan."
-        ],
-        "spicy": [
-          "Zuig aan Daddy's pik terwijl je hem aftrekt. Zorg dat je zijn voorvocht proeft.",
-          "Vinger jezelf en laat Daddy goed kijken. 'Vind je het lekker, Daddy?' Lik daarna je vingers af en laat Daddy ze ook aflikken.",
-          "Ga op je knieën voor Daddy zitten met je billen naar hem toe en laat hem met je kontgaatje spelen. Er mogen speeltjes gebruikt worden.",
-          "Vraag Daddy je hoofd te sturen terwijl je hem pijpt. Hij mag dit doen door je haren te pakken.",
-          "Ga op Daddy's gezicht zitten en beweeg je heupen zodat hij je gaatjes goed kan likken."
-        ],
-        "cnc": [
-          "Probeer verbaal Daddy tegen te werken alsof je een onschuldig meisje bent. Probeer weg te komen, terwijl Daddy je vasthoudt en aan je zit.",
-          "Zeg dat je niet wilt wat Daddy doet. Laat je lichaam iets anders zeggen."
-        ]
-      }
-    },
-    "hoofdspel": {
-      "Daddy": [
-        "Neuk Meisje, vinger haar, ga verder met neuken en doe je natte vingers in haar mondje. Laat Meisje zichzelf proeven terwijl je haar tongzoent.",
-        "Zeg Meisje op haar knieën te gaan zitten en vinger tegelijk haar beide gaatjes. Zij mag de roze vibrator op haar clitje gebruiken.",
-        "Zeg Meisje op haar knieën te gaan zitten en spreid haar billen. Lik haar kontgaatje en speel ermee met je vingers of een speeltje.",
-        "Geef Meisje een opdracht die ze zonder aarzelen uitvoert. Als ze gehoorzaamt, beloon je haar royaal.",
-        "Zeg Meisje met gespreide billen op je gezicht te komen zitten, precies met haar kontgaatje op je tong. Lik uitgebreid haar kontgaatje.",
-        "Vinger Meisje terwijl ze op haar buik ligt. Houd haar stevig vast en duw je natte vingers in haar mondje.",
-        "Neuk Meisje en duw daarna je natte pik tegen Meisje's mondje. Zeg haar dat ze je pik moet schoonlikken. Meisje gehoorzaamt graag."
-      ],
-      "Meisje": [
-        "Pijp Daddy en wissel af met het likken van zijn pik, ballen en kontgaatje. Tussendoor deepthroat je zijn pik en zuig je hard aan zijn eikel.",
-        "Vraag Daddy heel lief en onderdanig in welke positie hij zijn pik in een van je gaatjes wil doen.",
-        "Vraag Daddy met zijn benen wijd op zijn rug te gaan liggen. Lik zijn kontgaatje nat en begin hem daarna te pijpen, terwijl je je vinger naar binnen brengt. Zoek zijn prostaat — ca. 5-7 cm naar binnen, richting zijn navel — en laat hem voelen wat hij nog niet kent.",
-        "Ga met je hoofd over de rand van het bed liggen en vraag Daddy om je alsjeblieft in je mondje te neuken. Jij bepaalt of hij in je keeltje klaarkomt.",
-        "Ga met je rug naar Daddy toe op hem zitten en laat zijn pik in je kontgaatje glijden. Berijdt hem, maar hij mag nog niet klaarkomen.",
-        "Ga op Daddy's gezicht zitten en laat hem je goed likken — van je clitje tot je kontgaatje.",
-        "Ga op je rug liggen met je benen wijd en omhoog. Kijk Daddy aan en zeg: 'Ik ben helemaal van jou Daddy. Doe wat je wil.'",
-        "Nadat Daddy in je is geweest, pijp je hem. Proef jullie beide."
-      ],
-      "cnc": {
-        "Daddy": [
-          "Houd Meisje vast terwijl je je pik in haar kutje duwt. Neuk haar en duw daarna je pik in haar mondje. Zeg haar dat ze je pik moet schoonlikken. Met gemaakte tegenzin doet ze dit terwijl je haar polsen vasthoudt. Neuk haar daarna weer en kom in haar klaar. Laat haar daarna je pik weer schoonlikken.",
-          "Houd met één hand Meisje's polsen boven haar hoofd. Met de andere hand vinger je haar terwijl ze fysiek licht tegenstribbelt, maar verbaal veel meer tegenwerkt. Daarna duw je je natte vingers in haar mondje, terwijl je haar neukt. Kom in haar klaar.",
-          "Draai Meisje om in de positie die jij wil, ook als ze tegenwerkt. Bepaal zelf in welk gaatje je klaarkomt.",
-          "Houd Meisje stevig vast en kom over haar kutje heen klaar terwijl ze nog stribbelt.",
-          "Kom over Meisje's gezicht heen klaar terwijl ze verbaal tegenwerkt. Zij blijft liggen."
-        ],
-        "Meisje": [
-          "Stribbel tegen terwijl Daddy je neemt — verbaal en een beetje fysiek. Laat hem sterker zijn en in je klaarkomen.",
-          "Werk verbaal tegen als Daddy zijn pik tegen je lippen duwt — en lik hem toch schoon.",
-          "Zeg dat je wil stoppen. Voel dat je lichaam het tegenovergestelde wil. Geef je daarna helemaal over en laat je helemaal gaan.",
-          "Werk verbaal tegen totdat Daddy in je klaarkomt. Voel daarna wat hij met je heeft gedaan."
-        ]
-      }
-    },
-    "climax": {
-      "Daddy": [
-        "Ga standje 69 liggen en spuit Meisje's mond vol terwijl ze je kontgaatje vingert en jij haar kontgaatje likt.",
-        "Neuk Meisje achterlangs in haar kontgaatje, terwijl ze de roze vibrator op haar clitje heeft.",
-        "Laat Meisje zichzelf vingeren terwijl jij je aftrekt boven haar. Spuit over haar kutje heen en zij vingert zich met jouw warme zaad.",
-        "Leg Meisje op haar buik. Neem haar anaal.",
-        "Zeg Meisje met haar hoofd over de rand van het bed te gaan liggen. Neuk haar mondje totdat je klaarkomt. Spuit 1x over haar gezicht en duw daarna je pik in haar keeltje voor de rest van je warme zaad.",
-        "Trek jezelf af bij Meisje's gezicht en spuit over haar open mondje en uitgestoken tong.",
-        "Meisje gaat voor het bed zitten. Neuk haar mondje en spuit deze vol. Meisje laat het eruit lopen, speelt met je warme zaad en wrijft het over haar lippen, borsten, tepels, clitje en vingert zichzelf ermee.",
-        "Zeg Meisje met haar hoofd over de rand van het bed te gaan liggen. Neuk haar mondje en spuit deze vol. Meisje speelt met jouw warme zaad en wrijft het over haar lippen, borsten, tepels, clitje en vingert zichzelf ermee.",
-        "Meisje zit met gespreide billen voor je. Neuk haar kontgaatje, haal je pik eruit en spuit over haar kontgaatje. Duw daarna je pik weer naar binnen."
-      ],
-      "Meisje": [
-        "Ga voor Daddy zitten met je mondje open. Laat hem in je mondje spuiten, laat het eruit lopen en verwen jezelf ermee, terwijl je zijn pik schoon likt en weer hard probeert te maken.",
-        "Ga op je knieën voor Daddy zitten bij de rand van het bed en vraag Daddy om je in je kontje te neuken. Zeg Daddy dat je zijn Anal Meisje bent.",
-        "Pijp Daddy terwijl je zijn kontje vingert. Wanneer hij klaarkomt, kies je: slik door of verwen jezelf ermee.",
-        "Laat Daddy op zijn rug liggen. Ga op hem zitten en laat hem in je kontgaatje glijden. Berijdt hem en laat hem klaarkomen. Daarna ben jij aan de beurt.",
-        "Ga met je hoofd over de rand van het bed liggen en vraag Daddy om je in je mondje te neuken. Bepaal of hij in je keeltje klaarkomt, in je mondje en dat je het doorslikt, of dat je jezelf met zijn warme zaad bevredigt. Hij mag ook over je gezicht heen spuiten.",
-        "Kijk Daddy aan en vraag hem smachtend over de stoutste plek heen te spuiten waar je nu aan toe bent. Smeer het langzaam over je lichaam en maak hem opnieuw geil."
-      ]
-    },
-    "video": [
-      "Scene 1 - Meisje spreidt haar billen en Daddy neemt haar anaal, terwijl hij filmt.",
-      "Scene 2 - Meisje ligt met haar hoofd over de rand van het bed. Daddy filmt van boven terwijl hij haar mondje neukt. Hij spuit een keer over haar gezicht, de rest in haar keeltje — of vult haar mondje, en Meisje slikt het door en laat vol trots haar lege mondje zien, of laat het eruit lopen en smeert zichzelf ermee in terwijl ze zichzelf bevredigt met Daddy's cum.",
-      "Scene 3 - Close-up van Daddy's pik die langzaam in Meisje's kontgaatje glijdt.",
-      "Scene 4 - Close-up van Daddy die over Meisje's kutje, kontgaatje of over haar heen spuit.",
-      "Scene 5 - Meisje zit voor Daddy terwijl hij haar mondje volspuit. Ze laat het zien, laat het eruit lopen en verwent zichzelf ermee, terwijl ze Daddy's pik schoon likt en zuigt.",
-      "Scene 6 - Meisje gaat met haar rug naar Daddy toe op hem zitten, laat zijn pik in haar kontgaatje glijden en berijdt hem.",
-      "Scene 7 - Close-up van Meisje's mondje met uitgestoken tong, terwijl Daddy in haar mondje spuit.",
-      "Scene 8 - Meisje ligt voor Daddy met gespreide benen. Daddy spuit over haar kutje heen en Meisje bevredigt zichzelf ermee terwijl Daddy filmt."
-    ],
-    "buiten": [
-      "Natuur — Zoek een afgelegen plekje buiten en maak er een avontuur van. Kijk wat mogelijk is en probeer klaar te komen.",
-      "Zwembad hokje — Meisje pijpt Daddy, hij spuit haar mondje vol of over haar heen. Daddy vingert daarna Meisje.",
-      "Auto — Meisje trekt Daddy af, afwisselend met pijpen. Ze vangt zijn cum op met haar mondje en slikt het door.",
-      "Vibrator op afstand — Daddy bedient hem de hele avond terwijl Meisje ondergaat.",
-      "Geen ondergoed — Meisje draagt geen ondergoed tijdens een avondje uit. Alleen Daddy weet dat. Wanneer mogelijk wordt Meisje even gevingerd door hem of door haarzelf.",
-      "Buttplug — Meisje heeft een buttplug in tijdens een avondje uit. Daddy bepaalt wanneer en of hij er iets mee doet.",
-      "Bioscoop — Meisje zit tijdens de film aan Daddy's pik en probeert hem te laten klaarkomen met haar hand of mond. Lukt dit niet, dan wordt het afgemaakt in de auto.",
-      "Lingerie — Meisje draagt onder haar jurk hele stoute lingerie die Daddy heeft uitgezocht. Zo is ze stiekem zijn sletje zonder dat iemand het weet of ziet.",
-      "Tuin — Zorg ervoor dat de ander klaarkomt met je hand of mond.",
-      "Hotelkamer — Daddy neukt Meisje voor het open raam in een van haar gaatjes."
-    ]
-  },
-  "fs": {
-    "avondregels": {
-      "Femme": {
-        "vast": "Wanneer Speeltje gehoorzaamt en je tevreden bent, beloon je hem door hem te pijpen en zeg je hem dat hij dit verdiend heeft.",
-        "random": [
-          "Speeltje is helemaal van jou vanavond. Gebruik hem zoals jij wil, wanneer je wil.",
-          "Vertel Speeltje aan het begin van de avond wat voor Femme je vanavond wil zijn en wat je met Speeltje wil doen.",
-          "Raak Speeltje op onverwachte momenten aan. Niet als beloning — gewoon omdat hij van jou is.",
-          "Als Speeltje iets fout doet, corrigeer je hem direct en concreet."
-        ]
-      },
-      "Speeltje": {
-        "vast": "Je mag niet klaarkomen zonder expliciete toestemming van Femme. Vraag het haar — gebruik de woorden die je normaal niet hardop zegt.",
-        "random": [
-          "Speeltje mag Femme niet aanraken zonder toestemming.",
-          "Speeltje spreekt Femme aan als Femme. Geen uitzonderingen.",
-          "Je bent vanavond Femme's speeltje. Haar genot komt altijd eerst.",
-          "Als Femme je een opdracht geeft, voer je deze uit zonder vragen."
-        ]
-      }
-    },
-    "vragen": {
-      "Femme": [
-        "Beschrijf wat je vanavond met Speeltje wil doen — geen details weglaten.",
-        "Wat wil je dat Speeltje voor je doet zonder dat je het hoeft te vragen?",
-        "Welk lichaamsdeel van Speeltje maakt je het meest geil, en wat wil je er precies mee doen?",
-        "Beschrijf hoe je Speeltje wil gebruiken vanavond — als speeltje, als instrument, als dienaar?",
-        "Wat doet het met je als Speeltje volledig gehoorzaamt zonder aarzelen?",
-        "Beschrijf wat je wil zien op Speeltje's gezicht terwijl je hem gebruikt.",
-        "Als je Speeltje vanavond één ding mag laten doen wat je nog nooit hebt gevraagd — wat is dat?",
-        "Wat betekent het voor jou om vanavond volledig de controle te hebben over Speeltje?",
-        "Wat voor Femme wil je vanavond zijn — teder en controlerend, koel en veeleisend, of iets daartussenin?",
-        "Wat is iets wat je Speeltje wil laten doen maar nog nooit hebt durven vragen?",
-        "Beschrijf één ding dat je vanavond wil proberen dat je normaal te spannend of te stout vindt.",
-        "Wat geeft je het meeste gevoel van controle — kijken, aanraken, of bevelen?",
-        "Als je vanavond volledig je gang mag gaan met Speeltje zonder oordeel — wat doe je als eerste?",
-        "Wat vind je het lekkerste aan het idee dat Speeltje er puur voor jou is vanavond?",
-        "Beschrijf een fantasie waarbij jij volledig de leiding hebt — wie, wat, hoe.",
-        "Wat zou je doen met Speeltje als je wist dat je nooit hoefde te vragen of het oké is?",
-        "Welk lichaamsdeel van Speeltje wil je vanavond het meest gebruiken — en hoe?",
-        "Wat betekent het voor jou om iemand volledig te mogen gebruiken voor je eigen genot?"
-      ],
-      "Speeltje": [
-        "Beschrijf wat je vanavond voor Femme wil doen — wees expliciet.",
-        "Wat doet het met je als Femme je volledig gebruikt voor haar eigen genot?",
-        "Wat vind je het lekkerste wat Femme bij je doet — wees eerlijk en gedetailleerd.",
-        "Beschrijf wat er in je hoofd omgaat als Femme je een opdracht geeft die je moet uitvoeren.",
-        "Wat betekent het voor jou om vanavond volledig van Femme te zijn?",
-        "Als Femme vanavond één ding met je mag doen wat je nog nooit hebt toegestaan — wat is dat?",
-        "Wat vind je het lekkerste aan volledig ondergaan — beschrijf wat het met je lichaam doet.",
-        "Beschrijf hoe je wil dat Femme je gebruikt op het moment dat je bijna klaarkomt.",
-        "Wat maakt jou het meest gelukkig als Femme — haar plezier zien, haar stem horen, of het gevoel volledig van haar te zijn?",
-        "Beschrijf wat het met je doet als Femme de controle overneemt — wat voel je in je lichaam?",
-        "Wat wil je dat Femme vanavond meer durft te doen met jou?",
-        "Vertel Femme wat je het lekkerste vindt aan haar als ze dominant is — wees specifiek.",
-        "Als Femme vanavond alles mocht doen zonder te vragen — wat hoop je dat ze doet?",
-        "Vertel Femme wat ze mag doen met jouw lichaam vanavond — geen grenzen.",
-        "Wat wil je Femme laten weten over hoe jij haar ervaart als ze de leiding neemt?"
-      ]
-    },
-    "voorspel": {
-      "Femme": {
-        "mild": [
-          "Laat Speeltje op zijn knieën voor je zitten en kijk hem aan. Geef hem pas een opdracht als jij er klaar voor bent.",
-          "Zeg Speeltje precies hoe hij je moet kussen. Corrigeer hem als hij het niet goed doet.",
-          "Ga op je buik liggen en beveel Speeltje hoe hij je mag verwennen. Hij doet niets zonder jouw instructie.",
-          "Laat Speeltje je tepels verwennen met zijn mond terwijl jij hem langzaam aftrekt.",
-          "Ga schrijlings op Speeltje zitten zonder hem te laten binnenkomen. Beweeg langzaam over hem heen.",
-          "Lik het voorvocht van Speeltje's pik en tongzoen hem daarna — zo proeven jullie hem samen."
-        ],
-        "spicy": [
-          "Ga op Speeltje's gezicht zitten en beweeg je heupen. Vertel hem precies wat hij met zijn tong moet doen — rijd over zijn tong totdat jij tevreden bent.",
-          "Laat Speeltje zichzelf aftrekken terwijl jij toekijkt. Jij bepaalt wanneer hij mag stoppen.",
-          "Bind Speeltje's handen vast en gebruik zijn lichaam voor jouw genot. Hij doet niets terug.",
-          "Beveel Speeltje op zijn rug te gaan liggen. Gebruik zijn gezicht zoals jij wil.",
-          "Laat Speeltje je borsten en tepels verwennen terwijl jij hem aftrekt. Jij bepaalt het tempo."
-        ]
-      },
-      "Speeltje": {
-        "mild": [
-          "Streel en kus Femme over haar hele lichaam. Vraag haar waar ze aangeraakt wil worden.",
-          "Ga voor Femme staan en wacht op haar opdracht. Zeg haar dat je er volledig voor haar bent.",
-          "Kus Femme van haar nek naar beneden — stop pas als zij dat zegt.",
-          "Verwend Femme's hele lichaam met je handen. Vraag niets — lees haar lichaam."
-        ],
-        "spicy": [
-          "Vinger Femme terwijl je haar aankijkt. Vraag haar steeds of je het goed doet.",
-          "Lik Femme's kutje totdat zij zegt dat je mag stoppen.",
-          "Lik Femme's kontgaatje terwijl je haar tegelijk vingert. Stop pas als zij dat zegt.",
-          "Gebruik een speeltje in Femme's ene gaatje terwijl je het andere likt."
-        ]
-      }
-    },
-    "hoofdspel": {
-      "Femme": [
-        "Ga liggen hoe je wil en vertel Speeltje hoe hij je moet verwennen.",
-        "Pak Speeltje's hoofd vast en leid hem naar waar jij wil dat hij is.",
-        "Laat Speeltje op zijn rug liggen terwijl jij hem hard maakt. Ga dan op hem zitten met het gaatje dat jij kiest. Jij rijdt — hij beweegt niet.",
-        "Gebruik de satisfier of fleshlight op Speeltje. Jij bepaalt of hij klaarkomt — hij ondergaat en mag zelfs geen toestemming vragen om klaar te komen.",
-        "Ga op Speeltje's gezicht zitten en beveel hem je gaatjes te likken. Geef hem daarna een tongzoen om jezelf te proeven.",
-        "Pijp Speeltje als beloning wanneer hij gehoorzaam is geweest. Jij bepaalt hoe lang.",
-        "Breng glijmiddel aan op je vinger en masseer Speeltje's prostaat — ca. 5-7 cm naar binnen, richting zijn navel. Pijp hem tegelijkertijd.",
-        "Zeg Speeltje in welke positie je hem wil hebben. Hij gehoorzaamt zonder commentaar. Gebruik een speeltje in zijn kontgaatje of doe een buttplug in en pijp hem."
-      ],
-      "Speeltje": [
-        "Lig stil en laat Femme met je doen wat zij wil. Jij vraagt niets, jij neemt niets.",
-        "Lig stil terwijl Femme op je zit. Zij maakt je hard als dat nodig is — daarna kiest ze zelf met welk gaatje ze op je komt zitten. Jij beweegt niet.",
-        "Lik Femme's kutje totdat zij zegt dat je mag stoppen, ook als je denkt dat ze klaar is.",
-        "Vinger Femme in beide gaatjes tegelijk en kijk haar aan. Laat haar volledig genieten — geen vragen, alleen doen.",
-        "Lik Femme's kontgaatje uitgebreid. Stop pas wanneer zij dat zegt.",
-        "Gebruik een of twee speeltjes in Femme's gaatje(s) terwijl je haar clitje likt. Stop pas als zij dat zegt."
-      ]
-    },
-    "climax": {
-      "Femme": [
-        "Ga bovenop Speeltje zitten en laat zijn pik in een van je gaatjes glijden. Rijd hem tot een van jullie klaarkomt. Daarna is de ander aan de beurt.",
-        "Ga 69 op Speeltje liggen en zeg hem je beide gaatjes te vingeren, terwijl hij je clitje likt. Kom klaar op zijn tong terwijl je hem pijpt.",
-        "Laat Speeltje klaarkomen op de plek die jij kiest. Hij vraagt toestemming, jij beslist. Zeg hem daarna dat hij helemaal van jou is, zelfs zijn cum.",
-        "Vinger jezelf bij Speeltje's gezicht. Laat hem je goed zien, ruiken en proeven.",
-        "Pijp Speeltje totdat hij klaarkomt in je mondje. Slik het door of laat het eruit lopen en smeer jezelf ermee in. Zeg dat alles van Speeltje van jou is."
-      ],
-      "Speeltje": [
-        "Vraag Femme hoe en waar ze wil dat je klaarkomt.",
-        "Lik Femme's kutje, terwijl je haar gaatje(s) vingert. Zorg dat ze klaarkomt.",
-        "Laat Femme klaarkomen met haar vibrators. Daarna is het pas jouw beurt. Femme bepaalt hoe en waar jij klaarkomt.",
-        "Trek jezelf af en laat Femme zien dat je van haar bent. Kom over haar heen op de plek die zij aangeeft."
-      ]
-    }
+let DATA = null;
+async function loadGameData(){
+  try{
+    const res = await fetch('dare-and-desire-data.json');
+    DATA = await res.json();
+  }catch(e){
+    console.error('Kon dare-and-desire-data.json niet laden.',e);
+    alert('Kon de spelgegevens niet laden. Zorg dat dare-and-desire-data.json naast de HTML staat en gebruik een lokale server.');
   }
-};
+}
 
 // ══════════════════════════════════════════
 // GAME STATE
@@ -783,10 +522,125 @@ let G = {
   assignedRules:{p1:[],p2:[]},
   recent:[], currentCard:'',
   tab:'vragen', intensity:'mild',
-  judged:false
+  judged:false,
+  hoofdspelCnc:false,
+  vetoP1:true, vetoP2:true,
+  modus:'normaal',
+  bonusAvailable:false
 };
 const MAX_RECENT = 5;
 const CIRC = 2*Math.PI*22;
+
+
+// ══════════════════════════════════════════
+// MODUS
+// ══════════════════════════════════════════
+function setModus(m, btn){
+  G.modus=m;
+  document.querySelectorAll('.modus-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// VETO
+// ══════════════════════════════════════════
+function useVeto(playerIdx){
+  if(playerIdx===0&&!G.vetoP1) return;
+  if(playerIdx===1&&!G.vetoP2) return;
+  if(playerIdx===0) G.vetoP1=false;
+  if(playerIdx===1) G.vetoP2=false;
+  updateVetoBtns();
+  rerollCurrent();
+}
+function updateVetoBtns(){
+  const b1=document.getElementById('veto-p1');
+  const b2=document.getElementById('veto-p2');
+  if(b1){ b1.disabled=!G.vetoP1; if(!G.vetoP1) b1.classList.add('used'); }
+  if(b2){ b2.disabled=!G.vetoP2; if(!G.vetoP2) b2.classList.add('used'); }
+}
+
+// ══════════════════════════════════════════
+// BONUS
+// ══════════════════════════════════════════
+function drawBonus(){
+  G.bonusAvailable=false;
+  const el=document.getElementById('bonus-btn-wrap');
+  if(el) el.remove();
+  // Draw a card from a random category (not vragen, not current tab)
+  const cats=['voorspel','hoofdspel','climax','video','buiten'];
+  const pool=cats.filter(c=>c!==G.tab);
+  const cat=pool[Math.floor(Math.random()*pool.length)];
+  const pc=currentPC();
+  let items=[];
+  const d=DATA[G.rol][cat];
+  if(cat==='video'||cat==='buiten') items=d||[];
+  else if(cat==='climax') items=(d&&d[pc.key])||[];
+  else if(cat==='voorspel'){ const sub=d&&d[pc.key]; if(sub) items=[...(sub.mild||[]),...(sub.spicy||[]),...(sub.cnc||[])]; }
+  else if(cat==='hoofdspel'){ items=(d&&d[pc.key])||[]; }
+  if(!items.length) return;
+  const text=items[Math.floor(Math.random()*items.length)];
+  const content=document.getElementById('game-content');
+  const bonusCard=document.createElement('div');
+  bonusCard.style.marginTop='1rem';
+  bonusCard.innerHTML=`<div class="q-card gold-card" style="animation:cardIn .4s cubic-bezier(.34,1.56,.64,1) forwards">
+    <div class="q-tags"><span class="q-tag qt-cnc">⭐ BONUS</span></div>
+    <div class="q-text">${text}</div>
+  </div>`;
+  content.appendChild(bonusCard);
+}
+
+// ══════════════════════════════════════════
+// ZINNEN
+// ══════════════════════════════════════════
+function getZinnen(rol, speler, cat){
+  if(!DATA||!DATA.zinnen) return [];
+  const rolData=DATA.zinnen[rol];
+  if(!rolData||!rolData[speler]) return [];
+  return rolData[speler][cat]||rolData[speler]['hoofdspel']||[];
+}
+
+function renderZinnen(rol, speler, cat){
+  const zinnen=getZinnen(rol,speler,cat);
+  if(!zinnen.length) return '';
+  const first=zinnen.slice(0,3);
+  const rest=zinnen.slice(3);
+  const restHtml=rest.length?`<div id="meer-zinnen" style="display:none">${rest.map(z=>`<div class="zin">"${z}"</div>`).join('')}</div>
+    <button class="btn-meer-zinnen" onclick="toggleMeerZinnen(this)">+ meer zinnen</button>`:'';
+  return `<div class="zinnen-wrap">
+    <div class="zinnen-lbl">💬 Wat kan ${speler} zeggen</div>
+    <div class="zinnen-list">
+      ${first.map(z=>`<div class="zin">"${z}"</div>`).join('')}
+      ${restHtml}
+    </div>
+  </div>`;
+}
+
+function toggleMeerZinnen(btn){
+  const meer=document.getElementById('meer-zinnen');
+  if(!meer) return;
+  if(meer.style.display==='none'){ meer.style.display='block'; btn.textContent='− minder zinnen'; }
+  else { meer.style.display='none'; btn.textContent='+ meer zinnen'; }
+}
+
+// ══════════════════════════════════════════
+// RANDOM MODUS DRAW
+// ══════════════════════════════════════════
+function drawRandomCard(){
+  const pc=currentPC();
+  const cats=['voorspel','hoofdspel','climax','video','buiten'];
+  const cat=cats[Math.floor(Math.random()*cats.length)];
+  const d=DATA[G.rol][cat];
+  let pool=[];
+  if(cat==='video'||cat==='buiten') pool=d||[];
+  else if(cat==='climax') pool=(d&&d[pc.key])||[];
+  else if(cat==='voorspel'){ const sub=d&&d[pc.key]; if(sub) pool=[...(sub.mild||[]),...(sub.spicy||[]),...(sub.cnc||[])]; }
+  else if(cat==='hoofdspel'){ pool=(d&&d[pc.key])||[...(d&&d.cnc&&d.cnc[pc.key]||[])]; }
+  if(!pool.length){ drawRandomCard(); return; }
+  const text=pickFrom(pool,[G.currentCard]);
+  G.currentCard=text; addRecent(text);
+  G.tab=cat;
+  showCard(text,cat.toUpperCase(),'spicy',false);
+}
 
 // ══════════════════════════════════════════
 // SCREENS
@@ -805,6 +659,10 @@ function showScreen(id){
 // ROL & REGELS
 // ══════════════════════════════════════════
 function kiesRol(rol){
+  if(!DATA){
+    alert('Spelgegevens nog niet geladen. Wacht even of controleer of dare-and-desire-data.json naast de HTML staat.');
+    return;
+  }
   G.rol=rol;
   initRules();
   showScreen('screen-rules');
@@ -877,15 +735,32 @@ function startGame(){
   G.current=Math.random()<.5?0:1;
   G.judged=false;
   G.cardDrawn=false;
+  G.vetoP1=true; G.vetoP2=true;
+  G.bonusAvailable=false;
 
   document.getElementById('sc-lbl-p1').textContent=rc.p1.name;
   document.getElementById('sc-lbl-p2').textContent=rc.p2.name;
   document.getElementById('sc-p1').className=`score-num ${rc.p1.cls}`;
   document.getElementById('sc-p2').className=`score-num ${rc.p2.cls}`;
 
+  // Show regels sidebar button
+  const rb=document.getElementById('sidebar-regels-btn');
+  if(rb) rb.style.display='';
+
   showScreen('screen-game');
-  setTab('vragen');
-  renderTurnBadge();
+  if(G.modus==='random'){
+    // In random modus: show draw button directly
+    const content=document.getElementById('game-content');
+    if(content) content.innerHTML=`<div style="text-align:center;padding:1rem">
+      <div class="modus-badge">🎲 Volledig Random</div>
+      <div style="height:.8rem"></div>
+      <button class="btn btn-primary" id="draw-btn" onclick="drawRandomCard()">Trek een willekeurige kaart</button>
+    </div>`;
+    renderTurnBadge();
+  } else {
+    setTab('vragen');
+    renderTurnBadge();
+  }
 }
 
 // ══════════════════════════════════════════
@@ -1117,6 +992,7 @@ function showEmptyCard(){
 
 function showCard(text,labelTop,intensity,isGold){
   G.judged=false;
+  G.bonusAvailable=false;
   // Verberg de trek-knop zodra een kaart getoond wordt
   const drawBtn=document.getElementById('draw-btn');
   if(drawBtn) drawBtn.style.display='none';
@@ -1131,14 +1007,39 @@ function showCard(text,labelTop,intensity,isGold){
   const tag=tagMap[intensity]||'';
   const typeTag=`<span class="q-tag qt-opdracht">${labelTop}</span>`;
   const d=document.getElementById('card-display');
+  // Determine which player gets zinnen
+  const rc=ROL[G.rol];
+  const pc=currentPC();
+  // Meisje zinnen voor dm-vragen, dm-voorspel etc; Femme zinnen voor fs
+  let zinnenHtml='';
+  const tabForZinnen=G.tab==='vragen'?'vragen':G.tab;
+  if(G.rol==='dm'&&pc.key==='Meisje'){
+    zinnenHtml=renderZinnen('dm','Meisje',tabForZinnen);
+  } else if(G.rol==='fs'&&pc.key==='Femme'){
+    zinnenHtml=renderZinnen('fs','Femme',tabForZinnen);
+  }
+
+  // Veto buttons
+  const p1=rc.p1, p2=rc.p2;
+  const vetoHtml=`<div class="veto-row">
+    <button class="btn-veto${G.vetoP1?'':' used'}" id="veto-p1" onclick="useVeto(0)" ${G.vetoP1?'':'disabled'}>
+      🚫 Veto ${p1.name}
+    </button>
+    <button class="btn-veto${G.vetoP2?'':' used'}" id="veto-p2" onclick="useVeto(1)" ${G.vetoP2?'':'disabled'}>
+      🚫 Veto ${p2.name}
+    </button>
+  </div>`;
+
   d.innerHTML=`
     <div class="q-card${isGold?' gold-card':''}" id="active-card">
       <div class="q-tags">${typeTag}${tag}</div>
       <div class="q-text">${text}</div>
+      ${zinnenHtml}
     </div>
     <div style="margin-top:.7rem">
       <button class="btn btn-reroll" onclick="rerollCurrent()">↺ &nbsp;Andere kaart</button>
     </div>
+    ${vetoHtml}
     <div id="judge-sec" style="margin-top:.7rem">
       <div class="judge-lbl">Beoordeel de uitvoering:</div>
       <button class="btn btn-ok" onclick="judge(true)">✓ &nbsp;GESLAAGD &nbsp;+1</button>
@@ -1167,15 +1068,26 @@ function judge(ok){
   fl.textContent=ok?'+1':'−1';
   fl.className=ok?'pos show':'neg show';
   document.querySelectorAll('#judge-sec .btn').forEach(b=>b.disabled=true);
+
+  if(ok){
+    // Show bonus card option
+    const judgesec=document.getElementById('judge-sec');
+    if(judgesec){
+      const bonusWrap=document.createElement('div');
+      bonusWrap.id='bonus-btn-wrap';
+      bonusWrap.style.marginTop='.6rem';
+      bonusWrap.innerHTML=`<button class="btn-bonus" onclick="drawBonus()">⭐ &nbsp;Bonuskaart trekken</button>`;
+      judgesec.appendChild(bonusWrap);
+    }
+  }
+
   setTimeout(()=>{ fl.className=fl.className.replace('show','hide'); },700);
   setTimeout(()=>{
     fl.className='';
     G.current=1-G.current;
     G.judged=false;
     G.currentCard='';
-    // Clear card display and re-render tab for new player
     renderTurnBadge();
-    // Clear the card area
     const cd=document.getElementById('card-display');
     if(cd) cd.innerHTML='';
   },1300);
@@ -1318,6 +1230,11 @@ let wl=null;
 async function reqWL(){ try{ if('wakeLock' in navigator) wl=await navigator.wakeLock.request('screen'); }catch{} }
 document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') reqWL(); });
 reqWL();
+
+// ══════════════════════════════════════════
+// LOAD GAME DATA ON START
+// ══════════════════════════════════════════
+loadGameData();
 </script>
 </body>
 </html>

@@ -680,8 +680,8 @@ function pickRules(playerData, hasVast){
 function initRules(){
   const rc=ROL[G.rol];
   const d=DATA[G.rol].avondregels;
-  G.assignedRules.p1=pickRules(d[rc.p1.key],false);
-  G.assignedRules.p2=pickRules(d[rc.p2.key],true);
+  G.assignedRules.p1=pickRules(d[rc.p1.key],!!(d[rc.p1.key]&&d[rc.p1.key].vast));
+  G.assignedRules.p2=pickRules(d[rc.p2.key],!!(d[rc.p2.key]&&d[rc.p2.key].vast));
   renderRulesScreen();
 }
 
@@ -720,7 +720,7 @@ function rerollRules(playerKey){
   const isP2=playerKey==='p2';
   const pc=isP2?rc.p2:rc.p1;
   const d=DATA[G.rol].avondregels[pc.key];
-  const newRules=pickRules(d,isP2);
+  const newRules=pickRules(d,!!(d&&d.vast));
   G.assignedRules[playerKey]=newRules;
   renderRulesCard(`rules-card-${playerKey}`,pc,newRules,playerKey);
 }

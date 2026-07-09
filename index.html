@@ -304,10 +304,17 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
 
 
 /* ── KAART KLEUR PER SPELER ── */
-.q-card.card-daddy{background:linear-gradient(155deg,rgba(0,130,120,.55),rgba(0,80,80,.45));border-color:rgba(0,200,180,.5);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(0,200,180,.4),0 0 40px rgba(0,180,160,.2)}
-.q-card.card-meisje{background:linear-gradient(155deg,rgba(200,60,120,.55),rgba(150,30,80,.45));border-color:rgba(240,100,170,.5);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(240,100,170,.4),0 0 40px rgba(220,80,150,.2)}
-.q-card.card-femme{background:linear-gradient(155deg,rgba(130,50,200,.55),rgba(90,20,160,.45));border-color:rgba(190,120,240,.5);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(190,120,240,.4),0 0 40px rgba(160,80,220,.2)}
-.q-card.card-speeltje{background:linear-gradient(155deg,rgba(40,130,200,.55),rgba(20,90,160,.45));border-color:rgba(100,180,240,.5);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(100,180,240,.4),0 0 40px rgba(60,150,220,.2)}
+.q-card.card-daddy{background:linear-gradient(155deg,rgba(0,110,100,.32),rgba(0,60,60,.22));border-color:rgba(0,180,160,.35);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(0,180,160,.25),0 0 30px rgba(0,160,140,.12)}
+.q-card.card-meisje{background:linear-gradient(155deg,rgba(180,50,100,.32),rgba(130,20,60,.22));border-color:rgba(224,100,160,.35);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(224,100,160,.25),0 0 30px rgba(200,70,130,.12)}
+.q-card.card-femme{background:linear-gradient(155deg,rgba(110,40,180,.32),rgba(70,15,130,.22));border-color:rgba(170,100,220,.35);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(170,100,220,.25),0 0 30px rgba(140,70,200,.12)}
+.q-card.card-speeltje{background:linear-gradient(155deg,rgba(30,110,180,.32),rgba(15,70,130,.22));border-color:rgba(90,160,220,.35);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(90,160,220,.25),0 0 30px rgba(50,130,200,.12)}
+
+
+/* ── HOME KNOP ZIJBALK ── */
+.sidebar-home{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;width:100%;padding:.85rem .5rem;transition:all .2s;border-bottom:1px solid rgba(255,255,255,.06)}
+.sidebar-home:active{background:rgba(255,255,255,.06)}
+.sidebar-home-icon{font-size:1.3rem;line-height:1}
+.sidebar-home-lbl{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d)}
 
 </style>
 </head>
@@ -347,9 +354,6 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
     <div class="rules-card fu-2" id="rules-card-p1"></div>
     <div class="rules-card fu-3" id="rules-card-p2"></div>
     <div class="sm"></div>
-      <div class="modus-btn" id="modus-verrassing" onclick="setModus('verrassing',this)">Verrassing</div>
-      <div class="modus-btn" id="modus-random" onclick="setModus('random',this)">Volledig Random</div>
-    </div>
     <button class="btn btn-primary fu-4" onclick="startGame()">BEGIN HET SPEL →</button>
     <div class="slg"></div>
   </div>
@@ -359,6 +363,10 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
 <div class="screen" id="screen-game">
   <!-- Category Nav -->
   <nav class="cat-nav visible" id="cat-nav">
+    <div class="sidebar-home" onclick="goHome()" title="Home">
+      <span class="sidebar-home-icon">🏠</span>
+      <span class="sidebar-home-lbl">Home</span>
+    </div>
     <div class="cat-nav-inner">
       <div class="cat-tab active" id="tab-vragen" onclick="setTab('vragen')">
         <div class="cat-tab-dot"></div>
@@ -1089,6 +1097,12 @@ function toggleFooter(){
 // ══════════════════════════════════════════
 // CLIMAX HOLD BTN
 // ══════════════════════════════════════════
+function goHome(){
+  showScreen('screen-setup');
+  const rb=document.getElementById('sidebar-regels-btn');
+  if(rb) rb.style.display='none';
+}
+
 function setupClimaxBtn(btnId,ringId){
   const btn=document.getElementById(btnId);
   const ring=document.getElementById(ringId);

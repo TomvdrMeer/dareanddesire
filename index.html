@@ -283,8 +283,7 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
 .btn-meer-zinnen{background:transparent;border:1px solid rgba(201,168,76,.2);color:rgba(201,168,76,.5);font-family:'Cinzel',serif;font-size:clamp(.42rem,1.5vw,.5rem);letter-spacing:.12em;padding:.3rem .8rem;border-radius:10px;cursor:pointer;margin-top:.4rem;display:block;margin-left:auto;margin-right:auto;transition:all .2s}
 .btn-meer-zinnen:active{background:rgba(201,168,76,.08);color:var(--gold)}
 
-/* ── MODUS BADGE ── */
-.modus-badge{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.15em;text-transform:uppercase;padding:.18rem .55rem;border-radius:10px;border:1px solid rgba(155,111,214,.35);background:rgba(155,111,214,.08);color:rgba(155,111,214,.8);margin-bottom:.4rem;display:inline-block}
+
 
 /* ── VETO BTN ── */
 .veto-row{display:flex;gap:.5rem;justify-content:center;margin-top:.5rem}
@@ -293,9 +292,7 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
 .btn-veto:disabled{opacity:.25;pointer-events:none}
 .btn-veto.used{opacity:.2;pointer-events:none;text-decoration:line-through}
 
-/* ── BONUS ── */
-.btn-bonus{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.06));border:1px solid rgba(201,168,76,.4);color:var(--gold-l);font-family:'Cinzel',serif;font-size:clamp(.6rem,2.2vw,.7rem);letter-spacing:.12em;padding:.6rem 1.4rem;border-radius:var(--r);cursor:pointer;animation:hbGold 2s ease-in-out infinite;margin-top:.5rem;display:block;margin-left:auto;margin-right:auto;transition:all .2s}
-.btn-bonus:active{transform:scale(.96)}
+
 
 /* ── SIDEBAR EXTRA ── */
 .sidebar-regels{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;width:100%;padding:.85rem .5rem;transition:all .2s;border-top:1px solid rgba(255,255,255,.06)}
@@ -303,11 +300,14 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
 .sidebar-regels-icon{font-size:1.3rem;line-height:1}
 .sidebar-regels-lbl{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d)}
 
-/* ── MODUS SELECTIE ── */
-.modus-keuze{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:.8rem 0}
-.modus-btn{flex:1;min-width:80px;padding:.7rem .5rem;background:var(--surface);border:1.5px solid rgba(201,168,76,.12);border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.54rem,2vw,.62rem);letter-spacing:.08em;color:var(--cream-d);cursor:pointer;transition:all .2s;text-align:center}
-.modus-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.08);box-shadow:0 0 12px rgba(201,168,76,.15)}
-.modus-btn:active{transform:scale(.97)}
+
+
+
+/* ── KAART KLEUR PER SPELER ── */
+.q-card.card-daddy{background:linear-gradient(155deg,rgba(0,80,80,.22),rgba(15,6,24,.98));border-color:rgba(0,180,160,.25);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(0,180,160,.15),0 0 30px rgba(0,180,160,.08)}
+.q-card.card-meisje{background:linear-gradient(155deg,rgba(180,40,100,.18),rgba(15,6,24,.98));border-color:rgba(224,126,180,.25);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(224,126,180,.15),0 0 30px rgba(224,126,180,.08)}
+.q-card.card-femme{background:linear-gradient(155deg,rgba(120,40,180,.22),rgba(15,6,24,.98));border-color:rgba(180,100,220,.25);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(180,100,220,.15),0 0 30px rgba(180,100,220,.08)}
+.q-card.card-speeltje{background:linear-gradient(155deg,rgba(40,120,180,.18),rgba(15,6,24,.98));border-color:rgba(126,180,224,.25);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(126,180,224,.15),0 0 30px rgba(126,180,224,.08)}
 
 </style>
 </head>
@@ -347,9 +347,6 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
     <div class="rules-card fu-2" id="rules-card-p1"></div>
     <div class="rules-card fu-3" id="rules-card-p2"></div>
     <div class="sm"></div>
-    <p style="font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);text-align:center;width:100%;max-width:420px">Spelmodus</p>
-    <div class="modus-keuze fu-4" style="width:100%;max-width:420px">
-      <div class="modus-btn active" id="modus-normaal" onclick="setModus('normaal',this)">Normaal</div>
       <div class="modus-btn" id="modus-verrassing" onclick="setModus('verrassing',this)">Verrassing</div>
       <div class="modus-btn" id="modus-random" onclick="setModus('random',this)">Volledig Random</div>
     </div>
@@ -524,22 +521,12 @@ let G = {
   tab:'vragen', intensity:'mild',
   judged:false,
   hoofdspelCnc:false,
-  vetoP1:true, vetoP2:true,
-  modus:'normaal',
-  bonusAvailable:false
+  vetoP1:true, vetoP2:true
 };
 const MAX_RECENT = 5;
 const CIRC = 2*Math.PI*22;
 
 
-// ══════════════════════════════════════════
-// MODUS
-// ══════════════════════════════════════════
-function setModus(m, btn){
-  G.modus=m;
-  document.querySelectorAll('.modus-btn').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-}
 
 // ══════════════════════════════════════════
 // VETO
@@ -557,36 +544,6 @@ function updateVetoBtns(){
   const b2=document.getElementById('veto-p2');
   if(b1){ b1.disabled=!G.vetoP1; if(!G.vetoP1) b1.classList.add('used'); }
   if(b2){ b2.disabled=!G.vetoP2; if(!G.vetoP2) b2.classList.add('used'); }
-}
-
-// ══════════════════════════════════════════
-// BONUS
-// ══════════════════════════════════════════
-function drawBonus(){
-  G.bonusAvailable=false;
-  const el=document.getElementById('bonus-btn-wrap');
-  if(el) el.remove();
-  // Draw a card from a random category (not vragen, not current tab)
-  const cats=['voorspel','hoofdspel','climax','video','buiten'];
-  const pool=cats.filter(c=>c!==G.tab);
-  const cat=pool[Math.floor(Math.random()*pool.length)];
-  const pc=currentPC();
-  let items=[];
-  const d=DATA[G.rol][cat];
-  if(cat==='video'||cat==='buiten') items=d||[];
-  else if(cat==='climax') items=(d&&d[pc.key])||[];
-  else if(cat==='voorspel'){ const sub=d&&d[pc.key]; if(sub) items=[...(sub.mild||[]),...(sub.spicy||[]),...(sub.cnc||[])]; }
-  else if(cat==='hoofdspel'){ items=(d&&d[pc.key])||[]; }
-  if(!items.length) return;
-  const text=items[Math.floor(Math.random()*items.length)];
-  const content=document.getElementById('game-content');
-  const bonusCard=document.createElement('div');
-  bonusCard.style.marginTop='1rem';
-  bonusCard.innerHTML=`<div class="q-card gold-card" style="animation:cardIn .4s cubic-bezier(.34,1.56,.64,1) forwards">
-    <div class="q-tags"><span class="q-tag qt-cnc">⭐ BONUS</span></div>
-    <div class="q-text">${text}</div>
-  </div>`;
-  content.appendChild(bonusCard);
 }
 
 // ══════════════════════════════════════════
@@ -625,23 +582,6 @@ function toggleMeerZinnen(btn){
 // ══════════════════════════════════════════
 // RANDOM MODUS DRAW
 // ══════════════════════════════════════════
-function drawRandomCard(){
-  const pc=currentPC();
-  const cats=['voorspel','hoofdspel','climax','video','buiten'];
-  const cat=cats[Math.floor(Math.random()*cats.length)];
-  const d=DATA[G.rol][cat];
-  let pool=[];
-  if(cat==='video'||cat==='buiten') pool=d||[];
-  else if(cat==='climax') pool=(d&&d[pc.key])||[];
-  else if(cat==='voorspel'){ const sub=d&&d[pc.key]; if(sub) pool=[...(sub.mild||[]),...(sub.spicy||[]),...(sub.cnc||[])]; }
-  else if(cat==='hoofdspel'){ pool=(d&&d[pc.key])||[...(d&&d.cnc&&d.cnc[pc.key]||[])]; }
-  if(!pool.length){ drawRandomCard(); return; }
-  const text=pickFrom(pool,[G.currentCard]);
-  G.currentCard=text; addRecent(text);
-  G.tab=cat;
-  showCard(text,cat.toUpperCase(),'spicy',false);
-}
-
 // ══════════════════════════════════════════
 // SCREENS
 // ══════════════════════════════════════════
@@ -680,8 +620,8 @@ function pickRules(playerData, hasVast){
 function initRules(){
   const rc=ROL[G.rol];
   const d=DATA[G.rol].avondregels;
-  G.assignedRules.p1=pickRules(d[rc.p1.key],!!(d[rc.p1.key]&&d[rc.p1.key].vast));
-  G.assignedRules.p2=pickRules(d[rc.p2.key],!!(d[rc.p2.key]&&d[rc.p2.key].vast));
+  G.assignedRules.p1=pickRules(d[rc.p1.key],false);
+  G.assignedRules.p2=pickRules(d[rc.p2.key],true);
   renderRulesScreen();
 }
 
@@ -720,7 +660,7 @@ function rerollRules(playerKey){
   const isP2=playerKey==='p2';
   const pc=isP2?rc.p2:rc.p1;
   const d=DATA[G.rol].avondregels[pc.key];
-  const newRules=pickRules(d,!!(d&&d.vast));
+  const newRules=pickRules(d,isP2);
   G.assignedRules[playerKey]=newRules;
   renderRulesCard(`rules-card-${playerKey}`,pc,newRules,playerKey);
 }
@@ -736,7 +676,6 @@ function startGame(){
   G.judged=false;
   G.cardDrawn=false;
   G.vetoP1=true; G.vetoP2=true;
-  G.bonusAvailable=false;
 
   document.getElementById('sc-lbl-p1').textContent=rc.p1.name;
   document.getElementById('sc-lbl-p2').textContent=rc.p2.name;
@@ -748,19 +687,8 @@ function startGame(){
   if(rb) rb.style.display='';
 
   showScreen('screen-game');
-  if(G.modus==='random'){
-    // In random modus: show draw button directly
-    const content=document.getElementById('game-content');
-    if(content) content.innerHTML=`<div style="text-align:center;padding:1rem">
-      <div class="modus-badge">🎲 Volledig Random</div>
-      <div style="height:.8rem"></div>
-      <button class="btn btn-primary" id="draw-btn" onclick="drawRandomCard()">Trek een willekeurige kaart</button>
-    </div>`;
-    renderTurnBadge();
-  } else {
-    setTab('vragen');
-    renderTurnBadge();
-  }
+  setTab('vragen');
+  renderTurnBadge();
 }
 
 // ══════════════════════════════════════════
@@ -831,7 +759,7 @@ function renderSimpleTab(tab,pool){
     buiten:'Plan een buitenspel avontuur in.'
   };
   return `
-    <p class="italic" style="font-size:.8rem;margin-bottom:1.2rem;text-align:center">${descs[tab]||''}</p>
+    <p class="italic" style="font-size:1rem;margin-bottom:1.2rem;text-align:center">${descs[tab]||''}</p>
     <div id="card-display"></div>
     <button class="btn btn-primary" style="margin-top:.8rem" id="draw-btn" onclick="drawSimple('${tab}')">Trek een kaart</button>`;
 }
@@ -864,7 +792,7 @@ function renderOpdrachtTab(tab){
 function renderClimaxTab(){
   const pc=currentPC();
   return `
-    <p class="italic" style="font-size:.8rem;margin-bottom:1.2rem;text-align:center">Het einde van de avond — voor ${pc.name}.</p>
+    <p class="italic" style="font-size:1rem;margin-bottom:1.2rem;text-align:center">Het einde van de avond — voor ${pc.name}.</p>
     <div id="card-display"></div>
     <button class="btn btn-primary" style="margin-top:.8rem" id="draw-btn" onclick="drawClimaxCard()">Trek een kaart</button>`;
 }
@@ -992,7 +920,6 @@ function showEmptyCard(){
 
 function showCard(text,labelTop,intensity,isGold){
   G.judged=false;
-  G.bonusAvailable=false;
   // Verberg de trek-knop zodra een kaart getoond wordt
   const drawBtn=document.getElementById('draw-btn');
   if(drawBtn) drawBtn.style.display='none';
@@ -1007,31 +934,31 @@ function showCard(text,labelTop,intensity,isGold){
   const tag=tagMap[intensity]||'';
   const typeTag=`<span class="q-tag qt-opdracht">${labelTop}</span>`;
   const d=document.getElementById('card-display');
-  // Determine which player gets zinnen
+  // Zinnen alleen voor Femme, alleen bij opdrachten (niet bij vragen)
   const rc=ROL[G.rol];
   const pc=currentPC();
-  // Meisje zinnen voor dm-vragen, dm-voorspel etc; Femme zinnen voor fs
   let zinnenHtml='';
-  const tabForZinnen=G.tab==='vragen'?'vragen':G.tab;
-  if(G.rol==='dm'&&pc.key==='Meisje'){
-    zinnenHtml=renderZinnen('dm','Meisje',tabForZinnen);
-  } else if(G.rol==='fs'&&pc.key==='Femme'){
-    zinnenHtml=renderZinnen('fs','Femme',tabForZinnen);
+  const isVraag=(labelTop==='VRAAG'||G.tab==='vragen');
+  if(G.rol==='fs'&&pc.key==='Femme'&&!isVraag){
+    zinnenHtml=renderZinnenRandom('fs','Femme');
   }
 
-  // Veto buttons
+  // Veto buttons — alleen bij opdrachten, niet bij vragen
   const p1=rc.p1, p2=rc.p2;
-  const vetoHtml=`<div class="veto-row">
+  const showVeto=!(labelTop==='VRAAG'||G.tab==='vragen');
+  const vetoHtml=showVeto?`<div class="veto-row">
     <button class="btn-veto${G.vetoP1?'':' used'}" id="veto-p1" onclick="useVeto(0)" ${G.vetoP1?'':'disabled'}>
       🚫 Veto ${p1.name}
     </button>
     <button class="btn-veto${G.vetoP2?'':' used'}" id="veto-p2" onclick="useVeto(1)" ${G.vetoP2?'':'disabled'}>
       🚫 Veto ${p2.name}
     </button>
-  </div>`;
+  </div>`:'';
 
+  // Kaartkleur per speler
+  const playerCardClass='card-'+pc.key.toLowerCase();
   d.innerHTML=`
-    <div class="q-card${isGold?' gold-card':''}" id="active-card">
+    <div class="q-card${isGold?' gold-card':''} ${playerCardClass}" id="active-card">
       <div class="q-tags">${typeTag}${tag}</div>
       <div class="q-text">${text}</div>
       ${zinnenHtml}
@@ -1041,7 +968,6 @@ function showCard(text,labelTop,intensity,isGold){
     </div>
     ${vetoHtml}
     <div id="judge-sec" style="margin-top:.7rem">
-      <div class="judge-lbl">Beoordeel de uitvoering:</div>
       <button class="btn btn-ok" onclick="judge(true)">✓ &nbsp;GESLAAGD &nbsp;+1</button>
       <button class="btn btn-fail" onclick="judge(false)">✗ &nbsp;NIET GESLAAGD &nbsp;−1</button>
     </div>`;
@@ -1069,17 +995,6 @@ function judge(ok){
   fl.className=ok?'pos show':'neg show';
   document.querySelectorAll('#judge-sec .btn').forEach(b=>b.disabled=true);
 
-  if(ok){
-    // Show bonus card option
-    const judgesec=document.getElementById('judge-sec');
-    if(judgesec){
-      const bonusWrap=document.createElement('div');
-      bonusWrap.id='bonus-btn-wrap';
-      bonusWrap.style.marginTop='.6rem';
-      bonusWrap.innerHTML=`<button class="btn-bonus" onclick="drawBonus()">⭐ &nbsp;Bonuskaart trekken</button>`;
-      judgesec.appendChild(bonusWrap);
-    }
-  }
 
   setTimeout(()=>{ fl.className=fl.className.replace('show','hide'); },700);
   setTimeout(()=>{

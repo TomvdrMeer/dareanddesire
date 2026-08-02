@@ -4,12 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Dare & Desire">
 <meta name="theme-color" content="#05020a">
 <title>Dare &amp; Desire</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -17,12 +14,9 @@
   --crimson:#6b0f1e;--crimson2:#a8142e;--crimson3:#d41a3c;
   --gold:#c9a84c;--gold-l:#e2c16a;--gold-d:#7a6220;
   --cream:#f0e6d3;--cream-d:#8a7a6a;--white:#fff8f2;
-  --blue:#7eb4e0;--pink:#e07eb4;
-  --femme:#d4a0c0;--speeltje:#a0c4d4;
-  --neon-red:rgba(212,26,60,0.7);--neon-gold:rgba(226,193,106,0.6);
-  --neon-blue:rgba(126,180,224,0.6);--neon-pink:rgba(224,126,180,0.6);
+  --daddy:#7eb4e0;--meisje:#e07eb4;
   --r:12px;--r-lg:20px;--touch:52px;
-  --cat-h:68px;
+  --sidebar-w:90px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
@@ -31,1139 +25,404 @@ body::before{content:'';position:fixed;inset:0;background:
   radial-gradient(ellipse 90% 60% at 10% 90%,rgba(107,15,30,.35) 0%,transparent 55%),
   radial-gradient(ellipse 70% 50% at 90% 10%,rgba(100,20,160,.18) 0%,transparent 55%),
   radial-gradient(ellipse 50% 40% at 50% 50%,rgba(168,20,46,.06) 0%,transparent 60%);
-pointer-events:none;z-index:0;animation:bgBreathe 9s ease-in-out infinite}
+  pointer-events:none;z-index:0;animation:bgBreathe 9s ease-in-out infinite}
 @keyframes bgBreathe{0%,100%{opacity:.7}50%{opacity:1}}
 
 .screen{display:none;position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .screen.active{display:flex;flex-direction:column;animation:screenIn .3s ease forwards}
 @keyframes screenIn{from{opacity:0}to{opacity:1}}
 .screen-inner{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1.4rem 2rem;min-height:100%}
-.screen-inner.top{justify-content:flex-start;padding-top:max(5rem,calc(env(safe-area-inset-top)+4rem))}
-.screen-inner.game{justify-content:flex-start;align-items:stretch;padding-top:0;padding-left:0;padding-right:0;padding-bottom:calc(var(--cat-h) + env(safe-area-inset-bottom) + 16px);width:100%;box-sizing:border-box}
-@media (min-width:760px){
-  .screen-inner.game{padding-left:var(--sidebar-w);padding-bottom:2rem}
-}
+.screen-inner.top{justify-content:flex-start;padding-top:max(4rem,calc(env(safe-area-inset-top)+3rem))}
+.screen-inner.game{justify-content:flex-start;align-items:stretch;padding:0;width:100%}
 
-/* ── TYPOGRAPHY ── */
-h1{font-family:'Cinzel',serif;font-size:clamp(1.9rem,8.5vw,3.2rem);font-weight:900;background:linear-gradient(140deg,var(--gold-l) 0%,var(--gold) 45%,var(--crimson3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.1em;text-align:center;line-height:1.1}
+h1{font-family:'Cinzel',serif;font-size:clamp(2rem,9vw,3.4rem);font-weight:900;background:linear-gradient(140deg,var(--gold-l) 0%,var(--gold) 45%,var(--crimson3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.1em;text-align:center;line-height:1.1}
 h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:600;color:var(--gold-l);letter-spacing:.07em;text-align:center}
 .lbl{font-family:'Cinzel',serif;font-size:clamp(.52rem,1.9vw,.62rem);letter-spacing:.2em;text-transform:uppercase;color:var(--cream-d)}
 .italic{font-style:italic;font-size:clamp(.88rem,3.5vw,1rem);color:var(--cream-d);text-align:center;line-height:1.65}
 .div{width:100%;max-width:300px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d) 25%,var(--crimson2) 50%,rgba(100,20,160,.5) 75%,transparent);margin:.8rem auto;opacity:.5}
 .sx{height:.4rem}.sm{height:.9rem}.smd{height:1.4rem}.slg{height:2rem}
 
-/* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fadeUp .4s ease forwards}
 .fu-1{animation:fadeUp .4s .1s ease both}
 .fu-2{animation:fadeUp .4s .2s ease both}
 .fu-3{animation:fadeUp .4s .3s ease both}
-.fu-4{animation:fadeUp .4s .4s ease both}
 @keyframes cardIn{from{opacity:0;transform:scale(.87) translateY(24px)}to{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes cardPulse{0%,100%{box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(168,20,46,.15)}50%{box-shadow:0 12px 64px rgba(0,0,0,.8),0 0 60px rgba(168,20,46,.2),0 0 0 1px rgba(201,168,76,.25)}}
-@keyframes wGlow{from{text-shadow:0 0 40px currentColor}to{text-shadow:0 0 100px currentColor,0 0 180px rgba(201,168,76,.3)}}
-@keyframes hbCrimson{0%,20%{box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3);transform:scale(1)}22%{box-shadow:0 6px 50px rgba(212,26,60,.8),0 0 30px rgba(212,26,60,.4),0 0 0 1px rgba(212,26,60,.6);transform:scale(1.033)}30%{box-shadow:0 3px 20px rgba(107,15,30,.4);transform:scale(1)}38%{box-shadow:0 5px 35px rgba(107,15,30,.6),0 0 20px rgba(168,20,46,.3);transform:scale(1.016)}50%,100%{box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3);transform:scale(1)}}
-@keyframes hbGold{0%,20%{box-shadow:0 4px 20px rgba(201,168,76,.3),0 0 0 1px rgba(201,168,76,.25);transform:scale(1)}22%{box-shadow:0 6px 45px rgba(201,168,76,.75),0 0 25px rgba(201,168,76,.5),0 0 0 1px rgba(226,193,106,.7);transform:scale(1.033)}30%{box-shadow:0 3px 16px rgba(201,168,76,.2);transform:scale(1)}38%{box-shadow:0 5px 30px rgba(201,168,76,.5),0 0 15px rgba(201,168,76,.35);transform:scale(1.016)}50%,100%{box-shadow:0 4px 20px rgba(201,168,76,.3),0 0 0 1px rgba(201,168,76,.25);transform:scale(1)}}
+@keyframes cardPulse{
+  0%,100%{box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(168,20,46,.15)}
+  50%{box-shadow:0 12px 64px rgba(0,0,0,.8),0 0 60px rgba(168,20,46,.2),0 0 0 1px rgba(201,168,76,.25)}
+}
 @keyframes neonPulse{0%,100%{opacity:.6}50%{opacity:1}}
 @keyframes logoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.05)}}
-@keyframes selGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.5) saturate(1.4)}}
-.conf{position:fixed;pointer-events:none;z-index:150;animation:confFall linear forwards}
-@keyframes confFall{0%{opacity:1;transform:translateY(-20px) rotate(0deg)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
-.amb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;animation:ambFloat linear infinite}
-@keyframes ambFloat{0%{opacity:0;transform:translateY(0) translateX(0) scale(1)}8%{opacity:1}92%{opacity:.55}100%{opacity:0;transform:translateY(-110vh) translateX(var(--drift,0px)) scale(.4)}}
+@keyframes heartbeat{
+  0%,20%{box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3);transform:scale(1)}
+  22%{box-shadow:0 6px 50px rgba(212,26,60,.8),0 0 30px rgba(212,26,60,.4),0 0 0 1px rgba(212,26,60,.6);transform:scale(1.03)}
+  30%{transform:scale(1)}
+  38%{box-shadow:0 5px 35px rgba(107,15,30,.6),0 0 20px rgba(168,20,46,.3);transform:scale(1.015)}
+  50%,100%{box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3);transform:scale(1)}
+}
+@keyframes watermarkPulse{
+  0%,100%{opacity:0.06;transform:scale(1)}
+  20%{opacity:0.10;transform:scale(1.03)}
+  25%{opacity:0.07;transform:scale(1.01)}
+  38%{opacity:0.09;transform:scale(1.025)}
+  55%,100%{opacity:0.06;transform:scale(1)}
+}
 
-/* ── LOGO ── */
 .logo-icon{font-size:2.8rem;display:block;text-align:center;animation:logoFloat 4.5s ease-in-out infinite}
-.player-names{display:flex;align-items:center;gap:1rem;font-family:'Cinzel',serif}
-.pname{font-size:clamp(1.1rem,4.5vw,1.6rem);font-weight:600;letter-spacing:.1em}
-.pname.daddy{color:var(--blue)}.pname.meisje{color:var(--pink)}
-.pname.femme{color:var(--femme)}.pname.speeltje{color:var(--speeltje)}
-.pdivider{color:var(--gold);opacity:.45}
 
-/* ── ROL KEUZE ── */
-.rol-keuze{display:flex;flex-direction:column;gap:1rem;width:100%;max-width:360px}
-.rol-btn{width:100%;min-height:80px;padding:1.1rem 1.6rem;border-radius:var(--r-lg);background:var(--surface);cursor:pointer;user-select:none;-webkit-user-select:none;transition:all .2s;text-align:center}
-.rol-btn:active{transform:scale(.97)}
-.rol-btn-title{font-family:'Cinzel',serif;font-size:clamp(.8rem,3vw,1rem);font-weight:600;letter-spacing:.1em;margin-bottom:.35rem}
-.rol-btn-sub{font-style:italic;font-size:clamp(.78rem,3vw,.9rem);color:var(--cream-d);line-height:1.4}
-.rol-btn.dm{border:1.5px solid rgba(126,180,224,.25);background:rgba(126,180,224,.04);box-shadow:0 0 20px rgba(126,180,224,.08),inset 0 0 20px rgba(126,180,224,.03)}
-.rol-btn.dm:active,.rol-btn.dm:hover{border-color:rgba(126,180,224,.5);box-shadow:0 0 35px rgba(126,180,224,.2),inset 0 0 20px rgba(126,180,224,.06)}
-.rol-btn.dm .rol-btn-title{background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.rol-btn.fs{border:1.5px solid rgba(212,160,192,.25);background:rgba(212,160,192,.04);box-shadow:0 0 20px rgba(212,160,192,.08),inset 0 0 20px rgba(212,160,192,.03)}
-.rol-btn.fs:active,.rol-btn.fs:hover{border-color:rgba(212,160,192,.5);box-shadow:0 0 35px rgba(212,160,192,.2),inset 0 0 20px rgba(212,160,192,.06)}
-.rol-btn.fs .rol-btn-title{background:linear-gradient(90deg,var(--femme),var(--speeltje));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-
-/* ── BUTTONS ── */
 .btn{display:block;width:100%;max-width:360px;margin-left:auto;margin-right:auto;min-height:var(--touch);padding:.9rem 1.8rem;border:none;border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.72rem,2.8vw,.82rem);font-weight:600;letter-spacing:.12em;text-align:center;cursor:pointer;user-select:none;transition:transform .15s,opacity .15s;-webkit-user-select:none}
-.btn:active{transform:scale(.96)}.btn+.btn{margin-top:.7rem}.btn:disabled{opacity:.28;pointer-events:none}
-.btn-primary{background:linear-gradient(135deg,var(--crimson),var(--crimson3));color:var(--white);border:1px solid rgba(212,26,60,.4);box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3)}
+.btn:active{transform:scale(.96)}
+.btn+.btn{margin-top:.7rem}
+.btn-primary{background:linear-gradient(135deg,var(--crimson),var(--crimson3));color:var(--white);border:1px solid rgba(212,26,60,.4);box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3);animation:heartbeat 2.8s 1.5s ease-in-out infinite}
 .btn-gold{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#180e00;border:1px solid rgba(201,168,76,.4);box-shadow:0 4px 20px rgba(201,168,76,.3)}
-.btn-outline{background:transparent;border:1px solid rgba(201,168,76,.3);color:var(--gold)}
-.btn-outline:active{background:rgba(201,168,76,.07)}
-.btn-ghost{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.9rem,3.5vw,1rem);letter-spacing:.04em}
-.btn-ok{background:linear-gradient(135deg,#0d2010,#175c17);color:#80e080;border:1px solid rgba(80,200,80,.3);box-shadow:0 4px 25px rgba(30,92,30,.3),0 0 15px rgba(80,200,80,.15)}
-.btn-fail{background:linear-gradient(135deg,#200808,#5c1010);color:#e08080;border:1px solid rgba(200,80,80,.3);box-shadow:0 4px 25px rgba(92,20,20,.3),0 0 15px rgba(200,80,80,.15)}
-.btn-reroll{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.2);color:rgba(201,168,76,.6);font-size:clamp(.66rem,2.5vw,.74rem);min-height:44px;padding:.6rem 1.4rem;letter-spacing:.13em;box-shadow:0 0 15px rgba(201,168,76,.08)}
-.btn-reroll:active{background:rgba(201,168,76,.12);color:var(--gold);box-shadow:0 0 25px rgba(201,168,76,.2)}
 
-/* ── CATEGORY NAV BAR ── */
-:root{--sidebar-w:84px}
-/* Mobile-first: bottom bar */
-.cat-nav{position:fixed;left:0;right:0;bottom:0;height:var(--cat-h);background:rgba(5,2,10,.96);border-top:1px solid rgba(168,20,46,.2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:40;display:none;align-items:stretch;padding-bottom:env(safe-area-inset-bottom)}
+/* ── SIDEBAR ── */
+.cat-nav{position:fixed;left:0;right:0;bottom:0;height:68px;background:rgba(5,2,10,.96);border-top:1px solid rgba(168,20,46,.2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:40;display:none;align-items:stretch;padding-bottom:env(safe-area-inset-bottom)}
 .cat-nav.visible{display:flex}
 .cat-nav-inner{display:flex;align-items:stretch;gap:0;flex:1;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;justify-content:center;min-width:0}
 .cat-nav-inner::-webkit-scrollbar{display:none}
-.cat-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 .9rem;min-width:60px;cursor:pointer;user-select:none;-webkit-user-select:none;border-top:2px solid transparent;transition:all .2s;gap:2px;position:relative;flex-shrink:0}
-.cat-tab:active{background:rgba(255,255,255,.04)}
+.cat-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 .9rem;min-width:60px;cursor:pointer;user-select:none;-webkit-user-select:none;border-top:2px solid transparent;transition:all .2s;gap:2px;flex-shrink:0}
 .cat-tab.active{border-top-color:var(--crimson3)}
 .cat-tab.active .cat-tab-icon{filter:drop-shadow(0 0 6px var(--crimson3))}
 .cat-tab.active .cat-tab-lbl{color:var(--cream)}
-.cat-tab-icon{font-size:1.1rem;line-height:1}
+.cat-tab-icon{font-size:1.2rem;line-height:1}
 .cat-tab-lbl{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d);white-space:nowrap}
-.cat-tab-dot{position:absolute;top:8px;right:8px;width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold);display:none}
-.cat-tab.has-dot .cat-tab-dot{display:block}
 .topbar-side{display:flex;align-items:stretch;justify-content:center;flex-shrink:0}
 .topbar-side+.topbar-side{border-left:1px solid rgba(255,255,255,.06)}
 .topbar-stop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;-webkit-user-select:none;user-select:none;padding:0 .9rem;min-width:60px;height:100%;transition:all .2s}
 .topbar-stop:active{background:rgba(255,255,255,.04)}
 .topbar-stop-icon{font-size:1rem;line-height:1;color:var(--cream-d)}
 .topbar-stop-lbl{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d)}
-.cat-nav-climax{display:flex;align-items:center;justify-content:center;padding:.4rem}
 
-/* Tablet/Desktop: left vertical sidebar */
-@media (min-width:760px){
+@media(min-width:760px){
   .cat-nav{top:0;bottom:0;left:0;right:auto;width:var(--sidebar-w);height:100%;flex-direction:column;border-top:none;border-right:1px solid rgba(168,20,46,.2);padding-bottom:0;padding-top:env(safe-area-inset-top)}
   .cat-nav-inner{flex-direction:column;overflow-x:hidden;overflow-y:auto;justify-content:flex-start;padding-top:.5rem}
   .cat-tab{min-width:0;width:100%;padding:.85rem .5rem;border-top:none;border-left:2px solid transparent}
   .cat-tab.active{border-left-color:var(--crimson3);border-top-color:transparent}
-  .cat-tab-icon{font-size:1.3rem}
+  .cat-tab-icon{font-size:1.4rem}
   .cat-tab-lbl{font-size:.42rem}
   .topbar-side{flex-direction:column;width:100%;margin-top:auto}
   .topbar-side+.topbar-side{border-left:none;border-top:1px solid rgba(255,255,255,.06)}
   .topbar-stop{width:100%;min-width:0;padding:.85rem .5rem}
-  .cat-nav-climax{padding:.7rem}
+  .screen-inner.game{padding-left:var(--sidebar-w)}
 }
 
-/* ── SCORE BAR ── */
-.game-center{width:100%;max-width:560px;margin:0 auto;display:flex;flex-direction:column}
-.score-bar{display:flex;align-items:center;justify-content:center;gap:clamp(1.5rem,8vw,4rem);padding:.6rem 0;width:100%;border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:30;background:rgba(5,2,10,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-sizing:border-box}
-.score-player{display:flex;flex-direction:column;align-items:center;gap:1px}
-.score-num{font-family:'Cinzel',serif;font-size:clamp(1.4rem,6vw,1.9rem);font-weight:900;line-height:1;transition:transform .2s}
-.score-num.daddy{color:var(--blue);text-shadow:0 0 20px rgba(126,180,224,.4)}
-.score-num.meisje{color:var(--pink);text-shadow:0 0 20px rgba(224,126,180,.4)}
-.score-num.femme{color:var(--femme);text-shadow:0 0 20px rgba(212,160,192,.4)}
-.score-num.speeltje{color:var(--speeltje);text-shadow:0 0 20px rgba(160,196,212,.4)}
-.score-lbl{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.15em;color:var(--cream-d);text-transform:uppercase}
-.score-vs{font-family:'Cinzel',serif;font-size:.6rem;color:var(--gold-d);letter-spacing:.1em}
-.turn-badge{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .6rem;border-radius:20px;border:1px solid;animation:neonPulse 2s ease-in-out infinite}
-.turn-badge.daddy{color:var(--blue);border-color:rgba(126,180,224,.3);background:rgba(126,180,224,.06);box-shadow:0 0 12px rgba(126,180,224,.2)}
-.turn-badge.meisje{color:var(--pink);border-color:rgba(224,126,180,.3);background:rgba(224,126,180,.06);box-shadow:0 0 12px rgba(224,126,180,.2)}
-.turn-badge.femme{color:var(--femme);border-color:rgba(212,160,192,.3);background:rgba(212,160,192,.06);box-shadow:0 0 12px rgba(212,160,192,.2)}
-.turn-badge.speeltje{color:var(--speeltje);border-color:rgba(160,196,212,.3);background:rgba(160,196,212,.06);box-shadow:0 0 12px rgba(160,196,212,.2)}
+/* ── GAME LAYOUT ── */
+.turn-bar{display:flex;align-items:center;justify-content:center;gap:1rem;padding:.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(5,2,10,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);position:sticky;top:0;z-index:30}
+.turn-badge{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem 1.1rem;border-radius:20px;border:1px solid;animation:neonPulse 2s ease-in-out infinite;font-weight:600}
+.turn-badge.daddy{color:var(--daddy);border-color:rgba(126,180,224,.3);background:rgba(126,180,224,.06);box-shadow:0 0 12px rgba(126,180,224,.2)}
+.turn-badge.meisje{color:var(--meisje);border-color:rgba(224,126,180,.3);background:rgba(224,126,180,.06);box-shadow:0 0 12px rgba(224,126,180,.2)}
 
-/* ── GAME CONTENT AREA ── */
-.game-content{padding:1.2rem 0 2rem;width:100%;box-sizing:border-box}
+.game-content{padding:1.2rem 1.5rem 6rem;width:100%}
+@media(min-width:760px){
+  .game-content{padding:2rem 3rem 3rem;max-width:700px;margin:0 auto}
+}
 
 /* ── KAART ── */
-.q-card{width:100%;background:var(--surface);border-radius:var(--r-lg);padding:clamp(1.4rem,5vw,2rem) clamp(1.2rem,4vw,1.6rem);text-align:center;box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(168,20,46,.12);animation:cardIn .42s cubic-bezier(.34,1.56,.64,1) forwards,cardPulse 3.5s .5s ease-in-out infinite;position:relative;overflow:hidden}
-.q-card::before{content:'';position:absolute;inset:0;border-radius:var(--r-lg);border:1px solid rgba(168,20,46,.25);pointer-events:none}
-.q-card.gold-card::before{border-color:rgba(201,168,76,.3)}
-.q-card.gold-card{box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(201,168,76,.12),0 0 40px rgba(201,168,76,.08)}
-.q-tags{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin-bottom:.75rem}
-.q-tag{padding:.22rem .6rem;border-radius:20px;font-family:'Cinzel',serif;font-size:clamp(.46rem,1.8vw,.54rem);letter-spacing:.12em;text-transform:uppercase}
-.qt-opdracht{background:rgba(168,20,46,.12);color:#e05070;border:1px solid rgba(168,20,46,.3);box-shadow:0 0 8px rgba(168,20,46,.15)}
-.qt-vraag{background:rgba(126,180,224,.12);color:var(--blue);border:1px solid rgba(126,180,224,.25);box-shadow:0 0 8px rgba(126,180,224,.15)}
-.qt-mild{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.2)}
-.qt-spicy{background:rgba(255,60,60,.1);color:#ff7575;border:1px solid rgba(255,60,60,.2);box-shadow:0 0 8px rgba(255,60,60,.12)}
-.qt-cnc{background:rgba(201,168,76,.08);color:var(--gold-l);border:1px solid rgba(201,168,76,.25);box-shadow:0 0 8px rgba(201,168,76,.15)}
-.qt-fase{background:rgba(212,160,192,.08);color:#c890aa;border:1px solid rgba(212,160,192,.15)}
-.q-text{font-size:clamp(1.05rem,4vw,1.35rem);font-style:italic;color:var(--white);line-height:1.8;margin:.7rem 0 .4rem}
+.q-card{
+  width:100%;background:var(--surface);border-radius:var(--r-lg);
+  padding:clamp(1.6rem,5vw,2.2rem) clamp(1.4rem,4vw,2rem);
+  text-align:center;border:2px solid rgba(168,20,46,.2);
+  box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(168,20,46,.12);
+  animation:cardIn .42s cubic-bezier(.34,1.56,.64,1) forwards,cardPulse 3.5s .5s ease-in-out infinite;
+  position:relative;overflow:hidden;
+}
+.q-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d) 25%,var(--crimson2) 50%,rgba(100,20,160,.4) 75%,transparent)}
 
-/* ── INTENSITY CHOOSER ── */
-.choice-group{width:100%;margin-bottom:.8rem}
-.choice-group-lbl{font-family:'Cinzel',serif;font-size:clamp(.52rem,1.9vw,.6rem);letter-spacing:.2em;text-transform:uppercase;color:var(--cream-d);text-align:center;margin-bottom:.5rem}
-.choice-row{display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center}
-.cbtn{flex:1;min-width:70px;min-height:var(--touch);padding:.85rem .3rem;background:var(--surface);border:1.5px solid rgba(201,168,76,.08);border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.58rem,2.2vw,.68rem);font-weight:600;letter-spacing:.06em;color:var(--cream-d);text-align:center;cursor:pointer;user-select:none;transition:all .2s;-webkit-user-select:none}
-.cbtn:active{transform:scale(.96)}
-.cbtn.s-mild{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.08);box-shadow:0 0 15px rgba(201,168,76,.2),inset 0 0 10px rgba(201,168,76,.05);animation:selGlow 1.6s ease-in-out infinite}
-.cbtn.s-spicy{border-color:#ff6060;color:#ff6060;background:rgba(255,96,96,.08);box-shadow:0 0 15px rgba(255,60,60,.2),inset 0 0 10px rgba(255,60,60,.05);animation:selGlow 1.6s ease-in-out infinite}
-.cbtn.s-cnc{border-color:var(--gold-l);color:var(--gold-l);background:rgba(226,193,106,.06);box-shadow:0 0 15px rgba(226,193,106,.2),inset 0 0 10px rgba(226,193,106,.05);animation:selGlow 1.6s ease-in-out infinite}
-.cbtn.s-vraag{border-color:var(--blue);color:var(--blue);background:rgba(126,180,224,.08);box-shadow:0 0 15px rgba(126,180,224,.2);animation:selGlow 1.6s ease-in-out infinite}
+.q-card.daddy-card{border-color:rgba(126,180,224,.5);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 40px rgba(126,180,224,.08)}
+.q-card.daddy-card::before{background:linear-gradient(90deg,transparent,var(--daddy) 30%,#a8d4f0 50%,var(--daddy) 70%,transparent)}
+.q-card.meisje-card{border-color:rgba(224,126,180,.5);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 40px rgba(224,126,180,.08)}
+.q-card.meisje-card::before{background:linear-gradient(90deg,transparent,var(--meisje) 30%,#f0a8d0 50%,var(--meisje) 70%,transparent)}
+.q-card.cnc-card{border-color:rgba(212,26,60,.6);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 40px rgba(212,26,60,.1)}
+.q-card.cnc-card::before{background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-l) 50%,var(--gold) 70%,transparent)}
+.q-card.femme-card{border-color:rgba(160,80,200,.6);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 40px rgba(160,80,200,.1)}
+.q-card.femme-card::before{background:linear-gradient(90deg,transparent,#c080e0 30%,#d8a0f0 50%,#c080e0 70%,transparent)}
 
-/* ── JUDGE ── */
-.judge-lbl{font-family:'Cinzel',serif;font-size:clamp(.52rem,1.9vw,.6rem);letter-spacing:.18em;color:var(--cream-d);text-transform:uppercase;text-align:center;margin:1rem 0 .65rem}
-#score-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);font-family:'Cinzel',serif;font-size:5rem;font-weight:900;pointer-events:none;z-index:200;opacity:0;transition:transform .18s cubic-bezier(.34,1.56,.64,1),opacity .35s ease}
-#score-flash.pos{color:#80e080;text-shadow:0 0 50px rgba(80,220,80,.7)}
-#score-flash.neg{color:#e08080;text-shadow:0 0 50px rgba(220,80,80,.7)}
-#score-flash.show{transform:translate(-50%,-50%) scale(1);opacity:1}
-#score-flash.hide{transform:translate(-50%,-50%) scale(1.4);opacity:0}
+.q-tag-row{display:flex;gap:.35rem;justify-content:center;margin-bottom:.9rem;flex-wrap:wrap}
+.q-tag{padding:.2rem .6rem;border-radius:20px;font-family:'Cinzel',serif;font-size:clamp(.44rem,1.7vw,.52rem);letter-spacing:.12em;text-transform:uppercase}
+.qt-normal{background:rgba(168,20,46,.12);color:#e05070;border:1px solid rgba(168,20,46,.3)}
+.qt-cnc{background:rgba(201,168,76,.1);color:var(--gold-l);border:1px solid rgba(201,168,76,.25);box-shadow:0 0 8px rgba(201,168,76,.15)}
+.qt-femme{background:rgba(160,80,200,.1);color:#c090e8;border:1px solid rgba(160,80,200,.25);box-shadow:0 0 8px rgba(160,80,200,.15)}
 
-/* ── AVONDREGELS SCREEN ── */
-.rules-card{width:100%;max-width:420px;background:var(--surface);border-radius:var(--r-lg);padding:1.3rem;margin-bottom:.9rem;box-shadow:0 4px 30px rgba(0,0,0,.5)}
-.rules-card.daddy-card{border:1px solid rgba(126,180,224,.2);box-shadow:0 4px 30px rgba(0,0,0,.5),0 0 20px rgba(126,180,224,.06)}
-.rules-card.meisje-card{border:1px solid rgba(224,126,180,.2);box-shadow:0 4px 30px rgba(0,0,0,.5),0 0 20px rgba(224,126,180,.06)}
-.rules-card.femme-card{border:1px solid rgba(212,160,192,.2);box-shadow:0 4px 30px rgba(0,0,0,.5),0 0 20px rgba(212,160,192,.06)}
-.rules-card.speeltje-card{border:1px solid rgba(160,196,212,.2);box-shadow:0 4px 30px rgba(0,0,0,.5),0 0 20px rgba(160,196,212,.06)}
-.rules-card-header{font-family:'Cinzel',serif;font-size:clamp(.72rem,2.5vw,.85rem);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
-.rules-card-header.daddy{color:var(--blue);text-shadow:0 0 15px rgba(126,180,224,.4)}
-.rules-card-header.meisje{color:var(--pink);text-shadow:0 0 15px rgba(224,126,180,.4)}
-.rules-card-header.femme{color:var(--femme);text-shadow:0 0 15px rgba(212,160,192,.4)}
-.rules-card-header.speeltje{color:var(--speeltje);text-shadow:0 0 15px rgba(160,196,212,.4)}
-.rule-section-lbl{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);margin:0 0 .4rem .1rem;padding-top:.2rem}
-.rule-item{font-style:italic;font-size:clamp(.83rem,3.2vw,.93rem);color:var(--cream);line-height:1.55;padding:.5rem 0 .5rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);position:relative}
-.rule-item:last-child{border-bottom:none;padding-bottom:0}
-.rule-item::before{content:'♦';position:absolute;left:0;top:.65rem;font-size:.38rem;color:var(--gold-d);font-style:normal}
-.rule-item.vast{color:var(--gold-l)}
-.rule-item.vast::before{color:var(--gold)}
-.vast-badge{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.12em;color:var(--gold-d);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:.08rem .4rem;margin-left:.4rem}
-.btn-reroll-rules{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);color:rgba(201,168,76,.5);font-family:'Cinzel',serif;font-size:clamp(.42rem,1.5vw,.5rem);letter-spacing:.1em;padding:.25rem .65rem;border-radius:10px;cursor:pointer;transition:all .2s;white-space:nowrap;box-shadow:0 0 10px rgba(201,168,76,.06)}
-.btn-reroll-rules:active{background:rgba(201,168,76,.1);color:var(--gold);box-shadow:0 0 15px rgba(201,168,76,.15)}
+.q-text{font-size:clamp(1.1rem,4vw,1.4rem);font-style:italic;color:var(--white);line-height:1.85;margin:.5rem 0 .8rem}
 
-/* ── TURN NAME ── */
-.turn-name{font-family:'Cinzel',serif;font-size:clamp(2.6rem,14vw,5rem);font-weight:900;text-align:center;line-height:1}
-.turn-name.daddy{color:var(--blue);text-shadow:0 0 40px rgba(126,180,224,.4),0 0 80px rgba(126,180,224,.15)}
-.turn-name.meisje{color:var(--pink);text-shadow:0 0 40px rgba(224,126,180,.4),0 0 80px rgba(224,126,180,.15)}
-.turn-name.femme{color:var(--femme);text-shadow:0 0 40px rgba(212,160,192,.4),0 0 80px rgba(212,160,192,.15)}
-.turn-name.speeltje{color:var(--speeltje);text-shadow:0 0 40px rgba(160,196,212,.4),0 0 80px rgba(160,196,212,.15)}
+.judge-row{display:flex;gap:.5rem;justify-content:center;margin-top:1.2rem}
+.btn-judge{flex:1;max-width:160px;min-height:var(--touch);padding:.75rem .5rem;background:var(--surface2);border:1.5px solid rgba(255,255,255,.06);border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.6rem,2.3vw,.7rem);font-weight:600;letter-spacing:.1em;color:var(--cream-d);text-align:center;cursor:pointer;user-select:none;transition:all .2s;-webkit-user-select:none}
+.btn-judge:active{transform:scale(.96)}
+.btn-judge.skip:hover{border-color:rgba(201,168,76,.4);color:var(--gold)}
+.btn-judge.done{background:linear-gradient(135deg,rgba(107,15,30,.6),rgba(168,20,46,.4));border-color:rgba(168,20,46,.5);color:#e05070;box-shadow:0 0 20px rgba(107,15,30,.3)}
+.btn-judge.done:hover{box-shadow:0 0 30px rgba(168,20,46,.4);border-color:rgba(212,26,60,.7);color:var(--white)}
 
-/* ── CLIMAX HOLD BTN ── */
-.btn-climax-hold{position:relative;width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 38% 32%,rgba(201,168,76,.12),rgba(107,15,30,.18));border:1.5px solid rgba(201,168,76,.3);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;-webkit-user-select:none;user-select:none;touch-action:none;transition:all .2s;box-shadow:0 0 16px rgba(168,20,46,.15);flex-shrink:0}
-.btn-climax-hold:hover{border-color:rgba(201,168,76,.5);box-shadow:0 0 26px rgba(201,168,76,.25)}
-.climax-icon{font-size:1.05rem;line-height:1;pointer-events:none}
-.climax-label{font-family:'Cinzel',serif;font-size:.26rem;letter-spacing:.14em;color:rgba(201,168,76,.55);text-transform:uppercase;pointer-events:none}
-.climax-ring-wrap{position:absolute;inset:0;pointer-events:none}
-.climax-ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
-.climax-ring-bg{fill:none;stroke:rgba(201,168,76,.1);stroke-width:3}
-.climax-ring-fill{fill:none;stroke:var(--gold-l);stroke-width:3;stroke-linecap:round;stroke-dasharray:0 251;filter:drop-shadow(0 0 5px rgba(226,193,106,.8))}
+/* ── RULES OVERLAY ── */
+.overlay{position:fixed;inset:0;background:rgba(5,2,10,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.overlay.open{display:flex}
+.overlay-box{background:var(--surface);border:1px solid rgba(168,20,46,.25);border-radius:var(--r-lg);padding:2rem 1.6rem;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 60px rgba(107,15,30,.2)}
+.overlay-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d) 25%,var(--crimson2) 50%,rgba(100,20,160,.4) 75%,transparent)}
+.overlay-close{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--cream-d);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;transition:all .2s}
+.overlay-close:hover{border-color:var(--crimson3);color:var(--white)}
 
-/* ── FOOTER REGELS ── */
-#rules-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(5,2,10,.97);border-top:1px solid rgba(201,168,76,.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:40;height:64px;transition:height .32s cubic-bezier(.4,0,.2,1);display:none;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
-#rules-footer.visible{display:block}
-#rules-footer.open{height:220px}
-.footer-toggle{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1.2rem .3rem;cursor:pointer;min-height:44px}
-.footer-player-label{font-family:'Cinzel',serif;font-size:clamp(.52rem,1.9vw,.6rem);letter-spacing:.2em;text-transform:uppercase}
-.footer-player-label.daddy{color:var(--blue)}.footer-player-label.meisje{color:var(--pink)}
-.footer-player-label.femme{color:var(--femme)}.footer-player-label.speeltje{color:var(--speeltje)}
-.footer-chevron{font-size:.6rem;color:var(--gold-d);transition:transform .3s ease}
-#rules-footer.open .footer-chevron{transform:rotate(180deg)}
-.footer-compact-rules{padding:0 1.2rem .3rem;display:flex;flex-direction:column;gap:.1rem}
-.footer-compact-rule{font-style:italic;font-size:clamp(.6rem,2.1vw,.68rem);color:rgba(138,122,106,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
-.footer-full-rules{padding:.2rem 1.2rem 1rem;display:flex;flex-direction:column;gap:.5rem;overflow-y:auto;opacity:0;transition:opacity .2s ease .1s}
-#rules-footer.open .footer-full-rules{opacity:1}
-.footer-full-rule{font-style:italic;font-size:clamp(.78rem,2.9vw,.88rem);color:var(--cream);line-height:1.55;padding-left:1rem;position:relative}
-.footer-full-rule::before{content:'♦';position:absolute;left:0;top:.12rem;font-size:.38rem;color:var(--gold-d);font-style:normal}
-
-/* ── CLIMAX ── */
-.climax-winner-lbl{font-family:'Cinzel',serif;font-size:clamp(.52rem,1.9vw,.62rem);letter-spacing:.28em;text-transform:uppercase;color:var(--cream-d);text-align:center}
-.climax-winner-name{font-family:'Cinzel',serif;font-size:clamp(2rem,10vw,3.4rem);font-weight:900;line-height:1.05;text-align:center;animation:wGlow 2.5s ease-in-out infinite alternate}
-.climax-winner-name.daddy{color:var(--blue)}.climax-winner-name.meisje{color:var(--pink)}.climax-winner-name.draw{color:var(--gold)}
-.climax-winner-name.femme{color:var(--femme)}.climax-winner-name.speeltje{color:var(--speeltje)}
-.climax-sub{font-style:italic;font-size:clamp(.8rem,3.1vw,.95rem);color:var(--cream-d);text-align:center;line-height:1.55;max-width:310px;margin:.3rem auto .6rem}
-.climax-cards{width:100%;max-width:420px;display:flex;flex-direction:column;gap:.6rem}
-.climax-option{width:100%;background:var(--surface);border:1px solid rgba(201,168,76,.15);border-radius:var(--r-lg);padding:1rem 1.2rem;text-align:center;cursor:pointer;user-select:none;-webkit-user-select:none;transition:all .2s;font-style:italic;font-size:clamp(1rem,3.8vw,1.15rem);color:var(--white);line-height:1.65;box-shadow:0 0 15px rgba(168,20,46,.08)}
-.climax-option:active{transform:scale(.97);border-color:rgba(201,168,76,.45);background:rgba(201,168,76,.06);box-shadow:0 0 30px rgba(201,168,76,.15)}
-.climax-option-num{font-family:'Cinzel',serif;font-size:clamp(.42rem,1.5vw,.5rem);letter-spacing:.2em;color:var(--gold-d);text-transform:uppercase;margin-bottom:.3rem}
-.climax-reveal-glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(107,15,30,.4) 0%,rgba(201,168,76,.06) 55%,transparent 80%);animation:wPulse 3s ease-in-out infinite}
-.climax-reveal-wlbl{font-family:'Cinzel',serif;font-size:clamp(.48rem,1.7vw,.58rem);letter-spacing:.28em;text-transform:uppercase;color:var(--cream-d);text-align:center}
-.climax-reveal-wname{font-family:'Cinzel',serif;font-size:clamp(1.6rem,8vw,2.4rem);font-weight:900;text-align:center;line-height:1;animation:wGlow 2.5s ease-in-out infinite alternate}
-.climax-reveal-wname.daddy{color:var(--blue)}.climax-reveal-wname.meisje{color:var(--pink)}.climax-reveal-wname.draw{color:var(--gold)}
-.climax-reveal-wname.femme{color:var(--femme)}.climax-reveal-wname.speeltje{color:var(--speeltje)}
-.climax-big-card{width:100%;max-width:420px;background:linear-gradient(155deg,rgba(107,15,30,.25),rgba(15,6,24,.98));border:1px solid rgba(201,168,76,.35);border-radius:var(--r-lg);padding:clamp(1.8rem,6vw,2.6rem) clamp(1.4rem,5vw,2rem);text-align:center;box-shadow:0 16px 80px rgba(107,15,30,.5),0 0 0 1px rgba(201,168,76,.08),0 0 60px rgba(168,20,46,.1);animation:cardIn .5s cubic-bezier(.34,1.56,.64,1) forwards,cardPulse 4s .6s ease-in-out infinite}
-.climax-big-tag{display:inline-block;padding:.28rem .9rem;border-radius:20px;font-family:'Cinzel',serif;font-size:clamp(.5rem,1.9vw,.6rem);letter-spacing:.2em;text-transform:uppercase;background:rgba(226,193,106,.1);color:var(--gold-l);border:1px solid rgba(226,193,106,.3);margin-bottom:.9rem;box-shadow:0 0 15px rgba(226,193,106,.15)}
-.climax-big-text{font-size:clamp(1.1rem,4.3vw,1.45rem);font-style:italic;color:var(--white);line-height:1.85}
-@keyframes wPulse{0%,100%{opacity:.7}50%{opacity:1}}
-.btn-back{position:fixed;top:max(.9rem,env(safe-area-inset-top));left:1rem;padding:.3rem .65rem;min-height:36px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;font-family:'Cinzel',serif;font-size:clamp(.5rem,1.9vw,.58rem);letter-spacing:.12em;color:var(--cream-d);cursor:pointer;z-index:60;transition:all .2s}
-.btn-back:active{background:rgba(255,255,255,.09);color:var(--cream)}
-
-/* ── ZINNEN ── */
-.zinnen-wrap{margin-top:.9rem;border-top:1px solid rgba(255,255,255,.07);padding-top:.75rem}
-.zinnen-lbl{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin-bottom:.5rem;text-align:center}
-.zinnen-list{display:flex;flex-direction:column;gap:.35rem}
-.zin{font-style:italic;font-size:clamp(.78rem,3vw,.88rem);color:rgba(240,230,211,.75);line-height:1.5;padding:.25rem .5rem;border-left:2px solid rgba(201,168,76,.25);text-align:left}
-.btn-meer-zinnen{background:transparent;border:1px solid rgba(201,168,76,.2);color:rgba(201,168,76,.5);font-family:'Cinzel',serif;font-size:clamp(.42rem,1.5vw,.5rem);letter-spacing:.12em;padding:.3rem .8rem;border-radius:10px;cursor:pointer;margin-top:.4rem;display:block;margin-left:auto;margin-right:auto;transition:all .2s}
-.btn-meer-zinnen:active{background:rgba(201,168,76,.08);color:var(--gold)}
-
-
-
-/* ── VETO BTN ── */
-.veto-row{display:flex;gap:.5rem;justify-content:center;margin-top:.5rem}
-.btn-veto{background:rgba(212,26,60,.05);border:1px solid rgba(212,26,60,.25);color:rgba(212,26,60,.6);font-family:'Cinzel',serif;font-size:clamp(.46rem,1.7vw,.54rem);letter-spacing:.12em;padding:.35rem .9rem;border-radius:10px;cursor:pointer;transition:all .2s}
-.btn-veto:active{background:rgba(212,26,60,.12);color:var(--crimson3)}
-.btn-veto:disabled{opacity:.25;pointer-events:none}
-.btn-veto.used{opacity:.2;pointer-events:none;text-decoration:line-through}
-
-
-
-/* ── SIDEBAR EXTRA ── */
-.sidebar-regels{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;width:100%;padding:.85rem .5rem;transition:all .2s;border-top:1px solid rgba(255,255,255,.06)}
-.sidebar-regels:active{background:rgba(255,255,255,.04)}
-.sidebar-regels-icon{font-size:1.3rem;line-height:1}
-.sidebar-regels-lbl{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d)}
-
-
-
-
-/* ── KAART KLEUR PER SPELER ── */
-.q-card.card-daddy{background:linear-gradient(155deg,rgba(0,110,100,.32),rgba(0,60,60,.22));border-color:rgba(0,180,160,.35);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(0,180,160,.25),0 0 30px rgba(0,160,140,.12)}
-.q-card.card-meisje{background:linear-gradient(155deg,rgba(180,50,100,.32),rgba(130,20,60,.22));border-color:rgba(224,100,160,.35);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(224,100,160,.25),0 0 30px rgba(200,70,130,.12)}
-.q-card.card-femme{background:linear-gradient(155deg,rgba(110,40,180,.32),rgba(70,15,130,.22));border-color:rgba(170,100,220,.35);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(170,100,220,.25),0 0 30px rgba(140,70,200,.12)}
-.q-card.card-speeltje{background:linear-gradient(155deg,rgba(30,110,180,.32),rgba(15,70,130,.22));border-color:rgba(90,160,220,.35);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(90,160,220,.25),0 0 30px rgba(50,130,200,.12)}
-
-
-/* ── HOME KNOP ZIJBALK ── */
-.sidebar-home{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;width:100%;padding:.85rem .5rem;transition:all .2s;border-bottom:1px solid rgba(255,255,255,.06)}
-.sidebar-home:active{background:rgba(255,255,255,.06)}
-.sidebar-home-icon{font-size:1.3rem;line-height:1}
-.sidebar-home-lbl{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d)}
-
+.rule-block{margin-bottom:1.4rem}
+.rule-player{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.rule-player.daddy{color:var(--daddy)}
+.rule-player.meisje{color:var(--meisje)}
+.rule-player::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,currentColor,transparent);opacity:.2}
+.rule-item{font-style:italic;font-size:clamp(.85rem,3.3vw,1rem);color:var(--cream);line-height:1.65;padding:.6rem .8rem;background:rgba(255,255,255,.02);border-left:2px solid rgba(168,20,46,.3);border-radius:0 var(--r) var(--r) 0;margin-bottom:.6rem}
+.rule-item.random{color:var(--gold-l);border-left-color:rgba(201,168,76,.4)}
+.rule-sub{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-d);margin-bottom:.35rem;margin-top:.8rem}
 </style>
 </head>
 <body>
-<div id="score-flash"></div>
 
-<!-- ══ SETUP ══ -->
-<div class="screen active" id="screen-setup">
+<!-- WELCOME -->
+<div class="screen active" id="screenWelcome">
   <div class="screen-inner">
-    <span class="logo-icon">🔥</span>
-    <div class="sx"></div>
-    <h1>DARE &amp; DESIRE</h1>
-    <div class="sx"></div>
-    <p class="italic fu">Kies jullie rolverdeling voor vanavond</p>
-    <div class="div"></div>
-    <div class="smd"></div>
-    <div class="rol-keuze fu-1">
-      <button class="rol-btn dm" onclick="kiesRol('dm')">
-        <div class="rol-btn-title">Daddy &nbsp;♦&nbsp; Meisje</div>
-        <div class="rol-btn-sub">Hij leidt, zij gehoorzaamt</div>
-      </button>
-      <button class="rol-btn fs" onclick="kiesRol('fs')">
-        <div class="rol-btn-title">Femme &nbsp;♦&nbsp; Speeltje</div>
-        <div class="rol-btn-sub">Zij controleert, hij dient</div>
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ AVONDREGELS ══ -->
-<div class="screen" id="screen-rules">
-  <button class="btn-back" onclick="showScreen('screen-setup')">← Terug</button>
-  <div class="screen-inner top">
-    <div class="slg"></div>
-    <h2 class="fu" style="text-align:left;width:100%;max-width:420px">Avondregels</h2>
-    <p class="italic fu-1" style="margin:.35rem 0 1rem;font-size:.86rem;text-align:left;width:100%;max-width:420px">Deze regels gelden de hele avond.</p>
-    <div class="rules-card fu-2" id="rules-card-p1"></div>
-    <div class="rules-card fu-3" id="rules-card-p2"></div>
+    <span class="logo-icon">♠</span>
     <div class="sm"></div>
-    <button class="btn btn-primary fu-4" onclick="startGame()">BEGIN HET SPEL →</button>
+    <h1 class="fu">Dare &amp; Desire</h1>
+    <div class="sm"></div>
+    <div class="div fu-1"></div>
+    <div class="sm"></div>
+    <p class="italic fu-2">Welkom Daddy en Meisje.<br>Geniet van vanavond.</p>
     <div class="slg"></div>
+    <button class="btn btn-primary fu-3" onclick="goToRules()">Begin de avond</button>
   </div>
 </div>
 
-<!-- ══ GAME ══ -->
-<div class="screen" id="screen-game">
-  <!-- Category Nav -->
-  <nav class="cat-nav visible" id="cat-nav">
-    <div class="sidebar-home" onclick="goHome()" title="Home">
-      <span class="sidebar-home-icon">🏠</span>
-      <span class="sidebar-home-lbl">Home</span>
+<!-- RULES -->
+<div class="screen" id="screenRules">
+  <div class="screen-inner top">
+    <h2 class="fu">Spelregels vanavond</h2>
+    <div class="sm"></div>
+    <div class="div fu-1"></div>
+    <div class="smd"></div>
+    <div class="rule-block fu-2" style="width:100%;max-width:480px">
+      <div class="rule-player daddy">♦ Daddy</div>
+      <div class="rule-sub">Vaste regel</div>
+      <div class="rule-item">Elke keer als Meisje een opdracht goed heeft uitgevoerd zonder aarzelen, zeg je dat ze een goed meisje is en aai je over haar hoofd.</div>
+      <div class="rule-sub">Regel van vanavond</div>
+      <div class="rule-item random" id="ruleDaddy">—</div>
     </div>
+    <div class="rule-block fu-3" style="width:100%;max-width:480px">
+      <div class="rule-player meisje">♦ Meisje</div>
+      <div class="rule-sub">Vaste regel</div>
+      <div class="rule-item">Al het voorvocht van Daddy's pik moet worden opgelikt en opgezogen met enthousiasme en geluidjes. Zeg daarna: 'Dank je, Daddy.'</div>
+      <div class="rule-sub">Regel van vanavond</div>
+      <div class="rule-item random" id="ruleMeisje">—</div>
+    </div>
+    <div class="slg"></div>
+    <button class="btn btn-gold fu-3" onclick="startGame()">Start het spel</button>
+    <div class="sm"></div>
+  </div>
+</div>
+
+<!-- GAME -->
+<div class="screen" id="screenGame">
+  <nav class="cat-nav visible" id="catNav">
     <div class="cat-nav-inner">
-      <div class="cat-tab active" id="tab-vragen" onclick="setTab('vragen')">
-        <div class="cat-tab-dot"></div>
-        <span class="cat-tab-icon">💬</span>
-        <span class="cat-tab-lbl">Vragen</span>
-      </div>
-      <div class="cat-tab" id="tab-voorspel" onclick="setTab('voorspel')">
-        <div class="cat-tab-dot"></div>
-        <span class="cat-tab-icon">🌹</span>
+      <div class="cat-tab active" id="tabVoorspel" onclick="setCategory('voorspel')">
+        <span class="cat-tab-icon">❤️‍🔥</span>
         <span class="cat-tab-lbl">Voorspel</span>
       </div>
-      <div class="cat-tab" id="tab-hoofdspel" onclick="setTab('hoofdspel')">
-        <div class="cat-tab-dot"></div>
+      <div class="cat-tab" id="tabHoofdspel" onclick="setCategory('hoofdspel')">
         <span class="cat-tab-icon">🔥</span>
         <span class="cat-tab-lbl">Hoofdspel</span>
       </div>
-      <div class="cat-tab" id="tab-climax" onclick="setTab('climax')">
-        <div class="cat-tab-dot"></div>
-        <span class="cat-tab-icon">⚡</span>
-        <span class="cat-tab-lbl">Climax</span>
-      </div>
-      <div class="cat-tab" id="tab-video" onclick="setTab('video')">
-        <div class="cat-tab-dot"></div>
-        <span class="cat-tab-icon">🎬</span>
-        <span class="cat-tab-lbl">Video</span>
-      </div>
-      <div class="cat-tab" id="tab-buiten" onclick="setTab('buiten')">
-        <div class="cat-tab-dot"></div>
-        <span class="cat-tab-icon">🌙</span>
-        <span class="cat-tab-lbl">Buiten</span>
-      </div>
     </div>
-    <div class="topbar-side" id="sidebar-regels-btn" style="display:none">
-      <div class="sidebar-regels" onclick="toggleFooter()" title="Avondregels">
-        <span class="sidebar-regels-icon">📋</span>
-        <span class="sidebar-regels-lbl">Regels</span>
+    <div class="topbar-side">
+      <div class="topbar-stop" onclick="showRulesOverlay()">
+        <span class="topbar-stop-icon">✦</span>
+        <span class="topbar-stop-lbl">Regels</span>
       </div>
     </div>
     <div class="topbar-side">
-      <!-- Climax hold btn -->
-      <div class="cat-nav-climax"><div class="btn-climax-hold" id="climax-btn-game">
-        <div class="climax-ring-wrap">
-          <svg viewBox="0 0 52 52"><circle class="climax-ring-bg" cx="26" cy="26" r="22"/><circle class="climax-ring-fill" id="ring-game" cx="26" cy="26" r="22"/></svg>
-        </div>
-        <span class="climax-icon">🔥</span>
-        <span class="climax-label">CLIMAX</span>
-      </div></div>
-    </div>
-    <div class="topbar-side">
-      <div class="topbar-stop" onclick="showScreen('screen-setup')">
+      <div class="topbar-stop" onclick="stopGame()">
         <span class="topbar-stop-icon">✕</span>
         <span class="topbar-stop-lbl">Stop</span>
       </div>
     </div>
   </nav>
 
-  <div class="screen-inner game" id="game-inner">
-    <div class="game-center">
-      <!-- Score bar -->
-      <div class="score-bar">
-        <div class="score-player">
-          <div class="score-num" id="sc-p1">0</div>
-          <div class="score-lbl" id="sc-lbl-p1">—</div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:.25rem">
-          <div class="score-vs">VS</div>
-          <div class="turn-badge" id="turn-badge">—</div>
-        </div>
-        <div class="score-player">
-          <div class="score-num" id="sc-p2">0</div>
-          <div class="score-lbl" id="sc-lbl-p2">—</div>
-        </div>
-      </div>
+  <!-- Watermark -->
+  <div id="catWatermark" style="position:fixed;bottom:-40px;right:-40px;font-size:50vw;pointer-events:none;z-index:0;line-height:1;user-select:none;filter:blur(2px);animation:watermarkPulse 3.5s ease-in-out infinite;">❤️‍🔥</div>
 
-      <!-- Game content -->
-      <div class="game-content" id="game-content">
-        <!-- filled by JS -->
+  <div class="screen-inner game">
+    <div class="turn-bar">
+      <span class="lbl">Aan de beurt:</span>
+      <span class="turn-badge" id="turnBadge">Daddy</span>
+    </div>
+    <div style="overflow-y:auto;flex:1;position:relative;z-index:1">
+      <div class="game-content">
+        <div class="q-card" id="gameCard">
+          <div class="q-tag-row">
+            <span class="q-tag qt-normal" id="cardTag">Voorspel</span>
+          </div>
+          <div class="q-text" id="cardText">—</div>
+          <div class="judge-row">
+            <button class="btn-judge skip" onclick="skipCard()">↺ Sla over</button>
+            <button class="btn-judge done" onclick="doneCard()">Volbracht ✓</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ CLIMAX CHOICE ══ -->
-<div class="screen" id="screen-climax-choice">
-  <div class="screen-inner" style="gap:.7rem">
-    <div class="climax-winner-lbl fu" id="cc-winner-lbl">WINNAAR</div>
-    <div class="climax-winner-name fu-1" id="cc-winner-name">—</div>
-    <p class="climax-sub fu-2" id="cc-sub"></p>
-    <div class="div"></div>
-    <div class="climax-cards fu-3" id="cc-cards"></div>
-    <div class="slg"></div>
-  </div>
-</div>
-
-<!-- ══ CLIMAX REVEAL ══ -->
-<div class="screen" id="screen-climax-reveal">
-  <div class="climax-reveal-glow"></div>
-  <div class="screen-inner" style="gap:.8rem">
-    <div class="climax-reveal-wlbl fu" id="cr-winner-lbl">WINNAAR</div>
-    <div class="climax-reveal-wname fu-1" id="cr-winner-name">—</div>
-    <div class="div"></div>
-    <div class="climax-big-card fu-2">
-      <div class="climax-big-tag">✦ &nbsp;CLIMAX &nbsp;✦</div>
-      <div class="climax-big-text" id="cr-text">—</div>
+<!-- RULES OVERLAY -->
+<div class="overlay" id="rulesOverlay">
+  <div class="overlay-box">
+    <button class="overlay-close" onclick="hideRulesOverlay()">✕</button>
+    <h2 style="margin-bottom:1.2rem">Avondregels</h2>
+    <div class="rule-block">
+      <div class="rule-player daddy">♦ Daddy</div>
+      <div class="rule-sub">Vaste regel</div>
+      <div class="rule-item">Elke keer als Meisje een opdracht goed heeft uitgevoerd zonder aarzelen, zeg je dat ze een goed meisje is en aai je over haar hoofd.</div>
+      <div class="rule-sub">Regel van vanavond</div>
+      <div class="rule-item random" id="overlayDaddy">—</div>
     </div>
-    <div class="sm"></div>
-    <button class="btn btn-ghost fu-4" onclick="showScreen('screen-setup')">Nieuw spel</button>
-    <div class="slg"></div>
+    <div class="rule-block">
+      <div class="rule-player meisje">♦ Meisje</div>
+      <div class="rule-sub">Vaste regel</div>
+      <div class="rule-item">Al het voorvocht van Daddy's pik moet worden opgelikt en opgezogen met enthousiasme en geluidjes. Zeg daarna: 'Dank je, Daddy.'</div>
+      <div class="rule-sub">Regel van vanavond</div>
+      <div class="rule-item random" id="overlayMeisje">—</div>
+    </div>
   </div>
-</div>
-
-<!-- ══ FOOTER REGELS ══ -->
-<div id="rules-footer">
-  <div class="footer-toggle" onclick="toggleFooter()">
-    <span class="footer-player-label" id="footer-label">♦ Jouw regels</span>
-    <span class="footer-chevron">▲</span>
-  </div>
-  <div class="footer-compact-rules" id="footer-compact"></div>
-  <div class="footer-full-rules" id="footer-full"></div>
 </div>
 
 <script>
-// ══════════════════════════════════════════
-// CONFIG
-// ══════════════════════════════════════════
-const ROL = {
-  dm: {
-    p1:{key:'Daddy', name:'Daddy', cls:'daddy'},
-    p2:{key:'Meisje', name:'Meisje', cls:'meisje'},
-    dataKey:'dm'
+const DATA={
+  daddyRules:[
+    "Als Meisje niet luistert, wordt ze gespankt.",
+    "Zeg Meisje hardop wat voor meisje ze vanavond is. Laat het haar herhalen totdat je tevreden bent.",
+    "Als Meisje gehoorzaamt zonder aarzelen, mag zij haar beloning kiezen. Jij voert uit wat ze netjes vraagt aan Daddy."
+  ],
+  meisjeRules:[
+    "De eerste keer dat Daddy met zijn pik in je kutje of kontje is geweest, pijp je hem.",
+    "Elke keer dat je je onzeker voelt, zeg je: 'Daddy, zeg me wat ik moet doen.'",
+    "Vanavond rem je jezelf niet af. Daddy bepaalt, jij ondergaat en laat jezelf helemaal gaan. Ook tijdens het klaarkomen."
+  ],
+  voorspel:{
+    Daddy:["Kruip tegen elkaar aan, knuffel elkaar en kriebel en voel elkaar.","Leg Meisje op haar buik, kus en lik haar hals, rug, billen, dijbenen, randje onder billen en stiekem even een klein likje over haar kontgaatje.","Zuig aan Meisje's tepels.","Lik Meisje's kutje.","Vinger Meisje en lik samen je natte vingers af.","Tease Meisje en maak haar gek van geilheid.","Kijk samen een hele geile pornofilm."],
+    Meisje:["Kriebel Daddy's streepje bij z'n ballen.","Ga met je borsten boven Daddy hangen en bied je tepels aan.","Zuig aan Daddy's tepel, terwijl je hem aftrekt.","Maak je duim nat en wrijf ermee over Daddy's pik.","Pijp Daddy met overdreven veel geluid.","Lik Daddy's streepje en neem zijn ballen zachtjes in je mond."]
   },
-  fs: {
-    p1:{key:'Femme', name:'Femme', cls:'femme'},
-    p2:{key:'Speeltje', name:'Speeltje', cls:'speeltje'},
-    dataKey:'fs'
+  hoofdspel:{
+    Daddy:{
+      normal:["Neuk Meisje in haar kontje op de rand van het bed. Meisje speelt met haar vibrator. Spuit haar kontje vol. Meisje likt daarna Daddy's pik en pijpt hem.","Ga op je rug liggen en laat Meisje je berijden. Zij kiest welk gaatje ze gebruikt. Kom in haar klaar.","Ga op je rug liggen en laat Meisje je achterstevoren berijden. Zij kiest welk gaatje. Kom in haar klaar.","Geil elkaar op met het bepraten van een geile fantasie. Neuk elkaar en kom lekker klaar, terwijl je erover doorfantaseert. Daddy helpt Meisje als ze het even niet weet."],
+      cnc:["Houd Meisje's polsen vast boven haar hoofd. Voel haar borsten, vinger haar kutje en laat haar zichzelf proeven. Meisje stribbelt verbaal en lichtelijk fysiek tegen.","Houd Meisje's polsen vast en steek je pik in haar kutje. Neuk haar terwijl ze verbaal tegenstribbelt.","Draai Meisje op haar buik en houd haar in bedwang. Voel haar gaatjes en steek je pik in haar kontje. Neuk haar terwijl je haar tegenhoudt. Meisje stribbelt verbaal en lichtelijk fysiek tegen. Doe daarna je pik in Meisje's mondje en laat je pijpen."]
+    },
+    Meisje:{
+      normal:["Ga met je hoofd over de rand van het bed liggen. Speel met jezelf met de speeltjes, eventueel alle gaatjes gevuld, en laat Daddy je diep in je mondje neuken en klaarkomen.","Geil elkaar op met het bepraten van een geile fantasie. Neuk elkaar en kom lekker klaar, terwijl je erover doorfantaseert.","Ga met je knieën op de rand van het bed zitten, voorovergebogen, met gespreide billen. Laat Daddy zijn pik in je kontje steken en jij gaat bewegen. Daddy blijft stilstaan.","Ga voor het bed zitten met open mond en uitgestoken tong. Laat Daddy in je mondje spuiten. Laat het eruit lopen, speel ermee en wrijf jezelf ermee in.","Ga op je rug liggen en gebruik je speeltjes. Daddy komt tussen je benen in zitten en trekt zichzelf op je af. Hij spuit over je kutje en jij masturbeert met zijn cum en komt hierop klaar.","Ga in standje 69 liggen. Daddy likt jouw kontgaatje, jij pijpt hem en vingert zijn kontje. Laat hem in je mondje klaarkomen. Meisje bepaalt zelf of ze het doorslikt."],
+      femme:["Laat Speeltje op zijn rug liggen. Masseer zijn prostaat terwijl je hem pijpt en aftrekt. Laat hem klaarkomen.","Commandeer Speeltje om je hard in je kontje te neuken. Hij mag zijn cockring gebruiken.","Ga op je rug met je benen wijd liggen. Commandeer Speeltje om je kutje te likken en de roze vibrator te gebruiken op je. Druk zijn hoofd tegen je kutje aan.","Tease Speeltje totdat hij je smeekt om klaar te komen. Femme bepaalt hoe.","Bind Speeltje vast, ga op hem zitten met welk gaatje jij wil. Zorg dat hij smeekt om losgemaakt te worden en jou aan te mogen raken. En natuurlijk om te mogen klaarkomen."]
+    }
   }
 };
 
-// ══════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════
-let DATA = null;
-async function loadGameData(){
-  try{
-    const res = await fetch('dare-and-desire-data.json');
-    DATA = await res.json();
-  }catch(e){
-    console.error('Kon dare-and-desire-data.json niet laden.',e);
-    alert('Kon de spelgegevens niet laden. Zorg dat dare-and-desire-data.json naast de HTML staat en gebruik een lokale server.');
-  }
+// Shuffle helper
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+
+// Pools per player per category — filled on start
+let pools={};
+function initPools(){
+  pools={
+    voorspel:{Daddy:shuffle([...DATA.voorspel.Daddy]),Meisje:shuffle([...DATA.voorspel.Meisje])},
+    hoofdspel:{
+      Daddy:{normal:shuffle([...DATA.hoofdspel.Daddy.normal]),cnc:shuffle([...DATA.hoofdspel.Daddy.cnc])},
+      Meisje:{normal:shuffle([...DATA.hoofdspel.Meisje.normal]),femme:shuffle([...DATA.hoofdspel.Meisje.femme])}
+    }
+  };
 }
 
-// ══════════════════════════════════════════
-// GAME STATE
-// ══════════════════════════════════════════
-let G = {
-  rol: null, scores:[0,0], current:0,
-  assignedRules:{p1:[],p2:[]},
-  recent:[], currentCard:'',
-  tab:'vragen', intensity:'mild',
-  judged:false,
-  hoofdspelCnc:false,
-  vetoP1:true, vetoP2:true
-};
-const MAX_RECENT = 5;
-const CIRC = 2*Math.PI*22;
-
-
-
-// ══════════════════════════════════════════
-// VETO
-// ══════════════════════════════════════════
-function useVeto(playerIdx){
-  if(playerIdx===0&&!G.vetoP1) return;
-  if(playerIdx===1&&!G.vetoP2) return;
-  if(playerIdx===0) G.vetoP1=false;
-  if(playerIdx===1) G.vetoP2=false;
-  updateVetoBtns();
-  rerollCurrent();
-}
-function updateVetoBtns(){
-  const b1=document.getElementById('veto-p1');
-  const b2=document.getElementById('veto-p2');
-  if(b1){ b1.disabled=!G.vetoP1; if(!G.vetoP1) b1.classList.add('used'); }
-  if(b2){ b2.disabled=!G.vetoP2; if(!G.vetoP2) b2.classList.add('used'); }
+function drawFromPool(pool,source){
+  if(pool.length===0){pool.push(...shuffle([...source]))}
+  return pool.shift();
 }
 
-// ══════════════════════════════════════════
-// ZINNEN
-// ══════════════════════════════════════════
-function getZinnen(rol, speler, cat){
-  if(!DATA||!DATA.zinnen) return [];
-  const rolData=DATA.zinnen[rol];
-  if(!rolData||!rolData[speler]) return [];
-  return rolData[speler][cat]||rolData[speler]['hoofdspel']||[];
-}
+let player='Daddy',category='voorspel',daddyRule='',meisjeRule='';
 
-function renderZinnen(rol, speler, cat){
-  const zinnen=getZinnen(rol,speler,cat);
-  if(!zinnen.length) return '';
-  const first=zinnen.slice(0,3);
-  const rest=zinnen.slice(3);
-  const restHtml=rest.length?`<div id="meer-zinnen" style="display:none">${rest.map(z=>`<div class="zin">"${z}"</div>`).join('')}</div>
-    <button class="btn-meer-zinnen" onclick="toggleMeerZinnen(this)">+ meer zinnen</button>`:'';
-  return `<div class="zinnen-wrap">
-    <div class="zinnen-lbl">💬 Wat kan ${speler} zeggen</div>
-    <div class="zinnen-list">
-      ${first.map(z=>`<div class="zin">"${z}"</div>`).join('')}
-      ${restHtml}
-    </div>
-  </div>`;
-}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
 
-function toggleMeerZinnen(btn){
-  const meer=document.getElementById('meer-zinnen');
-  if(!meer) return;
-  if(meer.style.display==='none'){ meer.style.display='block'; btn.textContent='− minder zinnen'; }
-  else { meer.style.display='none'; btn.textContent='+ meer zinnen'; }
-}
-
-// ══════════════════════════════════════════
-// RANDOM MODUS DRAW
-// ══════════════════════════════════════════
-// ══════════════════════════════════════════
-// SCREENS
-// ══════════════════════════════════════════
-const FOOTER_SCREENS = new Set(['screen-game']);
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-  const f=document.getElementById('rules-footer');
-  if(FOOTER_SCREENS.has(id)&&G.rol){ f.classList.add('visible'); updateFooter(); }
-  else{ f.classList.remove('visible','open'); }
 }
 
-// ══════════════════════════════════════════
-// ROL & REGELS
-// ══════════════════════════════════════════
-function kiesRol(rol){
-  if(!DATA){
-    alert('Spelgegevens nog niet geladen. Wacht even of controleer of dare-and-desire-data.json naast de HTML staat.');
-    return;
-  }
-  G.rol=rol;
-  initRules();
-  showScreen('screen-rules');
+function goToRules(){
+  daddyRule=pick(DATA.daddyRules);
+  meisjeRule=pick(DATA.meisjeRules);
+  document.getElementById('ruleDaddy').textContent=daddyRule;
+  document.getElementById('ruleMeisje').textContent=meisjeRule;
+  document.getElementById('overlayDaddy').textContent=daddyRule;
+  document.getElementById('overlayMeisje').textContent=meisjeRule;
+  showScreen('screenRules');
 }
 
-function pickRules(playerData, hasVast){
-  const rules=[];
-  if(hasVast&&playerData.vast) rules.push({text:playerData.vast,vast:true});
-  const pool=[...(playerData.random||[])].sort(()=>Math.random()-.5);
-  const needed=2;
-  pool.slice(0,needed).forEach(t=>rules.push({text:t,vast:false}));
-  return rules;
-}
-
-function initRules(){
-  const rc=ROL[G.rol];
-  const d=DATA[G.rol].avondregels;
-  G.assignedRules.p1=pickRules(d[rc.p1.key],false);
-  G.assignedRules.p2=pickRules(d[rc.p2.key],true);
-  renderRulesScreen();
-}
-
-function renderRulesScreen(){
-  const rc=ROL[G.rol];
-  renderRulesCard('rules-card-p1',rc.p1,G.assignedRules.p1,'p1');
-  renderRulesCard('rules-card-p2',rc.p2,G.assignedRules.p2,'p2');
-}
-
-function renderRulesCard(elId,pc,rules,playerKey){
-  const el=document.getElementById(elId);
-  el.className=`rules-card fu-2 ${pc.cls}-card`;
-  const vastRules=rules.filter(r=>r.vast);
-  const randomRules=rules.filter(r=>!r.vast);
-  let html=`<div class="rules-card-header ${pc.cls}">
-    <span>${pc.name}</span>
-    <button class="btn-reroll-rules" onclick="rerollRules('${playerKey}')">↺ Nieuwe regels</button>
-  </div>`;
-  if(vastRules.length){
-    html+=`<div class="rule-section-lbl">VASTE REGEL</div>`;
-    vastRules.forEach(r=>{
-      html+=`<div class="rule-item vast">${r.text} <span class="vast-badge">VAST</span></div>`;
-    });
-  }
-  if(randomRules.length){
-    html+=`<div class="rule-section-lbl" style="margin-top:.5rem">AVONDREGEL${randomRules.length>1?'S':''}</div>`;
-    randomRules.forEach(r=>{
-      html+=`<div class="rule-item">${r.text}</div>`;
-    });
-  }
-  el.innerHTML=html;
-}
-
-function rerollRules(playerKey){
-  const rc=ROL[G.rol];
-  const isP2=playerKey==='p2';
-  const pc=isP2?rc.p2:rc.p1;
-  const d=DATA[G.rol].avondregels[pc.key];
-  const newRules=pickRules(d,isP2);
-  G.assignedRules[playerKey]=newRules;
-  renderRulesCard(`rules-card-${playerKey}`,pc,newRules,playerKey);
-}
-
-// ══════════════════════════════════════════
-// START GAME
-// ══════════════════════════════════════════
 function startGame(){
-  const rc=ROL[G.rol];
-  G.scores=[0,0];
-  G.recent=[];
-  G.current=Math.random()<.5?0:1;
-  G.judged=false;
-  G.cardDrawn=false;
-  G.vetoP1=true; G.vetoP2=true;
-
-  document.getElementById('sc-lbl-p1').textContent=rc.p1.name;
-  document.getElementById('sc-lbl-p2').textContent=rc.p2.name;
-  document.getElementById('sc-p1').className=`score-num ${rc.p1.cls}`;
-  document.getElementById('sc-p2').className=`score-num ${rc.p2.cls}`;
-
-  // Show regels sidebar button
-  const rb=document.getElementById('sidebar-regels-btn');
-  if(rb) rb.style.display='';
-
-  showScreen('screen-game');
-  setTab('vragen');
-  renderTurnBadge();
+  player=Math.random()<.5?'Daddy':'Meisje';
+  category='voorspel';
+  initPools();
+  showScreen('screenGame');
+  updateTurn();
+  drawCard();
 }
 
-// ══════════════════════════════════════════
-// TURN & BADGE
-// ══════════════════════════════════════════
-function currentPC(){ const rc=ROL[G.rol]; return G.current===0?rc.p1:rc.p2; }
-
-function renderTurnBadge(){
-  const pc=currentPC();
-  const badge=document.getElementById('turn-badge');
-  badge.textContent=`${pc.name}'s beurt`;
-  badge.className=`turn-badge ${pc.cls}`;
-  document.getElementById('sc-p1').textContent=G.scores[0];
-  document.getElementById('sc-p2').textContent=G.scores[1];
-
-  updateFooter();
-  renderTab();
+function stopGame(){
+  showScreen('screenWelcome');
 }
 
-// ══════════════════════════════════════════
-// TABS
-// ══════════════════════════════════════════
-function setTab(tab){
-  G.tab=tab;
-  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
-  const el=document.getElementById(`tab-${tab}`);
-  if(el){ el.classList.add('active'); el.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
-  G.intensity='mild';
-  G.hoofdspelCnc=false;
-  renderTab();
+function setCategory(cat){
+  category=cat;
+  document.getElementById('tabVoorspel').classList.toggle('active',cat==='voorspel');
+  document.getElementById('tabHoofdspel').classList.toggle('active',cat==='hoofdspel');
+  document.getElementById('catWatermark').textContent=cat==='voorspel'?'❤️\u200d🔥':'🔥';
+  drawCard();
 }
 
-function renderTab(){
-  const content=document.getElementById('game-content');
-  const pc=currentPC();
-  const rc=ROL[G.rol];
-  const tab=G.tab;
-
-  // Simpele categorieën zonder rol/intensity keuze
-  if(tab==='video'||tab==='buiten'){
-    const pool=DATA[G.rol][tab]||[];
-    content.innerHTML=renderSimpleTab(tab,pool);
-    return;
-  }
-
-  if(tab==='vragen'){
-    content.innerHTML=renderVragenTab();
-    return;
-  }
-
-  if(tab==='climax'){
-    content.innerHTML=renderClimaxTab();
-    return;
-  }
-
-  if(tab==='hoofdspel'){
-    content.innerHTML=renderHoofdspelTab();
-    return;
-  }
-
-  // voorspel
-  content.innerHTML=renderOpdrachtTab(tab);
+function updateTurn(){
+  const badge=document.getElementById('turnBadge');
+  badge.textContent=player;
+  badge.className='turn-badge '+(player==='Daddy'?'daddy':'meisje');
 }
 
-function renderSimpleTab(tab,pool){
-  const descs={
-    video:'Filmavond — leg een moment vast.',
-    buiten:'Plan een buitenspel avontuur in.'
-  };
-  return `
-    <p class="italic" style="font-size:1rem;margin-bottom:1.2rem;text-align:center">${descs[tab]||''}</p>
-    <div id="card-display"></div>
-    <button class="btn btn-primary" style="margin-top:.8rem" id="draw-btn" onclick="drawSimple('${tab}')">Trek een kaart</button>`;
-}
-
-function renderVragenTab(){
-  const pc=currentPC();
-  G.vraagRol=pc.key;
-  return `
-    <div id="card-display"></div>
-    <button class="btn btn-primary" id="draw-btn" style="margin-top:.8rem" onclick="drawVraag()">Trek een vraag voor ${pc.name}</button>`;
-}
-
-function renderOpdrachtTab(tab){
-  const pc=currentPC();
-  const rc=ROL[G.rol];
-  const cncBtn = G.rol==='dm' ? `<button class="cbtn ${G.intensity==='cnc'?'s-cnc':''}" onclick="setIntensity('cnc',this)">CNC</button>` : '';
-  return `
-    <div class="choice-group">
-      <div class="choice-group-lbl">Intensiteit</div>
-      <div class="choice-row">
-        <button class="cbtn ${G.intensity==='mild'?'s-mild':''}" onclick="setIntensity('mild',this)">MILD</button>
-        <button class="cbtn ${G.intensity==='spicy'?'s-spicy':''}" onclick="setIntensity('spicy',this)">SPICY 🌶</button>
-        ${cncBtn}
-      </div>
-    </div>
-    <div id="card-display"></div>
-    <button class="btn btn-primary" style="margin-top:.8rem" id="draw-btn" onclick="drawOpdracht()">Trek een kaart</button>`;
-}
-
-function renderClimaxTab(){
-  const pc=currentPC();
-  return `
-    <p class="italic" style="font-size:1rem;margin-bottom:1.2rem;text-align:center">Het einde van de avond — voor ${pc.name}.</p>
-    <div id="card-display"></div>
-    <button class="btn btn-primary" style="margin-top:.8rem" id="draw-btn" onclick="drawClimaxCard()">Trek een kaart</button>`;
-}
-
-function renderHoofdspelTab(){
-  const pc=currentPC();
-  const cncBtn = G.rol==='dm' ? `<button class="cbtn ${G.hoofdspelCnc?'s-cnc':''}" onclick="setHoofdspelCnc(this)">✦ CNC ✦</button>` : '';
-  const cncBlock = G.rol==='dm' ? `
-    <div class="choice-group">
-      <div class="choice-group-lbl">Modus</div>
-      <div class="choice-row">
-        <button class="cbtn ${!G.hoofdspelCnc?'s-spicy':''}" onclick="setHoofdspelNormal(this)">REGULIER</button>
-        ${cncBtn}
-      </div>
-    </div>` : '';
-  return `
-    ${cncBlock}
-    <div id="card-display"></div>
-    <button class="btn btn-primary" style="margin-top:.8rem" id="draw-btn" onclick="drawHoofdspelCard()">Trek een kaart</button>`;
-}
-
-function setHoofdspelCnc(btn){
-  G.hoofdspelCnc=true;
-  btn.closest('.choice-row').querySelectorAll('.cbtn').forEach(b=>b.className='cbtn');
-  btn.className='cbtn s-cnc';
-}
-function setHoofdspelNormal(btn){
-  G.hoofdspelCnc=false;
-  btn.closest('.choice-row').querySelectorAll('.cbtn').forEach(b=>b.className='cbtn');
-  btn.className='cbtn s-spicy';
-}
-
-function setIntensity(v,btn){
-  G.intensity=v;
-  btn.closest('.choice-row').querySelectorAll('.cbtn').forEach(b=>{
-    b.className='cbtn';
-  });
-  btn.className=`cbtn s-${v}`;
-}
-
-function setVraagRol(rol,btn){
-  G.vraagRol=rol;
-  btn.closest('.choice-row').querySelectorAll('.cbtn').forEach(b=>b.className='cbtn');
-  btn.className='cbtn s-vraag';
-}
-
-// ══════════════════════════════════════════
-// DRAW CARDS
-// ══════════════════════════════════════════
-function pickFrom(pool,exclude=[]){
-  const excl=[...G.recent,...exclude];
-  let c=pool.filter(t=>!excl.includes(t));
-  if(!c.length) c=[...pool];
-  return c[Math.floor(Math.random()*c.length)];
-}
-function addRecent(t){
-  G.recent=G.recent.filter(x=>x!==t);
-  G.recent.push(t);
-  if(G.recent.length>MAX_RECENT) G.recent.shift();
-}
-
-function drawOpdracht(){
-  const pc=currentPC();
-  const catData=DATA[G.rol][G.tab];
-  if(!catData){showEmptyCard();return;}
-  let pool;
-  if(catData[pc.key]&&catData[pc.key][G.intensity]) pool=catData[pc.key][G.intensity];
-  else{showEmptyCard();return;}
-  if(!pool||!pool.length){showEmptyCard();return;}
-  const text=pickFrom(pool,[G.currentCard]);
-  G.currentCard=text; addRecent(text);
-  const isCNC=G.intensity==='cnc';
-  showCard(text,'VOORSPEL',G.intensity,isCNC);
-}
-
-function drawHoofdspelCard(){
-  const pc=currentPC();
-  const hd=DATA[G.rol].hoofdspel;
-  let pool, isCNC=false;
-  if(G.rol==='dm'&&G.hoofdspelCnc){
-    pool=hd.cnc&&hd.cnc[pc.key]?hd.cnc[pc.key]:[];
-    isCNC=true;
+function getCard(){
+  if(category==='voorspel'){
+    const pool=pools.voorspel[player];
+    const source=DATA.voorspel[player];
+    return{text:drawFromPool(pool,source),tag:'Voorspel',tagClass:'qt-normal',cardClass:player==='Daddy'?'daddy-card':'meisje-card'};
   } else {
-    pool=hd[pc.key]||[];
-  }
-  if(!pool.length){showEmptyCard();return;}
-  const text=pickFrom(pool,[G.currentCard]);
-  G.currentCard=text; addRecent(text);
-  showCard(text,'HOOFDSPEL',isCNC?'cnc':'spicy',isCNC);
-}
-
-function drawVraag(){
-  if(!G.vraagRol){ alert('Kies eerst voor wie de vraag is.'); return; }
-  const pool=DATA[G.rol].vragen[G.vraagRol];
-  if(!pool||!pool.length){showEmptyCard();return;}
-  const text=pickFrom(pool,[G.currentCard]);
-  G.currentCard=text; addRecent(text);
-  showCard(text,'VRAAG','vraag',false);
-}
-
-function drawSimple(tab){
-  const pool=DATA[G.rol][tab]||[];
-  if(!pool.length){showEmptyCard();return;}
-  const text=pickFrom(pool,[G.currentCard]);
-  G.currentCard=text; addRecent(text);
-  const isGold=tab==='buiten';
-  const labels={video:'VIDEO',buiten:'AVONTUUR'};
-  showCard(text,labels[tab]||tab.toUpperCase(),'special',isGold);
-}
-
-function drawClimaxCard(){
-  const pc=currentPC();
-  const climax=DATA[G.rol].climax;
-  const pool=climax[pc.key]||[];
-  if(!pool.length){showEmptyCard();return;}
-  const text=pickFrom(pool,[G.currentCard]);
-  G.currentCard=text; addRecent(text);
-  showCard(text,'CLIMAX','climax',true);
-}
-
-function showEmptyCard(){
-  const d=document.getElementById('card-display');
-  if(d) d.innerHTML=`<p class="italic" style="text-align:center;color:var(--cream-d);padding:1rem">Geen opdrachten beschikbaar voor deze selectie.</p>`;
-}
-
-function showCard(text,labelTop,intensity,isGold){
-  G.judged=false;
-  // Verberg de trek-knop zodra een kaart getoond wordt
-  const drawBtn=document.getElementById('draw-btn');
-  if(drawBtn) drawBtn.style.display='none';
-  const tagMap={
-    'mild':'<span class="q-tag qt-mild">MILD</span>',
-    'spicy':'<span class="q-tag qt-spicy">SPICY 🌶</span>',
-    'cnc':'<span class="q-tag qt-cnc">✦ CNC ✦</span>',
-    'vraag':'<span class="q-tag qt-vraag">VRAAG</span>',
-    'climax':'<span class="q-tag qt-cnc">⚡ CLIMAX ⚡</span>',
-    'special':'<span class="q-tag qt-fase">✦</span>'
-  };
-  const tag=tagMap[intensity]||'';
-  const typeTag=`<span class="q-tag qt-opdracht">${labelTop}</span>`;
-  const d=document.getElementById('card-display');
-  // Zinnen alleen voor Femme, alleen bij opdrachten (niet bij vragen)
-  const rc=ROL[G.rol];
-  const pc=currentPC();
-  let zinnenHtml='';
-  const isVraag=(labelTop==='VRAAG'||G.tab==='vragen');
-  if(G.rol==='fs'&&pc.key==='Femme'&&!isVraag){
-    zinnenHtml=renderZinnenRandom('fs','Femme');
-  }
-
-  // Veto buttons — alleen bij opdrachten, niet bij vragen
-  const p1=rc.p1, p2=rc.p2;
-  const showVeto=!(labelTop==='VRAAG'||G.tab==='vragen');
-  const vetoHtml=showVeto?`<div class="veto-row">
-    <button class="btn-veto${G.vetoP1?'':' used'}" id="veto-p1" onclick="useVeto(0)" ${G.vetoP1?'':'disabled'}>
-      🚫 Veto ${p1.name}
-    </button>
-    <button class="btn-veto${G.vetoP2?'':' used'}" id="veto-p2" onclick="useVeto(1)" ${G.vetoP2?'':'disabled'}>
-      🚫 Veto ${p2.name}
-    </button>
-  </div>`:'';
-
-  // Kaartkleur per speler
-  const playerCardClass='card-'+pc.key.toLowerCase();
-  d.innerHTML=`
-    <div class="q-card${isGold?' gold-card':''} ${playerCardClass}" id="active-card">
-      <div class="q-tags">${typeTag}${tag}</div>
-      <div class="q-text">${text}</div>
-      ${zinnenHtml}
-    </div>
-    <div style="margin-top:.7rem">
-      <button class="btn btn-reroll" onclick="rerollCurrent()">↺ &nbsp;Andere kaart</button>
-    </div>
-    ${vetoHtml}
-    <div id="judge-sec" style="margin-top:.7rem">
-      <button class="btn btn-ok" onclick="judge(true)">✓ &nbsp;GESLAAGD &nbsp;+1</button>
-      <button class="btn btn-fail" onclick="judge(false)">✗ &nbsp;NIET GESLAAGD &nbsp;−1</button>
-    </div>`;
-}
-
-function rerollCurrent(){
-  const tab=G.tab;
-  if(tab==='video'||tab==='buiten') drawSimple(tab);
-  else if(tab==='vragen') drawVraag();
-  else if(tab==='climax') drawClimaxCard();
-  else if(tab==='hoofdspel') drawHoofdspelCard();
-  else drawOpdracht();
-}
-
-// ══════════════════════════════════════════
-// JUDGE
-// ══════════════════════════════════════════
-function judge(ok){
-  if(G.judged) return;
-  G.judged=true;
-  G.scores[G.current]+=ok?1:-1;
-  burstParticles(ok);
-  const fl=document.getElementById('score-flash');
-  fl.textContent=ok?'+1':'−1';
-  fl.className=ok?'pos show':'neg show';
-  document.querySelectorAll('#judge-sec .btn').forEach(b=>b.disabled=true);
-
-
-  setTimeout(()=>{ fl.className=fl.className.replace('show','hide'); },700);
-  setTimeout(()=>{
-    fl.className='';
-    G.current=1-G.current;
-    G.judged=false;
-    G.currentCard='';
-    renderTurnBadge();
-    const cd=document.getElementById('card-display');
-    if(cd) cd.innerHTML='';
-  },1300);
-}
-
-// ══════════════════════════════════════════
-// CLIMAX FLOW
-// ══════════════════════════════════════════
-function showClimaxChoice(){
-  const rc=ROL[G.rol];
-  const [s0,s1]=G.scores;
-  const isDraw=s0===s1;
-  const wi=s0>s1?0:1;
-  const wpc=wi===0?rc.p1:rc.p2;
-  const wLbl=document.getElementById('cc-winner-lbl');
-  const wName=document.getElementById('cc-winner-name');
-  const sub=document.getElementById('cc-sub');
-  if(isDraw){
-    wLbl.textContent='GELIJKSPEL';
-    wName.textContent=`${rc.p1.name} ♦ ${rc.p2.name}`;
-    wName.className='climax-winner-name draw';
-    sub.textContent='Jullie staan quitte — overleg samen welke heerlijke optie jullie kiezen om vanavond mee te eindigen.';
-  } else {
-    wLbl.textContent='WINNAAR';
-    wName.textContent=wpc.name;
-    wName.className=`climax-winner-name ${wpc.cls}`;
-    sub.textContent=`Kies jouw beloning, ${wpc.name}. Dit heb je verdiend.`;
-  }
-  let opts;
-  const c=DATA[G.rol].climax;
-  if(isDraw){
-    const pm=[...c[rc.p1.key]].sort(()=>Math.random()-.5);
-    const pf=[...c[rc.p2.key]].sort(()=>Math.random()-.5);
-    opts=[pm[0],pf[0],pm[1]||pf[1]||pm[0]];
-  } else {
-    const g=wi===0?rc.p1.key:rc.p2.key;
-    opts=[...(c[g]||[])].sort(()=>Math.random()-.5).slice(0,3);
-  }
-  while(opts.length<3) opts.push(opts[0]);
-  window._cx={opts,isDraw,wName:isDraw?`${rc.p1.name} ♦ ${rc.p2.name}`:wpc.name,wCls:isDraw?'draw':wpc.cls};
-  const container=document.getElementById('cc-cards');
-  container.innerHTML=opts.map((_,i)=>`
-    <div class="climax-option" onclick="chooseClimaxByIdx(${i})">
-      <div class="climax-option-num">Optie ${i+1}</div>
-      <div class="climax-option-body">${opts[i]}</div>
-    </div>`).join('');
-  launchConfetti();
-  showScreen('screen-climax-choice');
-}
-
-function chooseClimaxByIdx(idx){
-  const {opts,isDraw,wName,wCls}=window._cx;
-  const text=opts[idx];
-  document.getElementById('cr-winner-lbl').textContent=isDraw?'GELIJKSPEL':'WINNAAR';
-  const crName=document.getElementById('cr-winner-name');
-  crName.textContent=wName;
-  crName.className=`climax-reveal-wname ${wCls}`;
-  document.getElementById('cr-text').textContent=text;
-  launchConfetti();
-  showScreen('screen-climax-reveal');
-}
-
-// ══════════════════════════════════════════
-// FOOTER
-// ══════════════════════════════════════════
-function updateFooter(){
-  if(!G.rol) return;
-  const pc=currentPC();
-  const rules=G.current===0?G.assignedRules.p1:G.assignedRules.p2;
-  const lbl=document.getElementById('footer-label');
-  lbl.textContent=`♦ ${pc.name}'s regels`;
-  lbl.className=`footer-player-label ${pc.cls}`;
-  document.getElementById('footer-compact').innerHTML=rules.map(r=>`<div class="footer-compact-rule">${r.text.length>65?r.text.slice(0,62)+'…':r.text}</div>`).join('');
-  document.getElementById('footer-full').innerHTML=rules.map(r=>`<div class="footer-full-rule">${r.text}</div>`).join('');
-}
-function toggleFooter(){
-  const f=document.getElementById('rules-footer');
-  const c=document.getElementById('footer-compact');
-  const fl=document.querySelector('.footer-full-rules');
-  if(f.classList.contains('open')){ f.classList.remove('open'); setTimeout(()=>{ fl.style.display='none'; c.style.display=''; },150); }
-  else{ c.style.display='none'; fl.style.display=''; requestAnimationFrame(()=>f.classList.add('open')); }
-}
-
-// ══════════════════════════════════════════
-// CLIMAX HOLD BTN
-// ══════════════════════════════════════════
-function goHome(){
-  showScreen('screen-setup');
-  const rb=document.getElementById('sidebar-regels-btn');
-  if(rb) rb.style.display='none';
-}
-
-function setupClimaxBtn(btnId,ringId){
-  const btn=document.getElementById(btnId);
-  const ring=document.getElementById(ringId);
-  let timer=null,start=null,raf=null;
-  function begin(e){ e.preventDefault(); start=Date.now(); timer=setTimeout(()=>{ cancel(); showClimaxChoice(); },800); raf=requestAnimationFrame(function tick(){ if(!start)return; const p=Math.min((Date.now()-start)/800,1); ring.setAttribute('stroke-dasharray',`${p*CIRC} ${CIRC}`); if(p<1) raf=requestAnimationFrame(tick); }); }
-  function cancel(){ clearTimeout(timer);timer=null;cancelAnimationFrame(raf);raf=null;start=null;ring.setAttribute('stroke-dasharray',`0 ${CIRC}`); }
-  btn.addEventListener('mousedown',begin);btn.addEventListener('touchstart',begin,{passive:false});
-  btn.addEventListener('mouseup',cancel);btn.addEventListener('mouseleave',cancel);
-  btn.addEventListener('touchend',cancel);btn.addEventListener('touchcancel',cancel);
-}
-setupClimaxBtn('climax-btn-game','ring-game');
-
-// ══════════════════════════════════════════
-// PARTICLES
-// ══════════════════════════════════════════
-function launchConfetti(){
-  const cols=['#c9a84c','#e2c16a','#8b1a2b','#c41e3a','#f0e6d3','#9b6fd6','#7eb4e0','#e07eb4'];
-  for(let i=0;i<52;i++) setTimeout(()=>{
-    const el=document.createElement('div'); el.className='conf';
-    const sz=5+Math.random()*9;
-    el.style.cssText=`left:${Math.random()*100}vw;top:-14px;width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.45?'50%':'2px'};animation-duration:${1.4+Math.random()*2.8}s;`;
-    document.body.appendChild(el); setTimeout(()=>el.remove(),4600);
-  },i*48);
-}
-function burstParticles(ok){
-  const cols=ok?['#80e080','#50d050','#c0ffc0','#fff']:['#e08080','#d05050','#ffc0c0','#fff'];
-  for(let i=0;i<24;i++){
-    const el=document.createElement('div');
-    const a=(i/24)*Math.PI*2+Math.random()*.4,d=55+Math.random()*115,s=4+Math.random()*7;
-    el.style.cssText=`position:fixed;left:50vw;top:50vh;width:${s}px;height:${s}px;border-radius:50%;background:${cols[Math.floor(Math.random()*cols.length)]};pointer-events:none;z-index:200;transform:translate(-50%,-50%);transition:transform .55s cubic-bezier(.2,1,.3,1),opacity .55s ease-out;opacity:1;`;
-    document.body.appendChild(el);
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{ el.style.transform=`translate(calc(-50% + ${Math.cos(a)*d}px),calc(-50% + ${Math.sin(a)*d}px)) scale(0)`; el.style.opacity='0'; }));
-    setTimeout(()=>el.remove(),660);
+    if(player==='Daddy'){
+      if(Math.random()<.25){
+        return{text:drawFromPool(pools.hoofdspel.Daddy.cnc,DATA.hoofdspel.Daddy.cnc),tag:'CNC',tagClass:'qt-cnc',cardClass:'cnc-card'};
+      }
+      return{text:drawFromPool(pools.hoofdspel.Daddy.normal,DATA.hoofdspel.Daddy.normal),tag:'Hoofdspel',tagClass:'qt-normal',cardClass:'daddy-card'};
+    } else {
+      if(Math.random()<.25){
+        return{text:drawFromPool(pools.hoofdspel.Meisje.femme,DATA.hoofdspel.Meisje.femme),tag:'Femme',tagClass:'qt-femme',cardClass:'femme-card'};
+      }
+      return{text:drawFromPool(pools.hoofdspel.Meisje.normal,DATA.hoofdspel.Meisje.normal),tag:'Hoofdspel',tagClass:'qt-normal',cardClass:'meisje-card'};
+    }
   }
 }
 
-// ══════════════════════════════════════════
-// AMBIENT PARTICLES
-// ══════════════════════════════════════════
-(function(){
-  const pal=['rgba(201,168,76,','rgba(168,20,46,','rgba(155,111,214,','rgba(240,230,211,'];
-  for(let i=0;i<22;i++){
-    const el=document.createElement('div'),sz=2+Math.random()*5,col=pal[Math.floor(Math.random()*pal.length)],op=.08+Math.random()*.18,dur=10+Math.random()*15;
-    el.className='amb';
-    el.style.cssText=`width:${sz}px;height:${sz}px;background:${col}${op});left:${Math.random()*100}vw;bottom:-20px;--drift:${(Math.random()-.5)*85}px;animation-duration:${dur}s;animation-delay:${-(Math.random()*dur)}s;`;
-    document.body.appendChild(el);
-  }
-})();
+function drawCard(){
+  const c=getCard();
+  const card=document.getElementById('gameCard');
+  card.className='q-card '+c.cardClass;
+  card.style.animation='none';void card.offsetWidth;card.style.animation='';
+  document.getElementById('cardText').textContent=c.text;
+  const tag=document.getElementById('cardTag');
+  tag.textContent=c.tag;tag.className='q-tag '+c.tagClass;
+}
 
-// ══════════════════════════════════════════
-// WAKE LOCK
-// ══════════════════════════════════════════
-let wl=null;
-async function reqWL(){ try{ if('wakeLock' in navigator) wl=await navigator.wakeLock.request('screen'); }catch{} }
-document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') reqWL(); });
-reqWL();
+function skipCard(){drawCard()}
 
-// ══════════════════════════════════════════
-// LOAD GAME DATA ON START
-// ══════════════════════════════════════════
-loadGameData();
+function doneCard(){
+  player=player==='Daddy'?'Meisje':'Daddy';
+  updateTurn();drawCard();
+}
+
+function showRulesOverlay(){document.getElementById('rulesOverlay').classList.add('open')}
+function hideRulesOverlay(){document.getElementById('rulesOverlay').classList.remove('open')}
 </script>
 </body>
 </html>

@@ -14,165 +14,215 @@
   --crimson:#6b0f1e;--crimson2:#a8142e;--crimson3:#d41a3c;
   --gold:#c9a84c;--gold-l:#e2c16a;--gold-d:#7a6220;
   --cream:#f0e6d3;--cream-d:#8a7a6a;--white:#fff8f2;
-  --daddy:#7eb4e0;--meisje:#e07eb4;
-  --r:12px;--r-lg:20px;--touch:52px;
-  --sidebar-w:90px;
+  --daddy:#7eb4e0;--meisje:#e07eb4;--femme:#c080e0;--cnc:#e2c16a;
+  --r:14px;--r-lg:22px;--touch:54px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(16px,4vw,18px);-webkit-font-smoothing:antialiased}
-body::before{content:'';position:fixed;inset:0;background:
-  radial-gradient(ellipse 90% 60% at 10% 90%,rgba(107,15,30,.35) 0%,transparent 55%),
-  radial-gradient(ellipse 70% 50% at 90% 10%,rgba(100,20,160,.18) 0%,transparent 55%),
-  radial-gradient(ellipse 50% 40% at 50% 50%,rgba(168,20,46,.06) 0%,transparent 60%);
-  pointer-events:none;z-index:0;animation:bgBreathe 9s ease-in-out infinite}
-@keyframes bgBreathe{0%,100%{opacity:.7}50%{opacity:1}}
 
+/* VIGNETTE */
+body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 35%,rgba(0,0,0,.6) 100%);pointer-events:none;z-index:0}
+
+/* BG */
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(ellipse 90% 60% at 10% 90%,rgba(107,15,30,.45) 0%,transparent 55%),
+  radial-gradient(ellipse 70% 50% at 90% 10%,rgba(100,20,160,.25) 0%,transparent 55%),
+  radial-gradient(ellipse 50% 40% at 50% 50%,rgba(168,20,46,.1) 0%,transparent 60%);
+  pointer-events:none;z-index:0;animation:bgBreathe 12s ease-in-out infinite}
+@keyframes bgBreathe{0%,100%{opacity:.75}50%{opacity:1}}
+
+/* PARTICLES */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.particle{position:absolute;pointer-events:none;animation:particleFly linear infinite}
+@keyframes particleFly{
+  0%{transform:translateY(110vh) rotate(0deg) scale(0);opacity:0}
+  5%{opacity:1;transform:translateY(100vh) rotate(20deg) scale(1)}
+  90%{opacity:.7}100%{transform:translateY(-15vh) rotate(540deg) scale(.5);opacity:0}
+}
+
+/* SCREENS */
 .screen{display:none;position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
-.screen.active{display:flex;flex-direction:column;animation:screenIn .3s ease forwards}
-@keyframes screenIn{from{opacity:0}to{opacity:1}}
-.screen-inner{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1.4rem 2rem;min-height:100%}
-.screen-inner.top{justify-content:flex-start;padding-top:max(4rem,calc(env(safe-area-inset-top)+3rem))}
+.screen.active{display:flex;flex-direction:column;animation:screenIn .45s ease forwards}
+@keyframes screenIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.screen-inner{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1.4rem 2rem;min-height:100%}
+.screen-inner.top{justify-content:flex-start;padding-top:max(5rem,calc(env(safe-area-inset-top)+4rem))}
 .screen-inner.game{justify-content:flex-start;align-items:stretch;padding:0;width:100%}
 
-h1{font-family:'Cinzel',serif;font-size:clamp(2rem,9vw,3.4rem);font-weight:900;background:linear-gradient(140deg,var(--gold-l) 0%,var(--gold) 45%,var(--crimson3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.1em;text-align:center;line-height:1.1}
-h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:600;color:var(--gold-l);letter-spacing:.07em;text-align:center}
-.lbl{font-family:'Cinzel',serif;font-size:clamp(.52rem,1.9vw,.62rem);letter-spacing:.2em;text-transform:uppercase;color:var(--cream-d)}
-.italic{font-style:italic;font-size:clamp(.88rem,3.5vw,1rem);color:var(--cream-d);text-align:center;line-height:1.65}
-.div{width:100%;max-width:300px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d) 25%,var(--crimson2) 50%,rgba(100,20,160,.5) 75%,transparent);margin:.8rem auto;opacity:.5}
-.sx{height:.4rem}.sm{height:.9rem}.smd{height:1.4rem}.slg{height:2rem}
+/* CORNERS */
+.corner{position:fixed;width:18px;height:18px;border-color:rgba(201,168,76,.2);border-style:solid;z-index:3}
+.corner-tl{top:1rem;left:1rem;border-width:1px 0 0 1px;border-radius:4px 0 0 0}
+.corner-tr{top:1rem;right:1rem;border-width:1px 1px 0 0;border-radius:0 4px 0 0}
+.corner-bl{bottom:1rem;left:1rem;border-width:0 0 1px 1px;border-radius:0 0 0 4px}
+.corner-br{bottom:1rem;right:1rem;border-width:0 1px 1px 0;border-radius:0 0 4px 0}
 
+/* TYPE */
+h1{font-family:'Cinzel',serif;font-size:clamp(2.2rem,10vw,3.8rem);font-weight:900;
+  background:linear-gradient(140deg,var(--gold-l) 0%,var(--gold) 40%,var(--crimson3) 70%,var(--gold-l) 100%);
+  background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:.1em;text-align:center;line-height:1.1;animation:titleShimmer 4s linear infinite}
+@keyframes titleShimmer{0%{background-position:0% center}100%{background-position:200% center}}
+h2{font-family:'Cinzel',serif;font-size:clamp(.9rem,3.5vw,1.15rem);font-weight:600;color:var(--gold-l);letter-spacing:.07em;text-align:center}
+.lbl{font-family:'Cinzel',serif;font-size:clamp(.5rem,1.8vw,.6rem);letter-spacing:.2em;text-transform:uppercase;color:var(--cream-d)}
+.italic{font-style:italic;font-size:clamp(.9rem,3.5vw,1.05rem);color:var(--cream-d);text-align:center;line-height:1.7}
+.div{width:100%;max-width:300px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d) 25%,var(--crimson2) 50%,rgba(100,20,160,.5) 75%,transparent);margin:.8rem auto;opacity:.6}
+.sm{height:.9rem}.smd{height:1.4rem}.slg{height:2rem}
+
+/* ANIM */
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fadeUp .4s ease forwards}
 .fu-1{animation:fadeUp .4s .1s ease both}
 .fu-2{animation:fadeUp .4s .2s ease both}
 .fu-3{animation:fadeUp .4s .3s ease both}
-@keyframes cardIn{from{opacity:0;transform:scale(.87) translateY(24px)}to{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes cardPulse{
-  0%,100%{box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(168,20,46,.15)}
-  50%{box-shadow:0 12px 64px rgba(0,0,0,.8),0 0 60px rgba(168,20,46,.2),0 0 0 1px rgba(201,168,76,.25)}
+@keyframes neonPulse{0%,100%{opacity:.65}50%{opacity:1}}
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 8px rgba(201,168,76,.3))}
+  50%{transform:translateY(-10px) scale(1.08);filter:drop-shadow(0 0 24px rgba(201,168,76,.7))}
 }
-@keyframes neonPulse{0%,100%{opacity:.6}50%{opacity:1}}
-@keyframes logoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.05)}}
 @keyframes heartbeat{
   0%,20%{box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3);transform:scale(1)}
-  22%{box-shadow:0 6px 50px rgba(212,26,60,.8),0 0 30px rgba(212,26,60,.4),0 0 0 1px rgba(212,26,60,.6);transform:scale(1.03)}
-  30%{transform:scale(1)}
-  38%{box-shadow:0 5px 35px rgba(107,15,30,.6),0 0 20px rgba(168,20,46,.3);transform:scale(1.015)}
+  22%{box-shadow:0 6px 50px rgba(212,26,60,.9),0 0 40px rgba(212,26,60,.5);transform:scale(1.04)}
+  30%{transform:scale(1)}38%{transform:scale(1.02)}
   50%,100%{box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3);transform:scale(1)}
 }
-@keyframes watermarkPulse{
-  0%,100%{opacity:0.06;transform:scale(1)}
-  20%{opacity:0.10;transform:scale(1.03)}
-  25%{opacity:0.07;transform:scale(1.01)}
-  38%{opacity:0.09;transform:scale(1.025)}
-  55%,100%{opacity:0.06;transform:scale(1)}
-}
+@keyframes watermarkBreath{0%,100%{opacity:.14;transform:scale(1)}50%{opacity:.25;transform:scale(1.04)}}
+@keyframes watermark2Breath{0%,100%{opacity:.06;transform:scale(1) rotate(-15deg)}50%{opacity:.12;transform:scale(1.03) rotate(-15deg)}}
+@keyframes cardShimmer{0%{left:-100%}100%{left:200%}}
+@keyframes badgeReveal{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
 
-.logo-icon{font-size:2.8rem;display:block;text-align:center;animation:logoFloat 4.5s ease-in-out infinite}
+/* LOGO */
+.logo-icon{font-size:3.5rem;display:block;text-align:center;animation:logoFloat 4s ease-in-out infinite}
 
-.btn{display:block;width:100%;max-width:360px;margin-left:auto;margin-right:auto;min-height:var(--touch);padding:.9rem 1.8rem;border:none;border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.72rem,2.8vw,.82rem);font-weight:600;letter-spacing:.12em;text-align:center;cursor:pointer;user-select:none;transition:transform .15s,opacity .15s;-webkit-user-select:none}
+/* BUTTONS */
+.btn{display:block;width:100%;max-width:380px;margin-left:auto;margin-right:auto;
+  min-height:var(--touch);padding:1rem 2rem;border:none;border-radius:var(--r);
+  font-family:'Cinzel',serif;font-size:clamp(.75rem,3vw,.88rem);font-weight:600;letter-spacing:.12em;
+  text-align:center;cursor:pointer;user-select:none;position:relative;overflow:hidden;
+  transition:transform .15s,box-shadow .2s;-webkit-user-select:none}
 .btn:active{transform:scale(.96)}
-.btn+.btn{margin-top:.7rem}
-.btn-primary{background:linear-gradient(135deg,var(--crimson),var(--crimson3));color:var(--white);border:1px solid rgba(212,26,60,.4);box-shadow:0 4px 24px rgba(107,15,30,.5),0 0 0 1px rgba(168,20,46,.3);animation:heartbeat 2.8s 1.5s ease-in-out infinite}
-.btn-gold{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#180e00;border:1px solid rgba(201,168,76,.4);box-shadow:0 4px 20px rgba(201,168,76,.3)}
+.btn+.btn{margin-top:.8rem}
+.btn-primary{background:linear-gradient(135deg,var(--crimson),var(--crimson3));color:var(--white);
+  border:1px solid rgba(212,26,60,.4);box-shadow:0 4px 24px rgba(107,15,30,.5);
+  animation:heartbeat 2.8s 1.5s ease-in-out infinite}
+.btn-gold{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#180e00;
+  border:1px solid rgba(201,168,76,.4);box-shadow:0 4px 20px rgba(201,168,76,.3)}
 
-/* ── SIDEBAR ── */
-.cat-nav{position:fixed;left:0;right:0;bottom:0;height:68px;background:rgba(5,2,10,.96);border-top:1px solid rgba(168,20,46,.2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:40;display:none;align-items:stretch;padding-bottom:env(safe-area-inset-bottom)}
-.cat-nav.visible{display:flex}
-.cat-nav-inner{display:flex;align-items:stretch;gap:0;flex:1;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;justify-content:center;min-width:0}
-.cat-nav-inner::-webkit-scrollbar{display:none}
-.cat-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 .9rem;min-width:60px;cursor:pointer;user-select:none;-webkit-user-select:none;border-top:2px solid transparent;transition:all .2s;gap:2px;flex-shrink:0}
-.cat-tab.active{border-top-color:var(--crimson3)}
-.cat-tab.active .cat-tab-icon{filter:drop-shadow(0 0 6px var(--crimson3))}
-.cat-tab.active .cat-tab-lbl{color:var(--cream)}
-.cat-tab-icon{font-size:1.2rem;line-height:1}
-.cat-tab-lbl{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d);white-space:nowrap}
-.topbar-side{display:flex;align-items:stretch;justify-content:center;flex-shrink:0}
-.topbar-side+.topbar-side{border-left:1px solid rgba(255,255,255,.06)}
-.topbar-stop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;-webkit-user-select:none;user-select:none;padding:0 .9rem;min-width:60px;height:100%;transition:all .2s}
-.topbar-stop:active{background:rgba(255,255,255,.04)}
-.topbar-stop-icon{font-size:1rem;line-height:1;color:var(--cream-d)}
-.topbar-stop-lbl{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d)}
+/* TOP NAV */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:40;
+  background:rgba(5,2,10,.92);border-bottom:1px solid rgba(168,20,46,.2);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  display:none;align-items:center;justify-content:space-between;
+  padding:0 1rem;padding-top:env(safe-area-inset-top);height:calc(60px + env(safe-area-inset-top))}
+.top-nav.visible{display:flex}
+.top-nav-brand{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;color:var(--gold-d);text-transform:uppercase}
+.top-nav-center{display:flex;align-items:center;gap:.3rem}
+.nav-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  padding:.5rem .9rem;min-width:72px;cursor:pointer;user-select:none;-webkit-user-select:none;
+  border-radius:var(--r);border:1px solid transparent;transition:all .25s}
+.nav-tab.active{background:rgba(212,26,60,.12);border-color:rgba(212,26,60,.3)}
+.nav-tab.active .nav-tab-icon{filter:drop-shadow(0 0 8px var(--crimson3))}
+.nav-tab.active .nav-tab-lbl{color:var(--cream)}
+.nav-tab-icon{font-size:1.3rem;line-height:1;transition:filter .25s}
+.nav-tab-lbl{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d);white-space:nowrap;transition:color .25s}
+.top-nav-actions{display:flex;align-items:center;gap:.2rem}
+.nav-action{display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:.4rem .6rem;cursor:pointer;-webkit-user-select:none;user-select:none;
+  border-radius:var(--r);border:1px solid transparent;transition:all .2s;min-width:44px}
+.nav-action:active{background:rgba(255,255,255,.05)}
+.nav-action-icon{font-size:.9rem;color:var(--cream-d)}
+.nav-action-lbl{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-d)}
 
-@media(min-width:760px){
-  .cat-nav{top:0;bottom:0;left:0;right:auto;width:var(--sidebar-w);height:100%;flex-direction:column;border-top:none;border-right:1px solid rgba(168,20,46,.2);padding-bottom:0;padding-top:env(safe-area-inset-top)}
-  .cat-nav-inner{flex-direction:column;overflow-x:hidden;overflow-y:auto;justify-content:flex-start;padding-top:.5rem}
-  .cat-tab{min-width:0;width:100%;padding:.85rem .5rem;border-top:none;border-left:2px solid transparent}
-  .cat-tab.active{border-left-color:var(--crimson3);border-top-color:transparent}
-  .cat-tab-icon{font-size:1.4rem}
-  .cat-tab-lbl{font-size:.42rem}
-  .topbar-side{flex-direction:column;width:100%;margin-top:auto}
-  .topbar-side+.topbar-side{border-left:none;border-top:1px solid rgba(255,255,255,.06)}
-  .topbar-stop{width:100%;min-width:0;padding:.85rem .5rem}
-  .screen-inner.game{padding-left:var(--sidebar-w)}
-}
+/* GAME */
+.game-scroll{overflow-y:auto;flex:1;position:relative;z-index:1;
+  padding-top:calc(60px + env(safe-area-inset-top))}
+.game-content{padding:1.5rem 1.2rem 4rem;width:100%;max-width:600px;margin:0 auto}
 
-/* ── GAME LAYOUT ── */
-.turn-bar{display:flex;align-items:center;justify-content:center;gap:1rem;padding:.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(5,2,10,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);position:sticky;top:0;z-index:30}
-.turn-badge{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem 1.1rem;border-radius:20px;border:1px solid;animation:neonPulse 2s ease-in-out infinite;font-weight:600}
-.turn-badge.daddy{color:var(--daddy);border-color:rgba(126,180,224,.3);background:rgba(126,180,224,.06);box-shadow:0 0 12px rgba(126,180,224,.2)}
-.turn-badge.meisje{color:var(--meisje);border-color:rgba(224,126,180,.3);background:rgba(224,126,180,.06);box-shadow:0 0 12px rgba(224,126,180,.2)}
-
-.game-content{padding:1.2rem 1.5rem 6rem;width:100%}
-@media(min-width:760px){
-  .game-content{padding:2rem 3rem 3rem;max-width:700px;margin:0 auto}
-}
-
-/* ── KAART ── */
+/* KAART */
 .q-card{
-  width:100%;background:var(--surface);border-radius:var(--r-lg);
-  padding:clamp(1.6rem,5vw,2.2rem) clamp(1.4rem,4vw,2rem);
-  text-align:center;border:2px solid rgba(168,20,46,.2);
-  box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 0 1px rgba(168,20,46,.12);
-  animation:cardIn .42s cubic-bezier(.34,1.56,.64,1) forwards,cardPulse 3.5s .5s ease-in-out infinite;
-  position:relative;overflow:hidden;
+  width:100%;min-height:65vh;
+  background:linear-gradient(160deg,rgba(15,6,24,.97) 0%,rgba(23,8,42,.99) 100%);
+  border-radius:var(--r-lg);
+  padding:clamp(1.8rem,6vw,2.5rem) clamp(1.5rem,5vw,2.2rem);
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  text-align:center;position:relative;overflow:hidden;
+  border:1.5px solid rgba(168,20,46,.25);
+  box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 0 1px rgba(168,20,46,.08),inset 0 1px 0 rgba(255,255,255,.05);
+  transition:border-color .4s,box-shadow .4s;
 }
-.q-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d) 25%,var(--crimson2) 50%,rgba(100,20,160,.4) 75%,transparent)}
+.q-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-d) 25%,var(--crimson2) 50%,rgba(100,20,160,.4) 75%,transparent)}
+.q-card::after{content:'';position:absolute;top:0;width:40%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.035),transparent);
+  animation:cardShimmer 7s ease-in-out infinite;pointer-events:none}
 
-.q-card.daddy-card{border-color:rgba(126,180,224,.5);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 40px rgba(126,180,224,.08)}
+.q-card.daddy-card{border-color:rgba(126,180,224,.45);box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 70px rgba(126,180,224,.1)}
 .q-card.daddy-card::before{background:linear-gradient(90deg,transparent,var(--daddy) 30%,#a8d4f0 50%,var(--daddy) 70%,transparent)}
-.q-card.meisje-card{border-color:rgba(224,126,180,.5);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 40px rgba(224,126,180,.08)}
+.q-card.meisje-card{border-color:rgba(224,126,180,.45);box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 70px rgba(224,126,180,.1)}
 .q-card.meisje-card::before{background:linear-gradient(90deg,transparent,var(--meisje) 30%,#f0a8d0 50%,var(--meisje) 70%,transparent)}
-.q-card.cnc-card{border-color:rgba(212,26,60,.6);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 40px rgba(212,26,60,.1)}
+.q-card.cnc-card{border-color:rgba(212,26,60,.55);box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 80px rgba(212,26,60,.15)}
 .q-card.cnc-card::before{background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-l) 50%,var(--gold) 70%,transparent)}
-.q-card.femme-card{border-color:rgba(160,80,200,.6);box-shadow:0 8px 48px rgba(0,0,0,.7),0 0 40px rgba(160,80,200,.1)}
-.q-card.femme-card::before{background:linear-gradient(90deg,transparent,#c080e0 30%,#d8a0f0 50%,#c080e0 70%,transparent)}
+.q-card.femme-card{border-color:rgba(160,80,200,.55);box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 80px rgba(160,80,200,.12)}
+.q-card.femme-card::before{background:linear-gradient(90deg,transparent,var(--femme) 30%,#d8a0f0 50%,var(--femme) 70%,transparent)}
 
-.q-tag-row{display:flex;gap:.35rem;justify-content:center;margin-bottom:.9rem;flex-wrap:wrap}
-.q-tag{padding:.2rem .6rem;border-radius:20px;font-family:'Cinzel',serif;font-size:clamp(.44rem,1.7vw,.52rem);letter-spacing:.12em;text-transform:uppercase}
-.qt-normal{background:rgba(168,20,46,.12);color:#e05070;border:1px solid rgba(168,20,46,.3)}
-.qt-cnc{background:rgba(201,168,76,.1);color:var(--gold-l);border:1px solid rgba(201,168,76,.25);box-shadow:0 0 8px rgba(201,168,76,.15)}
-.qt-femme{background:rgba(160,80,200,.1);color:#c090e8;border:1px solid rgba(160,80,200,.25);box-shadow:0 0 8px rgba(160,80,200,.15)}
+/* CARD HEADER */
+.card-header{width:100%;display:flex;flex-direction:column;align-items:center;gap:.6rem;margin-bottom:1rem}
+.card-player-badge{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.45rem 1.4rem;border-radius:30px;border:1.5px solid;
+  font-family:'Cinzel',serif;font-size:clamp(.85rem,3.5vw,1.1rem);font-weight:600;letter-spacing:.15em;
+  animation:neonPulse 2s ease-in-out infinite;animation:badgeReveal .4s ease forwards;
+}
+.card-player-badge.daddy{color:var(--daddy);border-color:rgba(126,180,224,.4);background:rgba(126,180,224,.08);box-shadow:0 0 20px rgba(126,180,224,.2)}
+.card-player-badge.meisje{color:var(--meisje);border-color:rgba(224,126,180,.4);background:rgba(224,126,180,.08);box-shadow:0 0 20px rgba(224,126,180,.2)}
+.card-player-badge.cnc{color:var(--cnc);border-color:rgba(226,193,106,.4);background:rgba(226,193,106,.08);box-shadow:0 0 20px rgba(226,193,106,.2)}
+.card-player-badge.femme{color:var(--femme);border-color:rgba(192,128,224,.4);background:rgba(192,128,224,.08);box-shadow:0 0 20px rgba(192,128,224,.2)}
+.card-player-icon{font-size:1.1rem}
+.card-cat-tag{
+  font-family:'Cinzel',serif;font-size:clamp(.55rem,2.2vw,.68rem);letter-spacing:.2em;text-transform:uppercase;
+  padding:.25rem .9rem;border-radius:20px;border:1px solid rgba(255,255,255,.1);color:var(--cream-d);
+  background:rgba(255,255,255,.03)
+}
 
-.q-text{font-size:clamp(1.1rem,4vw,1.4rem);font-style:italic;color:var(--white);line-height:1.85;margin:.5rem 0 .8rem}
+/* CARD TEXT */
+.q-text{font-size:clamp(1.15rem,4.5vw,1.5rem);font-style:italic;color:var(--white);line-height:2;flex:1;display:flex;align-items:center;padding:1rem 0}
 
-.judge-row{display:flex;gap:.5rem;justify-content:center;margin-top:1.2rem}
-.btn-judge{flex:1;max-width:160px;min-height:var(--touch);padding:.75rem .5rem;background:var(--surface2);border:1.5px solid rgba(255,255,255,.06);border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.6rem,2.3vw,.7rem);font-weight:600;letter-spacing:.1em;color:var(--cream-d);text-align:center;cursor:pointer;user-select:none;transition:all .2s;-webkit-user-select:none}
-.btn-judge:active{transform:scale(.96)}
-.btn-judge.skip:hover{border-color:rgba(201,168,76,.4);color:var(--gold)}
-.btn-judge.done{background:linear-gradient(135deg,rgba(107,15,30,.6),rgba(168,20,46,.4));border-color:rgba(168,20,46,.5);color:#e05070;box-shadow:0 0 20px rgba(107,15,30,.3)}
-.btn-judge.done:hover{box-shadow:0 0 30px rgba(168,20,46,.4);border-color:rgba(212,26,60,.7);color:var(--white)}
+/* JUDGE ROW */
+.judge-row{display:flex;gap:.7rem;justify-content:center;width:100%;margin-top:1rem}
+.btn-judge{flex:1;max-width:170px;min-height:var(--touch);padding:.8rem .5rem;
+  background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-radius:var(--r);font-family:'Cinzel',serif;font-size:clamp(.62rem,2.5vw,.72rem);font-weight:600;
+  letter-spacing:.1em;color:var(--cream-d);text-align:center;cursor:pointer;user-select:none;
+  transition:all .22s;-webkit-user-select:none}
+.btn-judge:active{transform:scale(.95)}
+.btn-judge.skip:active{border-color:rgba(201,168,76,.5);color:var(--gold);background:rgba(201,168,76,.07)}
+.btn-judge.done{background:linear-gradient(135deg,rgba(107,15,30,.55),rgba(168,20,46,.4));
+  border-color:rgba(168,20,46,.5);color:#e05070;box-shadow:0 0 22px rgba(107,15,30,.22)}
+.btn-judge.done:active{box-shadow:0 0 40px rgba(168,20,46,.5);border-color:rgba(212,26,60,.8);color:var(--white)}
 
-/* ── RULES OVERLAY ── */
-.overlay{position:fixed;inset:0;background:rgba(5,2,10,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:1.5rem}
-.overlay.open{display:flex}
-.overlay-box{background:var(--surface);border:1px solid rgba(168,20,46,.25);border-radius:var(--r-lg);padding:2rem 1.6rem;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 60px rgba(107,15,30,.2)}
+.swipe-hint{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-d);text-align:center;margin-top:.8rem;opacity:.35}
+
+/* RULES */
+.overlay{position:fixed;inset:0;background:rgba(5,2,10,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.overlay.open{display:flex;animation:screenIn .3s ease forwards}
+.overlay-box{background:linear-gradient(145deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid rgba(168,20,46,.28);border-radius:var(--r-lg);padding:2rem 1.6rem;max-width:500px;width:100%;max-height:84vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.85),0 0 80px rgba(107,15,30,.25),inset 0 1px 0 rgba(255,255,255,.05)}
 .overlay-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d) 25%,var(--crimson2) 50%,rgba(100,20,160,.4) 75%,transparent)}
-.overlay-close{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--cream-d);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;transition:all .2s}
-.overlay-close:hover{border-color:var(--crimson3);color:var(--white)}
-
-.rule-block{margin-bottom:1.4rem}
-.rule-player{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
-.rule-player.daddy{color:var(--daddy)}
-.rule-player.meisje{color:var(--meisje)}
+.overlay-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--cream-d);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.overlay-close:hover{border-color:var(--crimson3);color:var(--white);background:rgba(212,26,60,.12)}
+.rule-block{margin-bottom:1.5rem}
+.rule-player{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.rule-player.daddy{color:var(--daddy)}.rule-player.meisje{color:var(--meisje)}
 .rule-player::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,currentColor,transparent);opacity:.2}
-.rule-item{font-style:italic;font-size:clamp(.85rem,3.3vw,1rem);color:var(--cream);line-height:1.65;padding:.6rem .8rem;background:rgba(255,255,255,.02);border-left:2px solid rgba(168,20,46,.3);border-radius:0 var(--r) var(--r) 0;margin-bottom:.6rem}
-.rule-item.random{color:var(--gold-l);border-left-color:rgba(201,168,76,.4)}
-.rule-sub{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-d);margin-bottom:.35rem;margin-top:.8rem}
+.rule-item{font-style:italic;font-size:clamp(.88rem,3.5vw,1.05rem);color:var(--cream);line-height:1.7;padding:.65rem .85rem;background:rgba(255,255,255,.025);border-left:2px solid rgba(168,20,46,.3);border-radius:0 var(--r) var(--r) 0;margin-bottom:.6rem}
+.rule-item.random{color:var(--gold-l);border-left-color:rgba(201,168,76,.4);background:rgba(201,168,76,.03)}
+.rule-sub{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-d);margin-bottom:.35rem;margin-top:.8rem}
 </style>
 </head>
 <body>
+
+<div id="particles"></div>
+<div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div><div class="corner corner-br"></div>
 
 <!-- WELCOME -->
 <div class="screen active" id="screenWelcome">
@@ -196,14 +246,14 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
     <div class="sm"></div>
     <div class="div fu-1"></div>
     <div class="smd"></div>
-    <div class="rule-block fu-2" style="width:100%;max-width:480px">
+    <div class="rule-block fu-2" style="width:100%;max-width:500px">
       <div class="rule-player daddy">♦ Daddy</div>
       <div class="rule-sub">Vaste regel</div>
       <div class="rule-item">Elke keer als Meisje een opdracht goed heeft uitgevoerd zonder aarzelen, zeg je dat ze een goed meisje is en aai je over haar hoofd.</div>
       <div class="rule-sub">Regel van vanavond</div>
       <div class="rule-item random" id="ruleDaddy">—</div>
     </div>
-    <div class="rule-block fu-3" style="width:100%;max-width:480px">
+    <div class="rule-block fu-3" style="width:100%;max-width:500px">
       <div class="rule-player meisje">♦ Meisje</div>
       <div class="rule-sub">Vaste regel</div>
       <div class="rule-item">Al het voorvocht van Daddy's pik moet worden opgelikt en opgezogen met enthousiasme en geluidjes. Zeg daarna: 'Dank je, Daddy.'</div>
@@ -218,44 +268,44 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
 
 <!-- GAME -->
 <div class="screen" id="screenGame">
-  <nav class="cat-nav visible" id="catNav">
-    <div class="cat-nav-inner">
-      <div class="cat-tab active" id="tabVoorspel" onclick="setCategory('voorspel')">
-        <span class="cat-tab-icon">❤️‍🔥</span>
-        <span class="cat-tab-lbl">Voorspel</span>
+  <nav class="top-nav visible" id="topNav">
+    <div class="top-nav-brand">D&amp;D</div>
+    <div class="top-nav-center">
+      <div class="nav-tab active" id="tabVoorspel" onclick="setCategory('voorspel')">
+        <span class="nav-tab-icon">❤️‍🔥</span>
+        <span class="nav-tab-lbl">Voorspel</span>
       </div>
-      <div class="cat-tab" id="tabHoofdspel" onclick="setCategory('hoofdspel')">
-        <span class="cat-tab-icon">🔥</span>
-        <span class="cat-tab-lbl">Hoofdspel</span>
-      </div>
-    </div>
-    <div class="topbar-side">
-      <div class="topbar-stop" onclick="showRulesOverlay()">
-        <span class="topbar-stop-icon">✦</span>
-        <span class="topbar-stop-lbl">Regels</span>
+      <div class="nav-tab" id="tabHoofdspel" onclick="setCategory('hoofdspel')">
+        <span class="nav-tab-icon">🔥</span>
+        <span class="nav-tab-lbl">Hoofdspel</span>
       </div>
     </div>
-    <div class="topbar-side">
-      <div class="topbar-stop" onclick="stopGame()">
-        <span class="topbar-stop-icon">✕</span>
-        <span class="topbar-stop-lbl">Stop</span>
+    <div class="top-nav-actions">
+      <div class="nav-action" onclick="showRulesOverlay()">
+        <span class="nav-action-icon">✦</span>
+        <span class="nav-action-lbl">Regels</span>
+      </div>
+      <div class="nav-action" onclick="stopGame()">
+        <span class="nav-action-icon">✕</span>
+        <span class="nav-action-lbl">Stop</span>
       </div>
     </div>
   </nav>
 
-  <!-- Watermark -->
-  <div id="catWatermark" style="position:fixed;bottom:-40px;right:-40px;font-size:50vw;pointer-events:none;z-index:0;line-height:1;user-select:none;filter:blur(2px);animation:watermarkPulse 3.5s ease-in-out infinite;">❤️‍🔥</div>
+  <!-- Watermarks -->
+  <div style="position:fixed;bottom:-60px;right:-60px;font-size:55vw;pointer-events:none;z-index:0;line-height:1;user-select:none;filter:blur(3px);animation:watermarkBreath 4s ease-in-out infinite;" id="catWatermark">❤️‍🔥</div>
+  <div style="position:fixed;top:-80px;left:-80px;font-size:38vw;pointer-events:none;z-index:0;line-height:1;user-select:none;filter:blur(5px);animation:watermark2Breath 7s ease-in-out infinite;transform:rotate(-15deg)">♠</div>
 
   <div class="screen-inner game">
-    <div class="turn-bar">
-      <span class="lbl">Aan de beurt:</span>
-      <span class="turn-badge" id="turnBadge">Daddy</span>
-    </div>
-    <div style="overflow-y:auto;flex:1;position:relative;z-index:1">
+    <div class="game-scroll" id="gameScroll">
       <div class="game-content">
         <div class="q-card" id="gameCard">
-          <div class="q-tag-row">
-            <span class="q-tag qt-normal" id="cardTag">Voorspel</span>
+          <div class="card-header">
+            <div class="card-player-badge daddy" id="cardBadge">
+              <span class="card-player-icon" id="cardIcon">♦</span>
+              <span id="cardPlayer">Daddy</span>
+            </div>
+            <div class="card-cat-tag" id="cardCat">Voorspel</div>
           </div>
           <div class="q-text" id="cardText">—</div>
           <div class="judge-row">
@@ -263,12 +313,13 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
             <button class="btn-judge done" onclick="doneCard()">Volbracht ✓</button>
           </div>
         </div>
+        <p class="swipe-hint">Veeg links om over te slaan · Veeg rechts als volbracht</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- RULES OVERLAY -->
+<!-- OVERLAY -->
 <div class="overlay" id="rulesOverlay">
   <div class="overlay-box">
     <button class="overlay-close" onclick="hideRulesOverlay()">✕</button>
@@ -291,37 +342,69 @@ h2{font-family:'Cinzel',serif;font-size:clamp(.85rem,3.2vw,1.1rem);font-weight:6
 </div>
 
 <script>
+// PARTICLES
+(function(){
+  const c=document.getElementById('particles');
+  const cols=['rgba(201,168,76,','rgba(212,26,60,','rgba(160,80,200,','rgba(126,180,224,','rgba(224,126,180,'];
+  for(let i=0;i<65;i++){
+    const p=document.createElement('div');p.className='particle';
+    const sz=Math.random()*4+1;
+    const col=cols[Math.floor(Math.random()*cols.length)];
+    const op=Math.random()*.5+.15;
+    const isDiamond=Math.random()>.65;
+    p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${col}${op});border-radius:${isDiamond?'2px':'50%'};animation-duration:${Math.random()*25+12}s;animation-delay:${Math.random()*25}s;box-shadow:0 0 ${sz*3}px ${col}0.5);${isDiamond?`transform:rotate(45deg);`:''}`;
+    c.appendChild(p);
+  }
+})();
+
+// DATA
 const DATA={
-  daddyRules:[
-    "Als Meisje niet luistert, wordt ze gespankt.",
-    "Zeg Meisje hardop wat voor meisje ze vanavond is. Laat het haar herhalen totdat je tevreden bent.",
-    "Als Meisje gehoorzaamt zonder aarzelen, mag zij haar beloning kiezen. Jij voert uit wat ze netjes vraagt aan Daddy."
-  ],
-  meisjeRules:[
-    "De eerste keer dat Daddy met zijn pik in je kutje of kontje is geweest, pijp je hem.",
-    "Elke keer dat je je onzeker voelt, zeg je: 'Daddy, zeg me wat ik moet doen.'",
-    "Vanavond rem je jezelf niet af. Daddy bepaalt, jij ondergaat en laat jezelf helemaal gaan. Ook tijdens het klaarkomen."
-  ],
+  daddyRules:["Als Meisje niet luistert, wordt ze gespankt.","Zeg Meisje hardop wat voor meisje ze vanavond is. Laat het haar herhalen totdat je tevreden bent.","Als Meisje gehoorzaamt zonder aarzelen, mag zij haar beloning kiezen. Jij voert uit wat ze netjes vraagt aan Daddy."],
+  meisjeRules:["De eerste keer dat Daddy met zijn pik in je kutje of kontje is geweest, pijp je hem.","Elke keer dat je je onzeker voelt, zeg je: 'Daddy, zeg me wat ik moet doen.'","Vanavond rem je jezelf niet af. Daddy bepaalt, jij ondergaat en laat jezelf helemaal gaan. Ook tijdens het klaarkomen."],
   voorspel:{
-    Daddy:["Kruip tegen elkaar aan, knuffel elkaar en kriebel en voel elkaar.","Leg Meisje op haar buik, kus en lik haar hals, rug, billen, dijbenen, randje onder billen en stiekem even een klein likje over haar kontgaatje.","Zuig aan Meisje's tepels.","Lik Meisje's kutje.","Vinger Meisje en lik samen je natte vingers af.","Tease Meisje en maak haar gek van geilheid.","Kijk samen een hele geile pornofilm."],
-    Meisje:["Kriebel Daddy's streepje bij z'n ballen.","Ga met je borsten boven Daddy hangen en bied je tepels aan.","Zuig aan Daddy's tepel, terwijl je hem aftrekt.","Maak je duim nat en wrijf ermee over Daddy's pik.","Pijp Daddy met overdreven veel geluid.","Lik Daddy's streepje en neem zijn ballen zachtjes in je mond."]
+    Daddy:["Kruip tegen elkaar aan, knuffel elkaar en kriebel en voel elkaar.","Leg Meisje op haar buik, kus en lik haar hals, rug, billen, dijbenen, randje onder billen en stiekem even een klein likje over haar kontgaatje.","Zuig aan Meisje's tepels.","Lik Meisje's kutje.","Vinger Meisje en lik samen je natte vingers af.","Tease Meisje en maak haar gek van geilheid.","Kijk samen een geile pornofilm of hentai."],
+    Meisje:["Kriebel Daddy's streepje bij z'n ballen.","Ga met je borsten boven Daddy hangen en bied je tepels aan.","Zuig aan Daddy's tepel, terwijl je hem aftrekt.","Maak je duim nat en wrijf ermee over Daddy's pik.","Pijp Daddy met overdreven veel geluid.","Lik Daddy's streepje en neem zijn ballen zachtjes in je mond.","Kuchisabishii — neem Daddy's pik zachtjes in je mond. Niet voor de seks, maar om hem bij je te voelen. Daddy streelt je haar."]
   },
   hoofdspel:{
     Daddy:{
-      normal:["Neuk Meisje in haar kontje op de rand van het bed. Meisje speelt met haar vibrator. Spuit haar kontje vol. Meisje likt daarna Daddy's pik en pijpt hem.","Ga op je rug liggen en laat Meisje je berijden. Zij kiest welk gaatje ze gebruikt. Kom in haar klaar.","Ga op je rug liggen en laat Meisje je achterstevoren berijden. Zij kiest welk gaatje. Kom in haar klaar.","Geil elkaar op met het bepraten van een geile fantasie. Neuk elkaar en kom lekker klaar, terwijl je erover doorfantaseert. Daddy helpt Meisje als ze het even niet weet."],
-      cnc:["Houd Meisje's polsen vast boven haar hoofd. Voel haar borsten, vinger haar kutje en laat haar zichzelf proeven. Meisje stribbelt verbaal en lichtelijk fysiek tegen.","Houd Meisje's polsen vast en steek je pik in haar kutje. Neuk haar terwijl ze verbaal tegenstribbelt.","Draai Meisje op haar buik en houd haar in bedwang. Voel haar gaatjes en steek je pik in haar kontje. Neuk haar terwijl je haar tegenhoudt. Meisje stribbelt verbaal en lichtelijk fysiek tegen. Doe daarna je pik in Meisje's mondje en laat je pijpen."]
+      normal:[
+        "Leg Meisje op de rand van het bed en neuk haar kontje terwijl zij haar vibrator gebruikt. Spuit haar kontje vol. Meisje likt daarna Daddy's pik schoon met haar mondje.",
+        "Ga op je rug liggen. Meisje berijdt je — zij kiest welk gaatje ze gebruikt en bepaalt het tempo. Daddy bepaalt of hij klaarkomt.",
+        "Ga op je rug liggen. Meisje berijdt je achterstevoren in haar kontje en bepaalt het tempo. Daddy bepaalt of hij klaarkomt.",
+        "Fantaseer samen: Meisje heeft via een escortwebsite een onderdanige escort uitgezocht en naar huis besteld — zij heeft bepaald hoe ze eruitziet en wat ze moet doen. Terwijl Daddy bij Meisje is en haar aanraakt, vertelt Meisje welke escort ze heeft gekozen en hoe ze eruitziet. Daddy vertelt wat hij met haar doet. Meisje bepaalt of ze erbij blijft en commandeert, of vanuit een andere kamer via een kijkgat of camera meekijkt. Meisje bepaalt wat de escort mag doen en waar en hoe Daddy klaarkomt. Daddy helpt Meisje de scene voor zich te zien. Klaarkomen is een optie.",
+        "Fantaseer samen: er is een timide blonde maid in huis — slank, gehoorzaam, beschikbaar. Terwijl Daddy Meisje bij zich houdt en aanraakt, bepraten jullie hoe de maid eruitziet en hoe Daddy haar gebruikt. Meisje vertelt wat de maid voor haar mag of moet doen. Daddy helpt Meisje de scene voor zich te zien. Klaarkomen is een optie.",
+        "Fantaseer samen: jullie bezoeken een exclusieve Kamasutra beurs. Overal om jullie heen worden nieuwe dingen geprobeerd en aangeboden. Terwijl jullie dicht tegen elkaar aan liggen en elkaar aanraken, bepraten jullie wat jullie zien, wat jullie willen uitproberen en wat jullie direct zouden doen als jullie daar waren. Daddy helpt Meisje de beurs voor zich te zien. Klaarkomen is een optie.",
+        "Fantaseer samen: jullie zijn een Romeins koppel met een huis vol onderdanige slavinnen. Terwijl Daddy bij Meisje is, mag hij op elk moment een slavin roepen en gebruiken zoals hij wil. Bepraat samen welke slavin dat is, hoe ze eruitziet en wat Daddy met haar doet. Meisje vertelt wat zij doet terwijl dit gebeurt — blijft ze erbij, kijkt ze van een afstand, geeft ze de slavin instructies, of doet ze gewoon haar eigen ding. Daddy helpt Meisje fantaseren. Klaarkomen is een optie.",
+        "Neuk Meisje afwisselend in haar kontje en kutje — minimaal 5 keer wisselen. Daddy bepaalt wanneer hij wisselt en het tempo. Daddy bepaalt of hij klaarkomt en in welk gaatje."
+      ],
+      cnc:[
+        "Houd Meisje's polsen vast boven haar hoofd. Voel haar borsten, vinger haar kutje en laat haar zichzelf proeven van je natte vingers. Meisje stribbelt verbaal en lichtelijk fysiek tegen.",
+        "Houd Meisje's polsen vast en steek je pik in haar kutje. Neuk haar terwijl ze verbaal tegenstribbelt. Daddy bepaalt of hij klaarkomt en waar.",
+        "Draai Meisje op haar buik en houd haar stevig in bedwang. Steek je pik in haar kontje en neuk haar terwijl je haar vasthoudt. Meisje stribbelt verbaal en lichtelijk fysiek tegen. Doe daarna je pik in haar mondje en laat je pijpen. Daddy bepaalt of hij klaarkomt en waar.",
+        "Houd Meisje stevig vast en gebruik al haar gaatjes — Daddy bepaalt de volgorde en het tempo. Meisje stribbelt verbaal en lichtelijk fysiek tegen. Daddy bepaalt of hij klaarkomt en in welk gaatje."
+      ]
     },
     Meisje:{
-      normal:["Ga met je hoofd over de rand van het bed liggen. Speel met jezelf met de speeltjes, eventueel alle gaatjes gevuld, en laat Daddy je diep in je mondje neuken en klaarkomen.","Geil elkaar op met het bepraten van een geile fantasie. Neuk elkaar en kom lekker klaar, terwijl je erover doorfantaseert.","Ga met je knieën op de rand van het bed zitten, voorovergebogen, met gespreide billen. Laat Daddy zijn pik in je kontje steken en jij gaat bewegen. Daddy blijft stilstaan.","Ga voor het bed zitten met open mond en uitgestoken tong. Laat Daddy in je mondje spuiten. Laat het eruit lopen, speel ermee en wrijf jezelf ermee in.","Ga op je rug liggen en gebruik je speeltjes. Daddy komt tussen je benen in zitten en trekt zichzelf op je af. Hij spuit over je kutje en jij masturbeert met zijn cum en komt hierop klaar.","Ga in standje 69 liggen. Daddy likt jouw kontgaatje, jij pijpt hem en vingert zijn kontje. Laat hem in je mondje klaarkomen. Meisje bepaalt zelf of ze het doorslikt."],
-      femme:["Laat Speeltje op zijn rug liggen. Masseer zijn prostaat terwijl je hem pijpt en aftrekt. Laat hem klaarkomen.","Commandeer Speeltje om je hard in je kontje te neuken. Hij mag zijn cockring gebruiken.","Ga op je rug met je benen wijd liggen. Commandeer Speeltje om je kutje te likken en de roze vibrator te gebruiken op je. Druk zijn hoofd tegen je kutje aan.","Tease Speeltje totdat hij je smeekt om klaar te komen. Femme bepaalt hoe.","Bind Speeltje vast, ga op hem zitten met welk gaatje jij wil. Zorg dat hij smeekt om losgemaakt te worden en jou aan te mogen raken. En natuurlijk om te mogen klaarkomen."]
+      normal:[
+        "Ga met je hoofd over de rand van het bed liggen. Speel met je speeltjes terwijl Daddy je diep in je mondje neukt en klaarkomt.",
+        "Ga op je knieën op de rand van het bed, voorovergebogen met gespreide billen. Laat Daddy zijn pik in je kontje steken en beweeg jij — Daddy blijft stilstaan. Daddy bepaalt of hij klaarkomt.",
+        "Ga voor het bed zitten met open mond en uitgestoken tong. Laat Daddy in je mondje spuiten. Laat het eruit lopen, speel ermee en wrijf jezelf ermee in.",
+        "Ga op je rug liggen en gebruik je speeltjes. Daddy gaat tussen je benen zitten en trekt zichzelf af boven je. Hij spuit over je kutje en jij masturbeert met zijn cum totdat je klaarkomt.",
+        "Ga in standje 69 liggen. Daddy likt jouw kontgaatje, jij pijpt hem en vingert zijn kontje. Meisje bepaalt of Daddy mag klaarkomen en of ze zijn cum doorslikt."
+      ],
+      femme:[
+        "Dwing Rebel op zijn rug te gaan liggen. Masseer zijn prostaat terwijl je hem pijpt en aftrekt. Femme bepaalt of Rebel mag klaarkomen.",
+        "Commandeer Rebel om je in je kontje te neuken. Hij mag zijn cockring gebruiken — maar alleen als jij dat toestaat. Jij bepaalt hoe hard Rebel je mag neuken en of hij mag klaarkomen.",
+        "Duw Rebels hoofd stevig tussen je benen en commandeer hem je te likken terwijl jij de roze vibrator gebruikt. Jij bepaalt wat Rebel likt en hoe lang.",
+        "Tease Rebel totdat hij je smeekt om klaar te komen. Femme bepaalt of hij dat verdient — en hoe.",
+        "Bind Rebel vast. Ga op hem zitten met welk gaatje jij wil en rijd hem totdat hij smeekt om losgemaakt te worden. Jij bepaalt of je op zijn pik of zijn gezicht gaat zitten — of afwisselt."
+      ]
     }
   }
 };
 
-// Shuffle helper
+// HELPERS
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-
-// Pools per player per category — filled on start
 let pools={};
 function initPools(){
   pools={
@@ -332,24 +415,15 @@ function initPools(){
     }
   };
 }
-
-function drawFromPool(pool,source){
-  if(pool.length===0){pool.push(...shuffle([...source]))}
-  return pool.shift();
-}
-
-let player='Daddy',category='voorspel',daddyRule='',meisjeRule='';
-
+function drawFromPool(pool,source){if(pool.length===0){pool.push(...shuffle([...source]))}return pool.shift()}
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
 
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+let player='Daddy',category='voorspel',daddyRule='',meisjeRule='',isAnimating=false;
+
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
 
 function goToRules(){
-  daddyRule=pick(DATA.daddyRules);
-  meisjeRule=pick(DATA.meisjeRules);
+  daddyRule=pick(DATA.daddyRules);meisjeRule=pick(DATA.meisjeRules);
   document.getElementById('ruleDaddy').textContent=daddyRule;
   document.getElementById('ruleMeisje').textContent=meisjeRule;
   document.getElementById('overlayDaddy').textContent=daddyRule;
@@ -359,16 +433,11 @@ function goToRules(){
 
 function startGame(){
   player=Math.random()<.5?'Daddy':'Meisje';
-  category='voorspel';
-  initPools();
-  showScreen('screenGame');
-  updateTurn();
-  drawCard();
+  category='voorspel';initPools();
+  showScreen('screenGame');drawCard();
 }
 
-function stopGame(){
-  showScreen('screenWelcome');
-}
+function stopGame(){showScreen('screenWelcome')}
 
 function setCategory(cat){
   category=cat;
@@ -378,48 +447,77 @@ function setCategory(cat){
   drawCard();
 }
 
-function updateTurn(){
-  const badge=document.getElementById('turnBadge');
-  badge.textContent=player;
-  badge.className='turn-badge '+(player==='Daddy'?'daddy':'meisje');
-}
-
 function getCard(){
   if(category==='voorspel'){
     const pool=pools.voorspel[player];
     const source=DATA.voorspel[player];
-    return{text:drawFromPool(pool,source),tag:'Voorspel',tagClass:'qt-normal',cardClass:player==='Daddy'?'daddy-card':'meisje-card'};
-  } else {
-    if(player==='Daddy'){
-      if(Math.random()<.25){
-        return{text:drawFromPool(pools.hoofdspel.Daddy.cnc,DATA.hoofdspel.Daddy.cnc),tag:'CNC',tagClass:'qt-cnc',cardClass:'cnc-card'};
-      }
-      return{text:drawFromPool(pools.hoofdspel.Daddy.normal,DATA.hoofdspel.Daddy.normal),tag:'Hoofdspel',tagClass:'qt-normal',cardClass:'daddy-card'};
-    } else {
-      if(Math.random()<.25){
-        return{text:drawFromPool(pools.hoofdspel.Meisje.femme,DATA.hoofdspel.Meisje.femme),tag:'Femme',tagClass:'qt-femme',cardClass:'femme-card'};
-      }
-      return{text:drawFromPool(pools.hoofdspel.Meisje.normal,DATA.hoofdspel.Meisje.normal),tag:'Hoofdspel',tagClass:'qt-normal',cardClass:'meisje-card'};
-    }
+    const text=drawFromPool(pool,source);
+    return{text,player:player,cat:'Voorspel',type:player==='Daddy'?'daddy':'meisje'};
   }
+  if(player==='Daddy'){
+    if(Math.random()<.25){
+      return{text:drawFromPool(pools.hoofdspel.Daddy.cnc,DATA.hoofdspel.Daddy.cnc),player:'Daddy',cat:'CNC',type:'cnc'};
+    }
+    return{text:drawFromPool(pools.hoofdspel.Daddy.normal,DATA.hoofdspel.Daddy.normal),player:'Daddy',cat:'Hoofdspel',type:'daddy'};
+  }
+  if(Math.random()<.333){
+    return{text:drawFromPool(pools.hoofdspel.Meisje.femme,DATA.hoofdspel.Meisje.femme),player:'Femme',cat:'Femme',type:'femme'};
+  }
+  return{text:drawFromPool(pools.hoofdspel.Meisje.normal,DATA.hoofdspel.Meisje.normal),player:'Meisje',cat:'Hoofdspel',type:'meisje'};
 }
 
-function drawCard(){
-  const c=getCard();
+const ICONS={daddy:'♦',meisje:'♥',cnc:'⚔',femme:'♛'};
+
+function drawCard(nextPlayer){
+  if(isAnimating)return;
+  isAnimating=true;
   const card=document.getElementById('gameCard');
-  card.className='q-card '+c.cardClass;
-  card.style.animation='none';void card.offsetWidth;card.style.animation='';
-  document.getElementById('cardText').textContent=c.text;
-  const tag=document.getElementById('cardTag');
-  tag.textContent=c.tag;tag.className='q-tag '+c.tagClass;
+
+  card.style.transition='transform .28s ease-in,opacity .28s ease-in';
+  card.style.transform='scale(.9) translateY(-18px)';
+  card.style.opacity='0';
+
+  setTimeout(()=>{
+    if(nextPlayer!==undefined)player=nextPlayer;
+    const c=getCard();
+
+    // Update card
+    card.className='q-card '+c.type+'-card';
+    document.getElementById('cardText').textContent=c.text;
+    document.getElementById('cardCat').textContent=c.cat;
+
+    const badge=document.getElementById('cardBadge');
+    badge.className='card-player-badge '+c.type;
+    document.getElementById('cardPlayer').textContent=c.player;
+    document.getElementById('cardIcon').textContent=ICONS[c.type]||'♦';
+
+    // Slide in
+    card.style.transition='none';
+    card.style.transform='scale(.9) translateY(22px)';
+    card.style.opacity='0';
+    void card.offsetWidth;
+    card.style.transition='transform .44s cubic-bezier(.34,1.56,.64,1),opacity .36s ease';
+    card.style.transform='scale(1) translateY(0)';
+    card.style.opacity='1';
+
+    setTimeout(()=>{isAnimating=false},440);
+  },260);
 }
 
-function skipCard(){drawCard()}
+function skipCard(){drawCard(player)}
+function doneCard(){drawCard(player==='Daddy'?'Meisje':'Daddy')}
 
-function doneCard(){
-  player=player==='Daddy'?'Meisje':'Daddy';
-  updateTurn();drawCard();
-}
+// SWIPE
+(function(){
+  let startX=0,startY=0;
+  const scroll=document.getElementById('gameScroll');
+  scroll.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;startY=e.touches[0].clientY},{passive:true});
+  scroll.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-startX;
+    const dy=e.changedTouches[0].clientY-startY;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>55){dx<0?skipCard():doneCard()}
+  },{passive:true});
+})();
 
 function showRulesOverlay(){document.getElementById('rulesOverlay').classList.add('open')}
 function hideRulesOverlay(){document.getElementById('rulesOverlay').classList.remove('open')}
